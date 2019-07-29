@@ -11,7 +11,7 @@ defined('BASEPATH') OR exit ('No direct script access allowed');
 
 class Produit extends CI_Controller
 {
-        
+
     /** \brief     Fonction liste qui permet d'afficher la page liste
      *  \details   Elle permet d'afficher la page de liste des produits, de naviguer a travers le site grâce a sa barre de navigation, et d'ajouter, modifier ou supprimer un produit
      *  \param     prenom     Affiche le prenom de l'utilisateur.
@@ -21,29 +21,29 @@ class Produit extends CI_Controller
      *  \@author   Aurélien Hantute
      *  \date      17/06/2019
      */
-    
+
     public function liste()
     {
         if($this->session->user)
         {
             $aView["Salutation"]= "<i>Salve, quis tabernam mirabile , quis offer naves te heroes .</i><br> Bienvenus, dans se magasin étonnant qui offre des navires héroiques.";
-            
+
             $this->load->library('proverbe');
             $citation=$this->proverbe->lesproverbes();
             $aView["citation"]=$citation;
-            
+
             $this->load->model("Produit_model");
             $aliste=$this->Produit_model->liste();
             $aView['liste']=$aliste;
-            
-            
+
             $this->load->view("produit/liste",$aView);
+
         }
         else{
             redirect(site_url("Client/Accueil"));
         }
     }
-    
+
     /** \brief     Fonction detail qui permet d'afficher la page detail
      *  \details   Elle permet d'afficher la page detaillé d'un produit, de naviguer a travers le site grâce a sa barre de navigation, de modifier ou supprimer le produit.
      *  \param     prenom     Affiche le prenom de l'utilisateur.
@@ -53,7 +53,7 @@ class Produit extends CI_Controller
      *  \@author   Aurélien Hantute
      *  \date      17/06/2019
      */
-    
+
     public function detail($id_produit)
     {
         if($this->session->user)
@@ -62,11 +62,11 @@ class Produit extends CI_Controller
             $citation=$this->proverbe->lesproverbes();
             $aView["citation"]=$citation;
             $aView["Salutation"]= "<i>Salve, quis tabernam mirabile , quis offer naves te heroes .</i><br> Bienvenus, dans se magasin étonnant qui offre des navires héroiques.";
-            
+
            $this->load->model('Produit_model');
            $adetail = $this->Produit_model->detail($id_produit);
-           $aView["detail"] = $adetail; 
-           
+           $aView["detail"] = $adetail;
+
            $this->load->view("produit/detail",$aView);
            $this->form_validation->set_message('rule','Error Message');
         }
@@ -74,8 +74,8 @@ class Produit extends CI_Controller
             redirect(site_url("Client/Accueil"));
         }
     }
-    
-    
+
+
     /** \brief      Fonction ajout qui permet d'afficher la page ajout pour ajouter un produit
      *   \details   Elle permet d'afficher la page de formulaire d'ajout de produit, de naviguer a travers le site grâce a sa barre de navigation.
      *              Elle contient une boucle pour vérifier que les données rentrés sont bien conforme à ce que l'on demande et fait une vérification pour empêcher le piratage du site.
@@ -85,7 +85,7 @@ class Produit extends CI_Controller
      *   \@author   Aurélien Hantute
      *   \date      17/06/2019
      */
-    
+
     public function ajout()
     {
         if($this->session->user)
@@ -93,25 +93,43 @@ class Produit extends CI_Controller
             $this->load->library('proverbe');
             $citation=$this->proverbe->lesproverbes();
             $aView["citation"] = $citation;
-            
-            $this->load->model('Produit_model');
-            $ajout = $this->Produit_model->ajout();
-            $aView["ajout"] = $ajout;
-            
+
             $this->load->model('Type_model');
             $liste = $this->Type_model->liste();
-            $aView["type"] = $liste;
-            
-            $this->load->view('Produit/ajout', $aView);
-            $this->form_validation->set_message('rules','Error Message');
+            $aView["ajout"] = $liste;
+
+            $this->form_validation->set_rules('type_produit','type_produit','required');
+            $this->form_validation->set_rules('classe_produit','classe_produit','required');
+            $this->form_validation->set_rules('id_vaisseau','id_vaisseau','required');
+            $this->form_validation->set_rules('nom_produit','nom_produit','required|regex_match[/^[0-9A-Za-zéèêëàâôöîïùûüç\s\/\\%-_]{0,}$/]',
+                array('required'=>'Erreur dans le champ %s'));
+            $this->form_validation->set_rules('prix_produit','prix_produit','required|regex_match[/^[1-9]{1,1}[0-9]{0,2}[\s]{0,1}[0-9]{0,3}[.,]{0,1}[0-9]{2,2}$/]',
+                array('required'=>'Erreur dans le champ %s'));
+            $this->form_validation->set_rules('stock_produit', 'stock_produit','required|regex_match[/^[0-9]{0,}$/]',
+                array('required'=>'Erreur dans le champs %s'));
+
+            if ($this->form_validation->run() == TRUE)
+            {
+              $this->load->model('Produit_model');
+              $ajout = $this->Produit_model->ajout();
+              $aView["ajout"] = $ajout;
+              redirect(site_url("Produit/liste"));
+            }
+            else
+            {
+              //$this->load->view("inclusion/navbar",$aView);
+              $this->load->view('produit/ajout', $aView);
+              //$this->load->view("inclusion/footer",$aView);
+              $this->form_validation->set_message('rules','Error Message');
+            }
         }
-        else 
+        else
         {
             redirect(site_url("Client/Accueil"));
         }
     }
-    
-    
+
+
     /** \brief      Fonction modification qui permet d'afficher la page modification pour modifier ou supprimer un produit
      *   \details   Elle permet d'afficher la page de formulaire de modification du produit, de naviguer a travers le site grâce a sa barre de navigation.
      *              Elle contient une boucle pour vérifier que les données rentrés sont bien conforme a se que l'on demande et fait une vérification pour empêcher le piratage du site.
@@ -121,7 +139,7 @@ class Produit extends CI_Controller
      *   \@author   Aurélien Hantute
      *   \date      17/06/2019
      */
-    
+
     public function modification($id_produit)
     {
         if($this->session->user)
@@ -129,56 +147,111 @@ class Produit extends CI_Controller
             $this->load->library('proverbe');
             $citation=$this->proverbe->lesproverbes();
             $aView["citation"] = $citation;
-            
-            $this->load->view('produit/modification', $aView);
-            $this->form_validation->set_message('rules','Error Message');
-            
-            $this->form_validation->set_rules('nom_produit','nom_produit','required');
-            $this->form_validation->set_rules('prix_produit','prix_produit','required');
-            $this->form_validation->set_rules('categorie_produit','categorie_produit','required');
+
+            $this->load->model('Produit_model');
+            $modif = $this->Produit_model->detail($id_produit);
+            $aView["modif"] = $modif;
+
+
             $this->form_validation->set_rules('type_produit','type_produit','required');
-            
-            if($this->form_validation->run() == TRUE )
+            $this->form_validation->set_rules('classe_vaisseau','classe_vaisseau','required');
+            $this->form_validation->set_rules('nom_produit','nom_produit','required|regex_match[/^[0-9A-Za-zéèêëàâôöîïùûüç\s\/\\%-_]{0,}$/]',
+                array('required'=>'Erreur dans le champ %s'));
+            $this->form_validation->set_rules('prix_produit','prix_produit','required|regex_match[/^[1-9]{1,1}[0-9]{0,2}[\s]{0,1}[0-9]{0,3}[.,]{0,1}[0-9]{2,2}$/]',
+                array('required'=>'Erreur dans le champ %s'));
+            $this->form_validation->set_rules('stock_produit', 'stock_produit','required|regex_match[/^[0-9]{0,}$/]',
+                array('required'=>'Erreur dans le champs %s'));
+            //$this->form_validation->set_rules('Description','Description','required');
+
+            if($this->form_validation->run() == TRUE)
             {
-                
+
                 $this->load->model('Produit/modification');
                 $modif = $this->Produit_model->modification($id_produit);
-                $aView["ajout"] = $modif;
-                
-                $this->load->view('produit/modification', $aView);
+                $aView["modif"] = $modif;
+            }
+            else{
+
                 $this->form_validation->set_message('rules','Error Message');
             }
+            $this->load->view('produit/modification', $aView);
         }
         else
         {
             redirect(site_url("Client/Accueil"));
         }
     }
-    
-    /**  \brief      fonction supprime qi permet de supprimer un produit de la base de donnée produits
+
+    /**  \brief      fonction supprime qui permet de supprimer un produit de la base de donnée produits
      *   \details    Elle permet d'afficher la page de suppression du produit
      *   \param      supprime       qui récupère les données du model et supprime les données du produits que l'on désire supprimer.
      *   \@author   Aurélien Hantute
      *   \date    06/05/2019
-     */ 
-    
+     */
+
     public function supprime($id_produit)
     {
         if ($this->input->get())
         {
-            
+
             // On charge les données obtenus dans la function produits_model
             $this->load->model('produit_model');
             $supprime = $this->produit_model->supprime();
             $supprime['supprime']=$supprime;
-            
+
             redirect('Produit/liste');
         }
-        
+
         // On fait un lien entre les deux table pour afficher le nom de la catégorie du produits et non son code numérique.
         $this->load->model('produit_model');
         $detail = $this->produit_model->DetailProduits($id_produit);
         $supprime['produit'] = $detail;
-        //$this->load->view('produit/supprime', $supprime); 
+        //$this->load->view('produit/supprime', $supprime);
+    }
+
+    public function type_produit()
+    {
+      echo "bonjour";
+      $this->load->model('Type_model');
+      $liste = $this->Type_model->liste();
+      $aView["autre/type"] = $liste;
+      var_dump($liste);
+      exit;
+      $this->load->view("autre/type", $aView);
+
+    }
+
+    public function classe_produit($id)
+    {
+    $this->load->model('Classe_model');
+    $classe = $this->Classe_model->Classe($id);
+    $aView["classe"] = $classe;
+    //console.log($classe);
+    //exit;
+    $this->load->view("autre/classe", $aView);
+  }
+
+    public function vaisseau_produit($id)
+    {
+      $this->load->model('Vaisseau_model');
+      $vaisseau = $this->Vaisseau_model->Vaisseau($id);
+      $aView["vaisseau"] = $vaisseau;
+      $this->load->view("autre/vaisseau",$aView);
+    }
+
+    public function categorie($categorie_produit)
+    {
+      $aView["Salutation"]= "<i>Salve, esto paratus sit vivere fabulosa valebat. </i><br> Bonjour, Soyez pret a vivre une aventure fabuleuse.";
+      $this->load->library("proverbe");
+      $citation= $this->proverbe->lesproverbes();
+      $aView['citation'] = $citation;
+
+      $this->load->model('Produit_model');
+      $categorie = $this->Produit_model->Categorie($categorie_produit);
+      $aView["categorie"] = $categorie;
+
+      $this->load->view("inclusion/navbar",$aView);
+      $this->load->view("produit/categorie",$aView);
+      $this->load->view("inclusion/footer",$aView);
     }
 }

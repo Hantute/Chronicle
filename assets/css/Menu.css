@@ -1,0 +1,139 @@
+#MENU, #MENU ul{
+  padding:0;
+  margin:0;
+  list-style:none;
+  text-align:center;
+}
+
+#MENU li{
+  display:inline-block;
+  position:relative;
+  border-radius:8px 8px 0 0;
+}
+
+#MENU ul li{
+  display:inherit;
+  border-radius:0;
+}
+
+#MENU ul li:hover{
+  border-radius: 0;
+}
+
+#MENU ul li:last-child{
+  border-radius 0 0 8px 8px;
+}
+
+#MENU ul{
+  position:absolute;
+  z-index:1000;
+  max-height:0;
+  left:0;
+  right:0;
+  overflow:hidden;
+  -moz-transition: .8s all .3s;
+  -webkit-transition: 8s all .3s;
+  transition: .8s all .3s;
+}
+
+#MENU li:hover ul{
+  max-height:15em;
+}
+
+/* background des liens menus */
+#MENU li:first-child{
+  background-color: #65537A;
+  background-image: -webkir-linear-gradient(top, #65537A 0%, #2A2333 100%);
+  background-image: linear-gradient(to bottom, #65537A 0%, #2A2333 100%);
+}
+
+#MENU li:nth-child(2){
+  background-color: #729EBF;
+  background-image: -webkir-linear-gradient(top, #729EBF 0%, #333A40 100%);
+  background-image: linear-gradient(to bottom, #729EBF 0%, #333A40 100%);
+}
+
+#MENU li:nth-child(3){
+  background-color: #F6AD1A;
+  background-image: -webkir-linear-gradient(top, #F6AD1A 0%, #9F391A 100%);
+  background-image: linear-gradient(to bottom, #F6AD1A 0%, #9F391A 100%);
+}
+
+#MENU li:nth-child(4){
+  background-color: #729EBF;
+  background-image: -webkir-linear-gradient(top, #002AFF 0%, #A4ABBF 100%);
+  background-image: linear-gradient(to bottom, #002AFF 0%, #A4ABBF 100%);
+}
+
+#MENU li:last-child{
+  background-color: #729EBF;
+  background-image: -webkir-linear-gradient(top, #CFFF6A 0%, #677F35 100%);
+  background-image: linear-gradient(to bottom, #CFFF6A 0%, #677F35 100%);
+}
+
+/* background des liens sous menus */
+
+#MENU li:first-child li{
+  background:#2A2333;
+}
+
+#MENU li:nth-child(2) li{
+  background:#333A40;
+}
+
+#MENU li:nth-child(3) li{
+  background:#9F391A;
+}
+
+#MENU li:nth-child(4) li{
+  background:#A4ABBF;
+}
+
+#MENU li:last-child li{
+  background:#677F35;
+}
+
+/* background des liens menus et sous menus au survol */
+
+#MENU li:first-child:hover, #MENU li:first-child li:hover {
+  background:#65537A;
+}
+
+#MENU li:nth-child(2):hover, #MENU li:nth-child(2) li:hover {
+  background:#729EBF;
+}
+
+#MENU li:nth-child(3):hover, #MENU li:nth-child(3) li:hover {
+  background:#F6AD1A;
+}
+
+#MENU li:nth-child(4):hover, #MENU li:nth-child(4) li:hover {
+  background:#002AFF;
+}
+
+#MENU li:last-child:hover, #MENU li:last-child li:hover {
+  background:#CFFF6A;
+}
+
+/* les a href */
+
+#MENU a{
+  text-decoration:none;
+  display:block;
+  padding:8px 32px;
+  color:#fff;
+  font-family:arial;
+}
+
+#MENU ul a{
+  padding:8px 0;
+}
+
+#MENU li:hover li a{
+  color:#fff;
+  text-transform:inherit;
+}
+
+#MENU li:hover a,#MENU li li:hover a{
+  color:#000;
+}

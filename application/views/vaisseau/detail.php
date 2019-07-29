@@ -18,9 +18,9 @@ defined ('BASEPATH') OR exit ('No direct script access allowed');
     </div>
     </header>
     <nav id="navbar" class="navbar navbar-expand-sm bg-info navbar-info">
-    
+
     <!-- Barre de navigation qui devient un bouton quand la taille de l'écran change Toggler/collapsibe Button -->
-        
+
         		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
         			<span class="navbar-toggler-icon"></span>
             	</button>
@@ -64,7 +64,7 @@ defined ('BASEPATH') OR exit ('No direct script access allowed');
         			<?php endif; ?>
         			<?php echo $citation; ?>
         			<br />
-        
+
         	<table border='5' bgcolor=#d0ff00 text-align='center'>
             	<TR border='10' bgcolor='#a4c2f4' width='250'>
             	<TH width='400'>Représentation graphique</TH>
@@ -74,6 +74,7 @@ defined ('BASEPATH') OR exit ('No direct script access allowed');
             	<TH width='50'>Nom</TH>
             	<TH width='75'>Chantier de construction</TH>
             	<TH width='75'>Date de mise en service</TH>
+              <TH width='75'>Date de dernière modernisation</TH>
             	<TH width='300'>Armement</TH>
             	<TH width='300'>Protection </TH>
             	<TH width='300'>Générateur </TH>
@@ -92,6 +93,7 @@ defined ('BASEPATH') OR exit ('No direct script access allowed');
             	    echo "<td width='50' text-align='center'>".$detail->nom_vaisseau."</td>\n";
             	    echo "<td width='75' text-align='center'>".$detail->chantier_de_construction."</td>\n";
             	    echo "<td width='75' text-align='center'>".$detail->date_activation."</td>\n";
+                  echo "<td width='75' text-align='center'>".$detail->mise_a_jour."</td>\n";
             	    echo "<td width='300' text-align='center'>".$detail->armement."</td>\n";
             	    echo "<td width='300' text-align='center'>".$detail->protection."</td>\n";
             	    echo "<td width='300' text-align='center'>".$detail->generateur."</td>\n";
@@ -100,10 +102,10 @@ defined ('BASEPATH') OR exit ('No direct script access allowed');
             	    echo "<td width='75' text-align='center'><a href=".site_url("/personnel/liste/").$detail->id_vaisseau.">Liste des effectifs</td>\n";
             	    echo "<td width='75' text-align='center'><a href=".site_url("/escadrille/liste/").$detail->id_vaisseau.">Groupe Aérien</td>\n";
             	    echo"</tr>";
-            	
+
             	?>
-        	
+
         	</table>
-        	</div>	
-	</body>	
+        	</div>
+	</body>
 </html>

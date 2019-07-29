@@ -9,8 +9,8 @@ class Client_model extends CI_Model
         $aClient = $requete->result();
         return $aClient;
     }
-    
-    
+
+
     public function Inscription()
     {
         //$statut = "2";
@@ -23,21 +23,21 @@ class Client_model extends CI_Model
         $this->db->insert("client", $data);
     }
 
-    
+
     public function Connexion()
     {
         $Date = date ("Y-m-d H:i:s");
-        
+
         // On récupère les données rentrés par l'utilisateur pour se connecter
         $data = $this->input->post();
-        
+
         $pseudo = $data["pseudo_client"];
         $secu = $data["mot_de_passe"];
-        
+
         // On récupère les données enregistrer dans la base de données client
-        
+
         $personne = $this->db->query("SELECT * FROM client WHERE pseudo_client=?", $pseudo)->row();
-        
+
         if($personne)
         {
             if(password_verify($secu, $personne->mot_de_passe))
@@ -60,17 +60,22 @@ class Client_model extends CI_Model
             redirect(site_url("Client/ConnexionClient"));
         }
     }
-     
+
     public function Modif($id_client)
     {
+        $Date=date("Y-m-d H:i:s");
         $client = $this->session->user->id_client;
         $data = $this->input->post();
-        //$Date = date("Y-m-d H:i:s");
+        unset ($data["id_client"]);
         unset ($data["modifier"]);
+
+        $data["date_modification"] = $Date; 
         //$data["date_modification_client"]=$Date;
         $data["mot_de_passe"] = password_hash($data["mot_de_passe"], PASSWORD_DEFAULT);
-        $id_client = $this->input->post();
-        $this->db->WHERE ('id_client', $client);
+        var_dump($data);
+        var_dump($id_client);
+        //exit;
+        $this->db->WHERE ('id_client', $id_client);
         $this->db->UPDATE("client", $data);
     }
 }
