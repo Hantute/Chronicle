@@ -44,8 +44,9 @@ body {
 	-webkit-transform: translateZ(0);
 				  transform: translateZ(0);
 	will-change:transform;
-	background-image: url('.../assets/img/orion_nebula-Universe.jpg');
+	background-image: url('../../assets/img/orion_nebula-Universe.jpg');
 	background-repeat: no-repeat;
+	
 	/*background: linear-gradient(#38c15a, white);*/
 	/*background-color:white;
 	background-attachment:fixed;*/
