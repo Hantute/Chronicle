@@ -16,32 +16,40 @@ class Client extends CI_Controller
 
         public function Accueil()
         {
-            // On affiche une ligne de salutation puis le nom, et le prénom de l'Utilisateur, si il a déjà un compte et qu'il s'est connecté.
-            $aView["Salutation"]= "<i>Salve, esto paratus sit vivere fabulosa valebat. </i><br> Bonjour, Soyez pret a vivre une aventure fabuleuse.";
+          // On affiche une ligne de salutation puis le nom, et le prénom de l'Utilisateur, si il a déjà un compte et qu'il s'est connecté.
+          $aView["Salutation"]= "<i>Salve, esto paratus sit vivere fabulosa valebat. </i><br> Bonjour, Soyez pret a vivre une aventure fabuleuse.";
 
             // On charge la vue et on apparaitre le resultat sur la page Accueil
+            $titre= "Accueil";
+            $aView["titre"]=$titre;
 
             $this->load->library('proverbe');
             $citation=$this->proverbe->lesproverbes();
             $aView["citation"]=$citation;
 
             $this->load->view('inclusion/navbar',$aView);
-            $this->load->view('Accueil',$aView);
 
-            /*if($this->session->user)
+            if($this->session->user)
             {
                 $this->load->model('Client_model');
                 $client = $this->Client_model->liste();
                 $aView["client"]=$client;
+                //$this->load->view('inclusion/navbar',$aView);
                 $this->load->view("Accueil",$aView);
             }
             else {
+                //$this->load->view('inclusion/navbar',$aView);
                 $this->load->view('Accueil',$aView);
-            }*/
+            }
         }
 
         public function Inscription()
         {
+
+            // On affiche une ligne de salutation puis le nom, et le prénom de l'Utilisateur, si il a déjà un compte et qu'il s'est connecté.
+            $aView["Salutation"]= "<i>Salve, esto paratus sit vivere fabulosa valebat. </i><br> Bonjour, Soyez pret a vivre une aventure fabuleuse.";
+            $titre= "Inscription";
+            $aView["titre"]=$titre;
             $this->load->library('proverbe');
             $citation=$this->proverbe->lesproverbes();
             $aView['citation']=$citation;
@@ -74,12 +82,17 @@ class Client extends CI_Controller
             else {
                   $this->form_validation->set_message('required','Erreur');
             }
+            $this->load->view('inclusion/navbar',$aView);
             $this->load->view("CreationClient",$aView);
         }
 
 
         public function Connexion()
         {
+            // On affiche une ligne de salutation puis le nom, et le prénom de l'Utilisateur, si il a déjà un compte et qu'il s'est connecté.
+            $aView["Salutation"]= "<i>Salve, esto paratus sit vivere fabulosa valebat. </i><br> Bonjour, Soyez pret a vivre une aventure fabuleuse.";
+            $titre= "Connexion";
+            $aView["titre"]=$titre;
 
             $this->load->library("proverbe");
             $citation= $this->proverbe->lesproverbes();
@@ -94,18 +107,24 @@ class Client extends CI_Controller
 
             if($this->form_validation->run() == TRUE)
             {
+                $this->load->view('inclusion/navbar',$aView);
                 $this->load->model("Client_model");
                 $personne = $this->Client_model->Connexion();
                 return $personne;
                 redirect(site_url("Client/Accueil"));
             }
             else{
+                $this->load->view('inclusion/navbar',$aView);
                 $this->load->view("ConnexionClient",$aView);
                 }
         }
 
         public function Modification()
         {
+
+            $titre= "Modification du compte utilisateur";
+            $aView["titre"]=$titre;
+
             $this->load->library("proverbe");
             $citation= $this->proverbe->lesproverbes();
             $Modification['citation'] = $citation;
@@ -125,12 +144,14 @@ class Client extends CI_Controller
 
            $data = $this->input->post();
 
+           $this->load->view('inclusion/navbar',$aView);
            $this->load->model("Client_model");
            $client = $this->Client_model->liste($this->session->user->id_client);
            $Modification["client"] = $client;
 
            if($this->form_validation->run() == TRUE)
            {
+                $this->load->view('inclusion/navbar',$aView);
                 $this->load->model("Client_model");
                 $extension = $this->Client_model->Modif($this->session->user->id_client);
                 redirect('Client/Accueil');

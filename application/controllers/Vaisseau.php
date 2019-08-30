@@ -27,6 +27,9 @@ class Vaisseau extends CI_Controller
         //Déclaration du tableau associatif à transmettre à la vue
         $aView = array();
 
+        $titre= "Liste des vaisseaux de la flotte de défense coloniale";
+        $aView["titre"]=$titre;
+
         if($this->session->user)
         {
             // On charge la fonction citation crée dans la library proverbe.
@@ -35,14 +38,23 @@ class Vaisseau extends CI_Controller
             $aView["citation"]=$citation;
             $aView["Salutation"]= "<i>Salve, esto paratus sit vivere fabulosa valebat. </i><br> Bonjour, Soyez pret a vivre une aventure fabuleuse.<br>";
 
+            $this->load->model('Flotte_model');
+            $Fliste = $this->Flotte_model->Liste();
+            $aView["Fliste"] = $Fliste;
+
+            $this->load->model('Groupe_model');
+            $Gliste = $this->Groupe_model->liste();
+            $aView["Gliste"] = $Gliste;
+
             // On charge le modèle 'vaisseau_model'
             $this->load->model('Vaisseau_model');
 
             // On appelle la méthode liste() du modèle, qui retourne le tableau résultat ici affecté à la variable $aListe (un tableau)
-            $aliste = $this->Vaisseau_model->liste();
-            $aView["liste"] = $aliste;
+            $Vliste = $this->Vaisseau_model->liste();
+            $aView["Vliste"] = $Vliste;
             //var_dump($aView);
 
+            $this->load->view('inclusion/navbar',$aView);
             $this->load->view('vaisseau/liste', $aView);
             //$this->form_validation->set_message('rule','Error Message');
 
@@ -56,6 +68,8 @@ class Vaisseau extends CI_Controller
     {
         //Déclaration du tableau associatif à transmettre à la vue
         $aView = array();
+        $titre= "Détail sur le vaisseau";
+        $aView["titre"]=$titre;
 
         if($this->session->user)
         {
@@ -73,6 +87,11 @@ class Vaisseau extends CI_Controller
             $aView["detail"] = $adetail;
             //var_dump($aView);
 
+            $this->load->model('Produit_model');
+            $ProduitVaisseau = $this->Produit_model->ProduitVaisseau($id_vaisseau);
+            $aView["ProduitVaisseau"] = $ProduitVaisseau;
+
+            $this->load->view('inclusion/navbar',$aView);
             $this->load->view('vaisseau/detail', $aView);
         }
         else {
@@ -137,6 +156,7 @@ class Vaisseau extends CI_Controller
                 $liste = $this->Type_model->liste();
                 $aView["ajout"] = $liste;
 
+                $this->load->view('inclusion/navbar',$aView);
                 $this->load->view("vaisseau/ajout",$aView);
 
             }
@@ -191,6 +211,7 @@ class Vaisseau extends CI_Controller
                     $adetail = $this->Vaisseau_model->detail($id_vaisseau);
                     $aView["modif"] = $adetail;
 
+                    $this->load->view('inclusion/navbar',$aView);
                     $this->load->view("vaisseau/modification",$aView);
                   }
             }
@@ -218,8 +239,9 @@ class Vaisseau extends CI_Controller
           $this->load->model('Type_model');
           $liste = $this->Type_model->liste();
           $aView["autre/type"] = $liste;
-          var_dump($liste);
-          exit;
+          //var_dump($liste);
+          //exit;
+
           $this->load->view("autre/type", $aView);
 
         }

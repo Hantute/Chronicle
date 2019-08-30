@@ -15,6 +15,10 @@ class Participe extends CI_Controller
 
      public function Liste()
      {
+
+       $titre= "Liste des batailles livrés";
+       $aView["titre"]=$titre;
+
        $aView["Salutation"]="<i>Salve, esto paratus sit vivere fabulosa valebat. </i><br> Bonjour, Soyez pret a vivre une aventure fabuleuse.";
 
        $this->load->library('proverbe');

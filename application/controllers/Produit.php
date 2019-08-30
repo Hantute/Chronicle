@@ -24,6 +24,8 @@ class Produit extends CI_Controller
 
     public function liste()
     {
+        $titre= "Liste des produits";
+        $aView["titre"]=$titre;
         if($this->session->user)
         {
             $aView["Salutation"]= "<i>Salve, quis tabernam mirabile , quis offer naves te heroes .</i><br> Bienvenus, dans se magasin étonnant qui offre des navires héroiques.";
@@ -36,7 +38,9 @@ class Produit extends CI_Controller
             $aliste=$this->Produit_model->liste();
             $aView['liste']=$aliste;
 
+            $this->load->view('inclusion/navbar',$aView);
             $this->load->view("produit/liste",$aView);
+            $this->load->view('inclusion/footer',$aView);
 
         }
         else{
@@ -56,6 +60,9 @@ class Produit extends CI_Controller
 
     public function detail($id_produit)
     {
+        $titre= "Liste détaillée des produits";
+        $aView["titre"]=$titre;
+
         if($this->session->user)
         {
             $this->load->library('proverbe');
@@ -67,7 +74,9 @@ class Produit extends CI_Controller
            $adetail = $this->Produit_model->detail($id_produit);
            $aView["detail"] = $adetail;
 
+           $this->load->view('inclusion/navbar',$aView);
            $this->load->view("produit/detail",$aView);
+           $this->load->view('inclusion/footer',$aView);
            $this->form_validation->set_message('rule','Error Message');
         }
         else {
@@ -88,6 +97,10 @@ class Produit extends CI_Controller
 
     public function ajout()
     {
+        $titre= "Ajouter un produit";
+        $aView["titre"]=$titre;
+        $aView["Salutation"]= "<i>Salve, quis tabernam mirabile , quis offer naves te heroes .</i><br> Bienvenus, dans se magasin étonnant qui offre des navires héroiques.";
+
         if($this->session->user)
         {
             $this->load->library('proverbe');
@@ -117,9 +130,9 @@ class Produit extends CI_Controller
             }
             else
             {
-              //$this->load->view("inclusion/navbar",$aView);
+              $this->load->view("inclusion/navbar",$aView);
               $this->load->view('produit/ajout', $aView);
-              //$this->load->view("inclusion/footer",$aView);
+              $this->load->view("inclusion/footer",$aView);
               $this->form_validation->set_message('rules','Error Message');
             }
         }
@@ -142,6 +155,9 @@ class Produit extends CI_Controller
 
     public function modification($id_produit)
     {
+        $titre= "Modifier un produit";
+        $aView["titre"]=$titre;
+
         if($this->session->user)
         {
             $this->load->library('proverbe');
@@ -174,7 +190,9 @@ class Produit extends CI_Controller
 
                 $this->form_validation->set_message('rules','Error Message');
             }
+            $this->load->view('inclusion/navbar',$aView);
             $this->load->view('produit/modification', $aView);
+            $this->load->view('inclusion/footer',$aView);
         }
         else
         {
@@ -191,6 +209,9 @@ class Produit extends CI_Controller
 
     public function supprime($id_produit)
     {
+        $titre= "Supprimer un produit";
+        $aView["titre"]=$titre;
+
         if ($this->input->get())
         {
 
@@ -202,6 +223,7 @@ class Produit extends CI_Controller
             redirect('Produit/liste');
         }
 
+        $this->load->view('inclusion/navbar',$aView);
         // On fait un lien entre les deux table pour afficher le nom de la catégorie du produits et non son code numérique.
         $this->load->model('produit_model');
         $detail = $this->produit_model->DetailProduits($id_produit);
@@ -215,8 +237,8 @@ class Produit extends CI_Controller
       $this->load->model('Type_model');
       $liste = $this->Type_model->liste();
       $aView["autre/type"] = $liste;
-      var_dump($liste);
-      exit;
+      //var_dump($liste);
+      //exit;
       $this->load->view("autre/type", $aView);
 
     }
@@ -241,6 +263,10 @@ class Produit extends CI_Controller
 
     public function categorie($categorie_produit)
     {
+
+      $titre= "Liste des produits de la categorie : ".$categorie_produit."" ;
+      $aView["titre"]=$titre;
+
       $aView["Salutation"]= "<i>Salve, esto paratus sit vivere fabulosa valebat. </i><br> Bonjour, Soyez pret a vivre une aventure fabuleuse.";
       $this->load->library("proverbe");
       $citation= $this->proverbe->lesproverbes();

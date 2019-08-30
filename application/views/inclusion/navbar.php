@@ -7,10 +7,14 @@ if (!defined ('BASEPATH')) exit ('No direct script access allowed');
 <html lang="fr">
 <head>
 <meta charset="utf-8">
-<meta name="$titre " content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title><?php $titre; ?></title>
+<meta name="<?php echo $titre; ?> " content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title><?php echo  $titre; ?></title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
  integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+ <script
+			  src="https://code.jquery.com/jquery-3.4.1.min.js"
+			  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+			  crossorigin="anonymous"></script>
 
 <!-- lien vers une page css pour faire la mise en forme de la page de présentation -->
  <link rel="stylesheet" href="<?php echo base_url("assets/css/Accueilbootstrap.css");?>">
@@ -19,7 +23,7 @@ if (!defined ('BASEPATH')) exit ('No direct script access allowed');
 <body>
 	<header>
 	<div>
-    <h1>LES CHRONICLES DES COLONIES PERDUS</h1>
+    <h1>LES CHRONICLES COLONIALES DISPARUES</h1>
   </div>
 	</header>
   <nav id="navbar" class="navbar navbar-expand-sm bg-info navbar-info" role="navigation">
@@ -33,7 +37,7 @@ if (!defined ('BASEPATH')) exit ('No direct script access allowed');
       <ul class="navbar-nav" id="MENU">
         <li class="nav-item">
           <a class="nav-link" href="<?php echo site_url('Client/Accueil')?>" >Accueil</a>
-            <ul >
+            <ul>
               <li class="nav-item"><a class="nav-link" href="<?php echo site_url('Client/Accueil#Lieu')?>" >Lieu</a></li>
               <li class="nav-item"><a class="nav-link" href="<?php echo site_url('Client/Accueil#Quadrants')?>" >Quadrants</a></li>
               <li class="nav-item"><a class="nav-link" href="<?php echo site_url('Client/Accueil#Zayin')?>" >Zayin-Mëm</a></li>
@@ -42,17 +46,24 @@ if (!defined ('BASEPATH')) exit ('No direct script access allowed');
         </li>
 
         <li class="nav-item">
-          <a href="#">Les vaisseaux</a>
-            <ul >
+          <a href="#">Bibliothéques</a>
+            <ul id="SMenu">
               <li class="nav-item">
                 <a class="nav-link" href="<?php echo site_url("") ?>" > Récits romancés de Bataille </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="<?php echo site_url("Participe/Liste") ?>" > Archives des Rapports de combats </a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="<?php echo site_url("Vaisseau/liste") ?>" > Listes des vaisseaux en activité </a>
-              </li>
+            </ul>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="<?php echo site_url("Vaisseau/liste") ?>" >Effectifs </a>
+            <ul >
+              <li class="nav-item"><a class="nav-link" href="<?php echo site_url('Vaisseau/liste#flotte1')?>" >flotte1</a></li>
+              <li class="nav-item"><a class="nav-link" href="<?php echo site_url('Vaisseau/liste#flotte2')?>" >flotte2</a></li>
+              <li class="nav-item"><a class="nav-link" href="<?php echo site_url('Vaisseau/liste#flotte3')?>" >flotte3</a></li>
+              <li class="nav-item"><a class="nav-link" href="<?php echo site_url('Vaisseau/liste#flotte4')?>" >flotte4</a></li>
             </ul>
         </li>
 
@@ -66,7 +77,7 @@ if (!defined ('BASEPATH')) exit ('No direct script access allowed');
                   <a class="nav-link" href="<?php echo site_url("Produit/categorie/Maquette")?>">les maquettes</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="">les dessins</a>
+                  <a class="nav-link" href="<?php echo site_url("Produit/categorie/Dessin")?>">les dessins</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="">les figurines</a>
@@ -99,6 +110,7 @@ if (!defined ('BASEPATH')) exit ('No direct script access allowed');
 
     <!-- Carroussel d'image controlée -->
     </nav>
+
 			<div class="container-fluid">
 					<?php if($this->session->user):?>
         				<p> <?php echo $Salutation."<br> ".$this->session->user->prenom_client." ".$this->session->user->nom_client; ?> !<br>

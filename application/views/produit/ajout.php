@@ -1,27 +1,3 @@
-<?php
-defined ('BASEPATH') OR exit ('No direct script access allowed');
-?>
-
-
-<!DOCTYPE>
-<html lang="fr">
-<head>
-	<meta charset ="utf-8">
-	<meta name="ajout" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<title>Ajout d'un produit</title>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
- 		integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-	<link rel="stylesheet" href="<?php  echo base_url("assets/css/Accueilbootstrap.css"); ?>">
-</head>
-<body>
-	<header>
-		<p style=font-size:200%> AJOUTER UN PRODUIT</p>
-	</header>
-			<nav>
-			<a href="<?php echo site_url("Produit/liste"); ?>">Liste des produits</a>
-			</nav>
-		<div class="container-fluid">
 			<h1 class="text-center"> Ajouter un nouveau produit</h1>
 					<?php echo form_open_multipart();
                         echo validation_errors();

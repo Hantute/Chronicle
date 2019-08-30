@@ -9,7 +9,7 @@ defined ('BASEPATH') OR exit ('No direct script access allowed');
  *  \date 26/06/2019
  */
 
-class Statut_model extends date_construction_modele
+class Statut_model extends CI_Model
 {
 
       public function statut_flotte()

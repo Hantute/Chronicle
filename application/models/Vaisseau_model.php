@@ -9,8 +9,8 @@ class Vaisseau_model extends CI_Model
             $requete = $this->db->query("SELECT * FROM vaisseau
             JOIN classe ON vaisseau.id_classe=classe.id_classe
             JOIN type ON classe.id_type=type.id_type");
-            $aliste= $requete->result();
-            return $aliste;
+            $Vliste= $requete->result();
+            return $Vliste;
         }
 
         public function detail($id_vaisseau)
@@ -31,6 +31,13 @@ class Vaisseau_model extends CI_Model
         }
 
         public function Vaisseau($id)
+        {
+          $requete = $this->db->query("SELECT * FROM vaisseau WHERE id_classe=?", array($id));
+          $vaisseau = $requete->result();
+          return $vaisseau;
+        }
+
+        public function VaisseauNom($id)
         {
           $requete = $this->db->query("SELECT * FROM vaisseau WHERE id_classe=?", array($id));
           $vaisseau = $requete->result();

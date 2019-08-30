@@ -8,7 +8,7 @@ class Produit_model extends CI_Model
         public function liste()
         {
             $requete = $this->db->query(" SELECT * FROM produit
-            JOIN vaisseau ON produit.id_vaisseau = vaisseau.id_vaisseau");
+              JOIN vaisseau ON produit.id_vaisseau = vaisseau.id_vaisseau");
             $aliste = $requete->result();
             return $aliste;
         }
@@ -17,11 +17,22 @@ class Produit_model extends CI_Model
         public function detail($id_produit)
         {
             $requete = $this->db->query ("SELECT * FROM produit
-            JOIN vaisseau ON produit.id_vaisseau = vaisseau.id_vaisseau WHERE id_produit=?", array($id_produit));
+              JOIN vaisseau ON produit.id_vaisseau = vaisseau.id_vaisseau
+              JOIN classe ON vaisseau.id_classe=classe.id_classe
+              JOIN type ON classe.id_type=type.id_type
+              WHERE id_produit=?", array($id_produit));
             $adetail = $requete->row();
             return $adetail;
         }
 
+        public function ProduitVaisseau($id_vaisseau)
+        {
+          $requete = $this->db->query("SELECT * FROM produit
+            WHERE id_vaisseau=?", array($id_vaisseau));
+          $ProduitVaisseau = $requete->result();
+          return $ProduitVaisseau;
+
+        }
 
         public function ajout()
         {
