@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  *  \class [Vaisseau] de la BDD chronicle.
  *  \brief Création de la class parente Vaisseau extension de la classe CI_Controller chargé de gérer toute les fonctions se rapportant à la table vaisseau de la BDD chronicle
  *  \details Elle est composé de x fonctions "public", Accueil, liste, ajout, modif, supprime, DetailVaisseau, PresentationVaisseau
- *  @author Aurélien Hantute
+ *  @author AHantute
  *  \date 11/06/2019
  */
 
@@ -18,7 +18,7 @@ class Vaisseau extends CI_Controller
      *  \param     nom        Affiche le nom de l'utilisateur.
      *  \param     Citation   Affiche le résultat de la function proverbe.
      *  \param     aView      Affiche toute les données qu'on veux faire apparaitre sur la page.
-     *   \@author   Aurélien Hantute
+     *   \@author   AHantute
      *   \date    11/06/2019
      */
 
@@ -106,7 +106,7 @@ class Vaisseau extends CI_Controller
          *  \param     nom        Affiche le nom de l'utilisateur.
          *  \param     Citation   Affiche le résultat de la function proverbe.
          *  \param     aView      Affiche toute les données qu'on veux faire apparaitre sur la page.
-         *   \@author   Aurélien Hantute
+         *   \@author   AHantute
          *   \date    11/06/2019
          */
 

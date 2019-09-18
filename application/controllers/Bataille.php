@@ -15,7 +15,7 @@ class Bataille extends CI_Controller
      *      \param      citation    Affiche le résultat de la library citation
      *      \param      liste       Affiche le résultat de la requete SQL.
      *      \param      aView       Permet de transférer les données récupérer sur la page View
-     *      \@author    Aurélien Hantute
+     *      \@author    AHantute
      *      \date       12/09/2019    
      */ 
     

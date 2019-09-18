@@ -12,7 +12,7 @@ class Groupe_de_combat extends CI_Controller
     
     public function choixGroupe($id)
     {
-        echo"Bonjour";
+        //echo"Bonjour";
        $this->load->model('Groupe_model');
        $groupe = $this->Groupe_model->Choix($id);
        $aView["groupe"]=$groupe;

@@ -31,16 +31,16 @@
 				<td width='400' text-align='center'><?php echo $row->photo_vaisseau ;?>"</td>
 				<td width='75' text-align='center'><?php echo $row->id_produit ; ?>"</td>\n";
 				<td width='150' text-align='center'><?php echo"<a href=".site_url("produit/detail/").$row->id_produit.">".$row->nom_produit ;?></td>
-				<td width='100' text-align='center'><?php echo $row->prix_produit ;?>€</td>
+				<td width='100' text-align='center' id='prix' value='<?php echo $row->prix_produit ;?>'><?php echo $row->prix_produit ;?>€</td>
 				<td width='100' text-align='center'><?php echo $row->categorie_produit ;?></td>
                                 <td width='100' text-align='center'><?php echo $limite ;?></td>
-                                <td width='100' text-align='center'><select id='facture'>
+                                <td width='100' text-align='center'><select id='commande'>
                                         <?php for($cpt=0; $cpt<=$limite;$cpt++){ ?>
                                             <option value='<?php echo $cpt ;?>'><?php echo $cpt ;?></option>
                                          <?php } ?>
                                         </select>        
                                 </td>
-                                <td width='100' text-align='center' id='facture'></td> 
+                                <td width='100' text-align='center' id='facture' value='<?php echo $facture=0 ;?>'>€</td> 
 					<?php if ($this->session->user->id_autorisation == "1")
 						{ ?>
                                 <td width='100' text-align='center'><?php echo "<a href=".site_url("/produit/modification/").$row->id_produit.">";?>modification</a></td>
@@ -52,4 +52,16 @@
 			?>
 
         	</table>
-
+    <script>
+            $("#commande").change(function()
+            {
+                let $commande = $("#commande").val();
+                let $prix = $("#prix").val();
+                console.log($commande);
+                console.log($prix);
+                
+                $facture=$commande * $prix;
+                console.log($facture);
+                $("#facture").appendTo("#facture").val($facture);
+            });
+    </script>

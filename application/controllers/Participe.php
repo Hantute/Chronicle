@@ -9,7 +9,7 @@ class Participe extends CI_Controller
      *   \param   nom        Affiche le nom de l'utilisateur.
      *   \param   Citation   Affiche le résultat de la function proverbe.
      *   \param   aView      Affiche toute les données qu'on veux faire apparaitre sur la page liste des batailles
-     *   \@author   Aurélien Hantute
+     *   \@author   AHantute
      *   \date    02/07/2019
      */
 

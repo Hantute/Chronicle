@@ -5,7 +5,7 @@ defined ('BASEPATH') OR exit ('No direct script access allowed');
  *  \class [statut] de la BDD chronicle.
  *  \brief Création de la class parente statut_model extension de la classe CI_Model chargé de gérer toute les intéractions se rapportant à la table statut de la BDD chronicle
  *  \details Elle est composé de x fonctions statut_vaisseau, statut_groupe, statut_flotte, statut_escadrille, statut_appareil
- *  @author Aurélien Hantute
+ *  @author AHantute
  *  \date 26/06/2019
  */
 

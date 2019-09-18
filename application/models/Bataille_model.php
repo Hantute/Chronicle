@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit ('No direct script access allowed');
  *  \class      [Bataille] de la BDD chronicle
  *  \brief      Création de la class Bataille_model extension de la classe CI_Model chargé de gérer toute les functions interagissant avec la table Bataille de la BDD chronicle
  *  \details    Elle est composé de 1 fonctions "public": liste ;
- *  @author     Aurélien Hantute
+ *  @author     AHantute
  *  \date       02/09/2019
  */
 
@@ -18,7 +18,7 @@ defined('BASEPATH') OR exit ('No direct script access allowed');
       *  \param     nom        Affiche le nom de l'utilisateur.
       *  \param     Citation   Affiche le résultat de la function proverbe.
       *  \param     aView      Affiche toute les données qu'on veux faire apparaitre sur la page de la liste.
-      *  \@author   Aurélien Hantute
+      *  \@author   AHantute
       *  \date      17/06/2019
       */
 

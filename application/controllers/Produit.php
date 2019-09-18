@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit ('No direct script access allowed');
  *  \class      [Produit] de la BDD chronicle
  *  \brief      Création de la class parente Produit extension de la classe CI_Controller chargé de gérer toute les functions se rapportant à la table produit de la BDD chronicle
  *  \details    Elle est composé de 7 fonctions "public": Accueil, liste, ajout, modif, supprime, detail, presentation
- *  @author     Aurélien Hantute
+ *  @author     AHantute
  *  \date       12/06/2019
  */
 
@@ -18,7 +18,7 @@ class Produit extends CI_Controller
      *  \param     nom        Affiche le nom de l'utilisateur.
      *  \param     Citation   Affiche le résultat de la function proverbe.
      *  \param     aView      Affiche toute les données qu'on veux faire apparaitre sur la page de la liste.
-     *  \@author   Aurélien Hantute
+     *  \@author   AHantute
      *  \date      17/06/2019
      */
 
@@ -54,7 +54,7 @@ class Produit extends CI_Controller
      *  \param     nom        Affiche le nom de l'utilisateur.
      *  \param     Citation   Affiche le résultat de la function proverbe.
      *  \param     aView      Affiche toute les données qu'on veux faire apparaitre sur la page de detail.
-     *  \@author   Aurélien Hantute
+     *  \@author   AHantute
      *  \date      17/06/2019
      */
 
@@ -91,7 +91,7 @@ class Produit extends CI_Controller
      *   \param     ajout     variable contenant la page d'ajout se trouvant dans le dossier model.
      *   \param     $config    Configure les données d'upload de la photo.
      *   \param     aView      Affiche toute les données qu'on veux faire apparaitre sur la page d'ajout.
-     *   \@author   Aurélien Hantute
+     *   \@author   AHantute
      *   \date      17/06/2019
      */
 
@@ -149,7 +149,7 @@ class Produit extends CI_Controller
      *   \param     aAjout     variable contenant la page d'modification/suppression se trouvant dans le dossier model.
      *   \param     $config    Configure les données d'upload de la photo.
      *   \param     aView      Affiche toute les données qu'on veux faire apparaitre sur la page de modification.
-     *   \@author   Aurélien Hantute
+     *   \@author   AHantute
      *   \date      17/06/2019
      */
 
@@ -203,7 +203,7 @@ class Produit extends CI_Controller
     /**  \brief      fonction supprime qui permet de supprimer un produit de la base de donnée produits
      *   \details    Elle permet d'afficher la page de suppression du produit
      *   \param      supprime       qui récupère les données du model et supprime les données du produits que l'on désire supprimer.
-     *   \@author   Aurélien Hantute
+     *   \@author   AHantute
      *   \date    06/05/2019
      */
 
