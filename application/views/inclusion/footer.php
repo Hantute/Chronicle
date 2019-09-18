@@ -1,3 +1,5 @@
+
+</div>
 <footer>
   <div class="col-sm-12">
     <div class="col-sm-4">
@@ -21,7 +23,6 @@
   </div>
 </footer>
 
-</div>
 <link src="<?php echo base_url("assets/js/onglet.js");?>">
 
 
@@ -34,6 +35,6 @@ crossorigin="anonymous">
 integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
 crossorigin="anonymous">
 </script>
-
+<!--div de fin de container -->
 </body>
 </html>

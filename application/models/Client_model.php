@@ -16,10 +16,12 @@ class Client_model extends CI_Model
         //$statut = "2";
         $Date = date("Y-m-d");
         $data = $this->input->post();
+        //var_dump($data);
         unset($data["envoyer"]);
+        
         $data["mot_de_passe"] = password_hash($data["mot_de_passe"], PASSWORD_DEFAULT);
         $data["date_inscription_client"] = $Date;
-        //$data["id_autorisation"]= $statut;
+        $data["id_autorisation"]= 3;
         $this->db->insert("client", $data);
     }
 
@@ -33,32 +35,37 @@ class Client_model extends CI_Model
 
         $pseudo = $data["pseudo_client"];
         $secu = $data["mot_de_passe"];
+        $secu2 = $data["password"];
 
-        // On récupère les données enregistrer dans la base de données client
-
-        $personne = $this->db->query("SELECT * FROM client WHERE pseudo_client=?", $pseudo)->row();
-
-        if($personne)
+        if ($secu == $secu2)
         {
-            if(password_verify($secu, $personne->mot_de_passe))
+
+            // On récupère les données enregistrer dans la base de données client
+
+            $personne = $this->db->query("SELECT * FROM client WHERE pseudo_client=?", $pseudo)->row();
+
+            if($personne)
             {
-                $derco["date_dernière_connexion"]=$Date;
-                $this->db->where('pseudo_client', $pseudo);
-                $this->db->update('client',$derco);
-                $this->session->user = $personne;
-                redirect(site_url("Client/Accueil"));
+                if(password_verify($secu, $personne->mot_de_passe))
+                {
+                    $derco["date_dernière_connexion"]=$Date;
+                    $this->db->where('pseudo_client', $pseudo);
+                    $this->db->update('client',$derco);
+                    $this->session->user = $personne;
+                    redirect(site_url("Client/Accueil"));
+                }
+                else
+                {
+                    $this->session->user = null;
+                    redirect(site_url("Client/Connexion"));
+                }
             }
+        }
             else
             {
                 $this->session->user = null;
-                redirect(site_url("Client/ConnexionClient"));
+                redirect(site_url("Client/Connexion"));
             }
-        }
-        else
-        {
-            $this->session->user = null;
-            redirect(site_url("Client/ConnexionClient"));
-        }
     }
 
     public function Modif($id_client)
@@ -69,7 +76,7 @@ class Client_model extends CI_Model
         unset ($data["id_client"]);
         unset ($data["modifier"]);
 
-        $data["date_modification"] = $Date; 
+        $data["date_modification"] = $Date;
         //$data["date_modification_client"]=$Date;
         $data["mot_de_passe"] = password_hash($data["mot_de_passe"], PASSWORD_DEFAULT);
         var_dump($data);

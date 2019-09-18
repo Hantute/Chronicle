@@ -31,21 +31,21 @@
     						<div class="form-group row">
     							<label for="nom" class="col-sm-2 col-form-labl">Date de naissance :</label>
     							<div class="col-sm-10">
-    								<input type="text" class="form-control border-success" name="date_naissance_client" id="date_de_naissance_client">
+    								<input type="text" class="form-control border-success" name="date_naissance_client" id="date_naissance" value="AAAA-MM-JJ">
     								<span id="pasdate"></span>
     							</div>
     						</div>
     						<div class="form-group row">
     							<label for="nom" class="col-sm-2 col-form-labl"><a class="text-danger">*</a>Mot de Passe :</label>
     							<div class="col-sm-10">
-    								<input type="text" class="form-control border-success" name="mot_de_passe" id="mot_de_passe" required>
+    								<input type="text" class="form-control border-success" name="mot_de_passe" id="motdepasse" value="Il faut mettre un signe spécifique -(_^*+\/\#à dans votre mot de passe" required>
     								<span id="pascode"></span>
     							</div>
     						</div>
     						<div class="form-group row">
     							<label for="nom" class="col-sm-2 col-form-labl"><a class="text-danger">*</a>e_mail :</label>
     							<div class="col-sm-10">
-    								<input type="text" class="form-control border-success" name="e_mail_client" id="e_mail_client" required>
+    								<input type="text" class="form-control border-success" name="e_mail_client" id="email" required>
     								<span id="pasemail"></span>
     							</div>
     						</div>

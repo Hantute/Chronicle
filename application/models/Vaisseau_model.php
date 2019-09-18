@@ -44,7 +44,7 @@ class Vaisseau_model extends CI_Model
           return $vaisseau;
         }
 
-        public function ajout()
+        public function ajout($data)
         {
             $aleatoire = rand(1300,1500);
             $jour = rand(06,28);
@@ -57,10 +57,12 @@ class Vaisseau_model extends CI_Model
             $date2 = (($aleatoire-$jour).'-'.$mois2."-".$jour2);
             $date3 = (($aleatoire+$mois).'-'.$mois3."-".$jour3);
 
-            $data = $this->input->post();
+            var_dump($data);
+            //$data = $this->input->post();
             //$photo=$_FILES["photo_vaisseau"]["name"];
             unset($data["envoyer"]);
             unset($data["id_type"]);
+            unset($data["id_flotte"]);
             $data["id_statut"] = 4;
 
             $data["date_lancement"]=$date;
@@ -82,12 +84,17 @@ class Vaisseau_model extends CI_Model
           unset($data["modifier"]);
           $data["mise_a_jour"] = $Date;
 
-          var_dump($data);
-          var_dump($id_vaisseau);
-
-          //$id = $this->input->get("id_vaisseau");
           $this->db->WHERE('id_vaisseau', $id_vaisseau);
           $this->db->UPDATE('vaisseau',$data);
         }
+        
+        public function choix_vaisseau()
+        {
+            $requete = $this->db->query ("SELECT * FROM vaisseau");
+            $choix_vaisseau = $requete->result();
+            return $choix_vaisseau;
+        }
+
 }
+
 ?>

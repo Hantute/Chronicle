@@ -54,6 +54,10 @@ class Client extends CI_Controller
             $citation=$this->proverbe->lesproverbes();
             $aView['citation']=$citation;
 
+            // récupération des données du formulaire
+            $data = $this->input->post();
+
+
             // On appelle la fonction validation de formulaire, qui va vérifier si les données sont bonnes et on définit les données qu'on considère obligatoire
             $this->form_validation->set_rules('nom_client','nom', 'required|regex_match[/^[A-Za-zéèà^¨ù-]{0,}$/]',
                 array('required'=>'Erreur dans le champ %s'));
@@ -61,19 +65,18 @@ class Client extends CI_Controller
                 array('required'=>'Erreur dans le champ %s'));
             $this->form_validation->set_rules('pseudo_client','pseudo', 'required|regex_match[/^[0-9A-Za-z\sèéêàùâîôûöïä_-]{0,}$/]',
                 array('required'=>'Erreur dans le champ %s'));
-            $this->form_validation->set_rules('date_naissance_client','date_naissance','required|regex_match[/^[0-9][0-9]?\/[0-9][0-9]?\/[0-9][0-9]([0-9][0-9])?$/]',
+            $this->form_validation->set_rules('date_naissance_client','date_naissance','required|regex_match[/^[0-9]{4,4}[-]{1,1}[0-1][0-9][-][0-3][0-9]{1,1}?$/]',
                 array('required'=>'Erreur dans le champs %s'));
-            $this->form_validation->set_rules('mot_de_passe','motdepasse', 'required|regex_match[/^[0-9A-Za-zéèà@ç]{0,}[-(_^*+\/\\"#à]{1,}[0-9A-Za-z]{0,}$/] ',
+            $this->form_validation->set_rules('mot_de_passe','motdepasse', 'required|regex_match[/^[0-9A-Za-zéèà@ç]{0,}[-(_^*+\/\"#à]{1,}[0-9A-Za-z]{0,}$/] ',
                 array('required'=>'Erreur dans le champ %s'));
-            $this->form_validation->set_rules('e_mail_client','email', "required|regex_match[[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?]",
+            $this->form_validation->set_rules('e_mail_client','email', "required|regex_match[/^[A-Za-z0-9!#$%&'*+=?^_`{|}~-]+(?:\.[A-Za-z0-9!#$%&'*+=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9][a-z0-9-]*[a-z0-9]?$/]",
                 array('required'=>'Erreur dans le champ %s'));
 
-           // récupération des données du formulaire
-           $data = $this->input->post();
-
+           var_dump($data);
            // Condition mise en place pour vérifier si les données du formulaire sont conforme, si c'est le ca, on ajoute le client dans la base de données
             if ($this->form_validation->run() == TRUE)
             {
+                var_dump($data);
                 $this->load->model('Client_model');
                 $aCreation = $this->Client_model->Inscription();
                 $aCreation['Inscription']= $aCreation;
@@ -81,9 +84,9 @@ class Client extends CI_Controller
             }
             else {
                   $this->form_validation->set_message('required','Erreur');
+                  $this->load->view('inclusion/navbar',$aView);
+                  $this->load->view("CreationClient",$aView);
             }
-            $this->load->view('inclusion/navbar',$aView);
-            $this->load->view("CreationClient",$aView);
         }
 
 
@@ -98,12 +101,15 @@ class Client extends CI_Controller
             $citation= $this->proverbe->lesproverbes();
             $aView['citation'] = $citation;
 
-            $this->form_validation->set_rules('pseudo_client','pseudo_client','required',
-                array ('required'=>'Erreur dans le champs %s'));
-            $this->form_validation->set_rules('mot_de_passe', 'mot_de_passe','required',
-                array ('required' => 'Erreurs dans le champs %s'));
+            $this->form_validation->set_rules('pseudo_client','pseudo', 'required|regex_match[/^[0-9A-Za-z\sèéêàùâîôûöïä_-]{0,}$/]',
+                array('required'=>'Erreur dans le champ %s'));
+                $this->form_validation->set_rules('mot_de_passe','motdepasse', 'required|regex_match[/^[0-9A-Za-zéèà@ç]{0,}[-(_^*+\/\"#à]{1,}[0-9A-Za-z]{0,}$/] ',
+                    array('required'=>'Erreur dans le champ %s'));
+                    $this->form_validation->set_rules('password','password', 'required|regex_match[/^[0-9A-Za-zéèà@ç]{0,}[-(_^*+\/\"#à]{1,}[0-9A-Za-z]{0,}$/] ',
+                        array('required'=>'Erreur dans le champ %s'));
 
             $data= $this->input->post();
+
 
             if($this->form_validation->run() == TRUE)
             {
@@ -121,13 +127,13 @@ class Client extends CI_Controller
 
         public function Modification()
         {
-
+            $aView["Salutation"]= "<i>Salve, esto paratus sit vivere fabulosa valebat. </i><br> Bonjour, Soyez pret a vivre une aventure fabuleuse.";
             $titre= "Modification du compte utilisateur";
             $aView["titre"]=$titre;
 
             $this->load->library("proverbe");
             $citation= $this->proverbe->lesproverbes();
-            $Modification['citation'] = $citation;
+            $aView['citation'] = $citation;
 
             $this->form_validation->set_rules('nom_client','nom', 'required|regex_match[/^[A-Za-zéèà^¨ù-]{0,}$/]',
                 array('required'=>'Erreur dans le champ %s'));
@@ -135,11 +141,11 @@ class Client extends CI_Controller
                 array('required'=>'Erreur dans le champ %s'));
             $this->form_validation->set_rules('pseudo_client','pseudo', 'required|regex_match[/^[0-9A-Za-z\sèéêàùâîôûöïä_-]{0,}$/]',
                 array('required'=>'Erreur dans le champ %s'));
-            $this->form_validation->set_rules('date_naissance_client','date_naissance','required|regex_match[/^[0-9][0-9]?\/[0-9][0-9]?\/[0-9][0-9]([0-9][0-9])?$/]',
+            $this->form_validation->set_rules('date_naissance_client','date_naissance','required|regex_match[/^[0-9]{4,4}[-]{1,1}[0-1][0-9][-][0-3][0-9]{1,1}?$/]',
                 array('required'=>'Erreur dans le champs %s'));
-            $this->form_validation->set_rules('mot_de_passe','motdepasse', 'required|regex_match[/^[0-9A-Za-zéèà@ç]{0,}[-(_^*+\/\\"#à]{1,}[0-9A-Za-z]{0,}$/] ',
+            $this->form_validation->set_rules('mot_de_passe','motdepasse', 'required|regex_match[/^[0-9A-Za-zéèà@ç]{0,}[-(_^*+\/\#à]{1,}[0-9A-Za-z]{0,}$/] ',
                 array('required'=>'Erreur dans le champ %s'));
-            $this->form_validation->set_rules('e_mail_client','email', "required|regex_match[[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?]",
+            $this->form_validation->set_rules('e_mail_client','email', "required|regex_match[/^[A-Za-z0-9!#$%&'*+=?^_`{|}~-]+(?:\.[A-Za-z0-9!#$%&'*+=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9][a-z0-9-]*[a-z0-9]?$/]",
                 array('required'=>'Erreur dans le champ %s'));
 
            $data = $this->input->post();

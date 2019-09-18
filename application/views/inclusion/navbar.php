@@ -18,7 +18,7 @@ if (!defined ('BASEPATH')) exit ('No direct script access allowed');
 
 <!-- lien vers une page css pour faire la mise en forme de la page de présentation -->
  <link rel="stylesheet" href="<?php echo base_url("assets/css/Accueilbootstrap.css");?>">
- <link rel="stylesheet" href="<?php echo base_url("assets/css/Menu.css"); ?>">
+ <link rel="stylesheet" href="<?php echo base_url("assets/css/Menu.css"); ?>"> 
 </head>
 <body>
 	<header>
@@ -52,7 +52,7 @@ if (!defined ('BASEPATH')) exit ('No direct script access allowed');
                 <a class="nav-link" href="<?php echo site_url("") ?>" > Récits romancés de Bataille </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="<?php echo site_url("Participe/Liste") ?>" > Archives des Rapports de combats </a>
+                <a class="nav-link" href="<?php echo site_url("Bataille/Liste") ?>" > Archives des Rapports de combats </a>
               </li>
             </ul>
         </li>
@@ -64,6 +64,8 @@ if (!defined ('BASEPATH')) exit ('No direct script access allowed');
               <li class="nav-item"><a class="nav-link" href="<?php echo site_url('Vaisseau/liste#flotte2')?>" >flotte2</a></li>
               <li class="nav-item"><a class="nav-link" href="<?php echo site_url('Vaisseau/liste#flotte3')?>" >flotte3</a></li>
               <li class="nav-item"><a class="nav-link" href="<?php echo site_url('Vaisseau/liste#flotte4')?>" >flotte4</a></li>
+              <li class="nav-item"><a class="nav-link" href="<?php echo site_url('Vaisseau/liste#flotte5')?>" >flotte5</a></li>
+              <li class="nav-item"><a class="nav-link" href="<?php echo site_url('Vaisseau/liste#flotte6')?>" >flotte6</a></li>
             </ul>
         </li>
 
@@ -113,26 +115,27 @@ if (!defined ('BASEPATH')) exit ('No direct script access allowed');
 
 			<div class="container-fluid">
 					<?php if($this->session->user):?>
-        				<p> <?php echo $Salutation."<br> ".$this->session->user->prenom_client." ".$this->session->user->nom_client; ?> !<br>
+                            <p> <?php echo $Salutation."<br> ".$this->session->user->prenom_client." ".$this->session->user->nom_client; ?> </p>
         			<?php else: ?>
-        				<p> <?php echo $Salutation;?>
-        			<?php endif;?><br>
+                            <p> <?php echo $Salutation;?></p>
+        			<?php endif;?> 
               		<?php echo $citation; ?>
-				<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-    				<div class="carousel-inner">
-    					<div class="carousel-item active">
-    					       <img class="d-block w-100" src="" id="img2"
-    					       alt="First slide" title=" responsive" >
-    				  </div>
-    					<a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-       						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        					<span class="sr-only">Previous</span>
-      					</a>
-      					<a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-        					<span class="carousel-control-next-icon" aria-hidden="true"></span>
-        					<span class="sr-only">Next</span>
-      					</a>
-				    </div>
-        </div>
+                                
+                                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                                    <div class="carousel-inner">
+                                        <div class="carousel-item active">
+                                            <img class="d-block w-100" src="" id="img2"
+                                            alt="First slide" title=" responsive" >
+                                        </div>
+                                            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                    <span class="sr-only">Previous</span>
+                                            </a>
+                                            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                    <span class="sr-only">Next</span>
+                                            </a>
+                                    </div>
+                                </div>
 
 <link src="<?php echo base_url("assets/js/onglet.js");?>">

@@ -52,11 +52,11 @@ class Vaisseau extends CI_Controller
             // On appelle la méthode liste() du modèle, qui retourne le tableau résultat ici affecté à la variable $aListe (un tableau)
             $Vliste = $this->Vaisseau_model->liste();
             $aView["Vliste"] = $Vliste;
-            //var_dump($aView);
 
             $this->load->view('inclusion/navbar',$aView);
             $this->load->view('vaisseau/liste', $aView);
-            //$this->form_validation->set_message('rule','Error Message');
+            $this->load->view('inclusion/footer',$aView);
+            $this->form_validation->set_message('rule','Error Message');
 
             }
         else {
@@ -93,6 +93,7 @@ class Vaisseau extends CI_Controller
 
             $this->load->view('inclusion/navbar',$aView);
             $this->load->view('vaisseau/detail', $aView);
+            $this->load->view('inclusion/footer',$aView);
         }
         else {
             redirect(site_url("Client/Accueil"));
@@ -111,7 +112,10 @@ class Vaisseau extends CI_Controller
 
         public function ajout()
         {
-
+            
+            $titre= "Ajouter un vaisseau à la flotte de défense coloniale";
+            $aView["titre"]=$titre;
+            
             if($this->session->user /*&& $this->session->user->id_autorisation == "1"*/)
             {
 
@@ -133,32 +137,33 @@ class Vaisseau extends CI_Controller
                     array ('required' => 'Erreur dans le champs %s'));
                 $this->form_validation->set_rules('generateur', 'generateur', 'required',
                     array ('required' => 'Erreur dans le champs %s'));
-              /*  $this->form_validation->set_rules('id_groupe','groupe','required',
-                    array ('required' =>'Erreur dans le champs %s'));*/
-              /*  $this->form_validation->set_rules('id_classe','classe','required',
-                    array ('required' => 'Erreur dans le champs %s'));*/
+                
+                $data = $this->input->post();
 
                     if ($this->form_validation->run() == TRUE)
                     {
-                      $data = $this->input->post();
-
                       $this->load->model('Vaisseau_model');
-                      $ajout = $this->Vaisseau_model->ajout();
+                      $this->Vaisseau_model->ajout($data);
                       redirect(site_url("vaisseau/liste"));
                     }
-                /*$data = $this->input->post();
+                    else 
+                    {    
+                        $this->form_validation->set_message('required','Erreur');
 
-                $this->load->model('Vaisseau_model');
-                $ajout = $this->Vaisseau_model->ajout();
-                $aView['vaisseau/ajout'] = $ajout;*/
+                        $this->load->model('Flotte_model');
+                        $flotte= $this->Flotte_model->Liste();
+                        $aView["flotte"]=$flotte;
+                        $this->load->model('Type_model');
+                        $liste = $this->Type_model->liste();
+                        $aView["ajout"] = $liste;
+                        $this->load->model('Planete_model');
+                        $planete = $this->Planete_model->liste();
+                        $aView["chantier"]=$planete;
 
-                $this->load->model('Type_model');
-                $liste = $this->Type_model->liste();
-                $aView["ajout"] = $liste;
-
-                $this->load->view('inclusion/navbar',$aView);
-                $this->load->view("vaisseau/ajout",$aView);
-
+                        $this->load->view('inclusion/navbar',$aView);
+                        $this->load->view("vaisseau/ajout",$aView);
+                        $this->load->view("inclusion/footer",$aView);
+                    }
             }
             else {
                 redirect(site_url("Client/Accueil"));
@@ -239,24 +244,15 @@ class Vaisseau extends CI_Controller
           $this->load->model('Type_model');
           $liste = $this->Type_model->liste();
           $aView["autre/type"] = $liste;
-          //var_dump($liste);
-          //exit;
-
           $this->load->view("autre/type", $aView);
 
         }
 
         public function classe_vaisseau($id)
         {
-          //alert("bonjour");
-          //var_dump($id);
-          //exit;
-          //console.log($id_type);
         $this->load->model('Classe_model');
         $classe = $this->Classe_model->Classe($id);
         $aView["classe"] = $classe;
-        //console.log($classe);
-        //exit;
         $this->load->view("autre/classe", $aView);
       }
 }

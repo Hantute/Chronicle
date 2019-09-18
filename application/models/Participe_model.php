@@ -18,4 +18,20 @@ class Participe_model extends CI_Model
       return $arapport;
     }
 
+    public function ajout() 
+    {
+        $data = $this->input->post();
+        unset ($data["envoyer"]);
+        var_dump($data);
+        $this->db->insert ('participe', $data);
+    }
+    
+    
+    public function Choix_vaisseau($id)
+    {
+        $requete = $this->db->query("SELECT * FROM participe WHERE id_bataille=?", array($id));
+        $choix = $requete->result();
+        return $choix;   
+    }
+    
 }

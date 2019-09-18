@@ -9,28 +9,47 @@
 		        	<TH width='400'>Image </TH>
 		        	<TH width="75">Code </TH>
 		        	<TH width='150'>Nom </TH>
-		        	<TH width='100'>Prix </TH>
+		        	<TH width='100'>Prix à l'unité</TH>
 		        	<TH width='100'>Categorie </TH>
-							<TH width='100'>Modifier un produit</TH>
-							<TH width='100'>Supprimer un produit</TH>
+                                <TH witdh='100'>Stock</TH>
+                                <TH witdh='100'>Commande</TH>
+                                <TH width='100'>facture</TH>
+							<?php
+							if ($this->session->user->id_autorisation == "1")
+							{
+								echo"<TH width='100'>Modifier un produit</TH>";
+								echo"<TH width='100'>Supprimer un produit</TH>";
+							}
+							?>
 						</TR>
 			<br>
 			<?php
 			foreach ($liste as $row)
 			{
-			    echo "<tr border='10' bgcolor='#6ff7ae' width='150' text-aligne='center'>\n";
-				    echo "<td width='400' text-align='center'>".$row->photo_vaisseau."</td>\n";
-				    echo "<td width='75' text-align='center'>".$row->id_produit."</td>\n";
-				    echo "<td width='150' text-align='center'><a href=".site_url("produit/detail/").$row->id_produit.">".$row->nom_produit."</td>\n";
-				    echo "<td width='100' text-align='center'>".$row->prix_produit."</td>\n";
-				    echo "<td width='100' text-align='center'>".$row->categorie_produit."</td>\n";
-				    echo "<td width='100' text-align='center'><a href=".site_url("/produit/modification/").$row->id_produit.">modification</a></td>\n";
-				    echo "<td width='100' text-align='center'><a href=".site_url("/produit/suppression/").$row->id_produit.">suppression</td>\n";
-			    echo"</tr>";
-			}
+                            $limite=$row->stock_produit;?>
+			    <tr border='10' bgcolor='#6ff7ae' width='150' text-aligne='center'>
+				<td width='400' text-align='center'><?php echo $row->photo_vaisseau ;?>"</td>
+				<td width='75' text-align='center'><?php echo $row->id_produit ; ?>"</td>\n";
+				<td width='150' text-align='center'><?php echo"<a href=".site_url("produit/detail/").$row->id_produit.">".$row->nom_produit ;?></td>
+				<td width='100' text-align='center'><?php echo $row->prix_produit ;?>€</td>
+				<td width='100' text-align='center'><?php echo $row->categorie_produit ;?></td>
+                                <td width='100' text-align='center'><?php echo $limite ;?></td>
+                                <td width='100' text-align='center'><select id='facture'>
+                                        <?php for($cpt=0; $cpt<=$limite;$cpt++){ ?>
+                                            <option value='<?php echo $cpt ;?>'><?php echo $cpt ;?></option>
+                                         <?php } ?>
+                                        </select>        
+                                </td>
+                                <td width='100' text-align='center' id='facture'></td> 
+					<?php if ($this->session->user->id_autorisation == "1")
+						{ ?>
+                                <td width='100' text-align='center'><?php echo "<a href=".site_url("/produit/modification/").$row->id_produit.">";?>modification</a></td>
+				<td width='100' text-align='center'><?php echo "<a href=".site_url("/produit/suppression/").$row->id_produit.">" ;?>suppression</td>
+						<?php } ?>
+					</tr>
+			<?php }
 
 			?>
 
         	</table>
-	</body>
-</html>
+

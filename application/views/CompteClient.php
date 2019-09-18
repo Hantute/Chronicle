@@ -1,48 +1,4 @@
-<?php
-if (!defined ('BASEPATH')) exit ('No direct script access allowed');
-?>
 
-<!DOCTYPE>
-<html lang="fr">
-<head>
-	<meta charset = "utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1,shrink-t-fit=no">
-	<title>Modification du compte client</title>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
- 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-
-	 <!-- Lien CSS est en dessous de bootstrap et pas au dessus -->
-	<link rel="stylesheet" href="<?php echo base_url("assets/css/Jarditoubootstrap.css"); ?>">
-</head>
-<body>
-	<header>
-	<p style=font-size:200%> Modification du compte client</p>
-
-	</header>
-    	<nav id="navbar" class="navbar navbar-expand-sm bg-info navbar-info">
-
-            <!-- Barre de navigation qui devient un bouton quand la taille de l'écran change Toggler/collapsibe Button -->
-
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-        		<span class="navbar-toggler-icon"></span>
-            </button>
-    		<div class="collapse navbar-collapse" id="collapsibleNavbar">
-        		<ul class="navbar-nav">
-        			<li class="nav-item">
-        				<a class="nav-link" href="<?php echo site_url('Client/Accueil')?>">Accueil</a>
-        			</li>
-            		<li class="nav-item">
-                				<?php if($this->session->user):?>
-            					<a class="nav-link" href="<?php echo site_url("Client/Deconnexion")?>" tabindex="-1" aria-disabled="true"><?= $this->session->user->pseudo_client ?></a>
-            				<?php else: ?>
-            					<a class="nav-link" href="<?php echo site_url("Client/Connexion")?>" tabindex="-1" aria-disabled="true">Connexion</a>
-            				<?php endif;?>
-            		</li>
-            	</ul>
-    		</div>
-		</nav>
-
-	<div class="container-fluid">
 		<h1><i> SALVE CIVIS</i>: "Bonjour citoyen"</h1>
 		<h3><i>vos iustus facis impletione officiorum civilium, Vos volo ut fiat miles ? </i>:" Vous voulez faire votre devoir de citoyens, vous voulez être un soldat ?"</h3>
 		<?php echo $citation;?>
@@ -74,7 +30,7 @@ if (!defined ('BASEPATH')) exit ('No direct script access allowed');
     							</div>
     						</div>
     						<div class="form-group row">
-    							<label for="date_naissance_client" class="col-sm-2 col-form-labl">Date de naissance :</label>
+    							<label for="date_naissance_client" class="col-sm-2 col-form-labl" value="JJ/MM/AAAA">Date de naissance :</label>
     							<div class="col-sm-10">
     								<input type="text" class="form-control border-success" name="date_naissance_client" id="date_naissance_client" value="<?=$this->session->user->date_naissance_client; ?>">
     								<span id="pasdate"></span>
@@ -105,6 +61,3 @@ if (!defined ('BASEPATH')) exit ('No direct script access allowed');
 				<p><i>gratias ago tibi, MILES </i>: Merci, SOLDAT</p>
 		</form>
 	</div>
-<!-- <link rel="stylesheet" href="http://localhost/ci/assets/css/??.css">	-->
-</body>
-</html>

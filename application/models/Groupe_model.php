@@ -14,6 +14,13 @@ class Groupe_model extends CI_Model
     $Gliste = $requete->result();
     return $Gliste;
   }
+  
+  public function Choix($id)
+  {
+      $requete = $this->db->query("SELECT * FROM groupe_de_combat WHERE flotte_id_flotte=?", array($id));
+      $groupe = $requete->result();
+      return $groupe;
+  }
 }
 
 
