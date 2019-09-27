@@ -115,7 +115,8 @@ if (!defined ('BASEPATH')) exit ('No direct script access allowed');
 
 			<div class="container-fluid">
 					<?php if($this->session->user):?>
-                            <p> <?php echo $Salutation."<br> ".$this->session->user->prenom_client." ".$this->session->user->nom_client; ?> </p>
+                            <p> <?php echo $Salutation."<br>"; ?>
+                                 Bonjour Capitaine <?php echo $this->session->user->prenom_client." ".$this->session->user->nom_client; ?> <br> </p>
         			<?php else: ?>
                             <p> <?php echo $Salutation;?></p>
         			<?php endif;?> 

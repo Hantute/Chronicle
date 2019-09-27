@@ -14,5 +14,12 @@ class Flotte_model extends CI_Model
     $flotte = $requete->result();
     return $flotte;
   }
+  
+  public function ChoixFlotte($id)
+  {
+      $requete = $this->db->query("SELECT * FROM flotte WHERE id_flotte=?",array($id));
+      $flotte= $requete->row();
+      return $flotte;
+  }        
 }
 ?>

@@ -85,11 +85,26 @@ class Vaisseau extends CI_Controller
             // On appelle la méthode liste() du modèle, qui retourne le tableau résultat ici affecté à la variable $aListe (un tableau)
             $adetail = $this->Vaisseau_model->detail($id_vaisseau);
             $aView["detail"] = $adetail;
-            //var_dump($aView);
 
             $this->load->model('Produit_model');
             $ProduitVaisseau = $this->Produit_model->ProduitVaisseau($id_vaisseau);
             $aView["ProduitVaisseau"] = $ProduitVaisseau;
+            
+            $this->load->model('Participe_model');
+            $rapport= $this->Participe_model->Detail($id_vaisseau);
+            $aView["rapport"]=$rapport;
+            
+            $idgroupe=$adetail->id_groupe;
+            
+            $this->load->model('Groupe_model');
+            $groupe= $this->Groupe_model->ChoixVaisseau($idgroupe);
+            $aView["Groupe"]=$groupe;
+            
+            $idflotte= $groupe->flotte_id_flotte;
+            
+            $this->load->model('Flotte_model');
+            $flotte= $this->Flotte_model->Choixflotte($idflotte);
+            $aView["Flotte"]=$flotte;
 
             $this->load->view('inclusion/navbar',$aView);
             $this->load->view('vaisseau/detail', $aView);
@@ -189,6 +204,9 @@ class Vaisseau extends CI_Controller
                   $this->load->library('proverbe');
                   $citation=$this->proverbe->lesproverbes();
                   $aView["citation"]=$citation;
+                  $aView["Salutation"]= "<i>Salve, esto paratus sit vivere fabulosa valebat. </i><br> Bonjour, Soyez pret a vivre une aventure fabuleuse.<br>";
+                  $titre= "modification du vaisseau";
+                  $aView["titre"]=$titre;
 
                   if ($this->form_validation->run() == TRUE)
                   {
@@ -218,6 +236,7 @@ class Vaisseau extends CI_Controller
 
                     $this->load->view('inclusion/navbar',$aView);
                     $this->load->view("vaisseau/modification",$aView);
+                    $this->load->view("inclusion/footer",$aView);
                   }
             }
             else {

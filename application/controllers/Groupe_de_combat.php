@@ -20,5 +20,11 @@ class Groupe_de_combat extends CI_Controller
         
     }
     
-    
+    public function GroupeVaisseau($id)
+    {
+        $this->load->model('Vaisseau_model');
+        $GroupeV = $this->Vaisseau_model->Groupe_Vaisseau($id);
+        $aView["GroupeV"]=$GroupeV;
+        $this->load->view("autre/listeVaisseau", $aView);
+    }
 }

@@ -95,6 +95,16 @@ class Vaisseau_model extends CI_Model
             return $choix_vaisseau;
         }
 
+        public function Groupe_Vaisseau($id)
+        {
+            $requete = $this->db->query("SELECT * FROM vaisseau 
+                JOIN classe ON vaisseau.id_classe=classe.id_classe
+                JOIN type ON classe.id_type=type.id_type
+                WHERE id_groupe=?",array($id));
+            $GroupeV= $requete->result();
+            return $GroupeV;
+        }
+        
 }
 
 ?>

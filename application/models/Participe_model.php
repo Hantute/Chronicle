@@ -34,4 +34,11 @@ class Participe_model extends CI_Model
         return $choix;   
     }
     
+    public function Detail($id)
+    {          
+        $requete = $this->db->query("SELECT * FROM participe WHERE id_vaisseau=?", array($id));
+        $participe = $requete->result();
+        return $participe;
+    }
+    
 }

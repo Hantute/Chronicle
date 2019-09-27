@@ -1,7 +1,7 @@
 
-							<?php if($this->session->user && $this->session->user->id_autorisation == "1"){?>
-														<a href="<?php echo site_url("Produit/ajout")?>">ajouter un produit</a><br />
-													<?php } ?>
+		<?php if($this->session->user && $this->session->user->id_autorisation == "1"){?>
+		<a href="<?php echo site_url("Produit/ajout")?>">ajouter un produit</a><br />
+                <?php } ?>
 
 
         	<table border='5' bgcolor=#d0ff00 text-align='center' id='tableau'>

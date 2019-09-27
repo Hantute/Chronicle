@@ -1,4 +1,17 @@
 
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+ integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+ <script
+			  src="https://code.jquery.com/jquery-3.4.1.min.js"
+			  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+			  crossorigin="anonymous"></script>
+
+<!--lien vers une page css pour faire la mise en forme de la page de présentation -->
+<link rel="stylesheet" href="<?php echo base_url("assets/css/Accueilbootstrap.css");?>">
+ <link rel="stylesheet" href="<?php echo base_url("assets/css/Menu.css"); ?>"> 
+
+
         <?php echo form_open_multipart();
 		echo validation_errors();
 		if(isset($Erreurs))
@@ -55,17 +68,9 @@
                     {
                         $("id_vaisseau").show();
                         let id_bataille = $("#id_bataille").val();
-                            $("#id_vaisseau").load("http://localhost/Ci_FilRouge/index.php/Participe/Choix_vaisseau/"+id_bataille);
+                            $("#id_vaisseau").load("http://localhost/Ci_FilRouge/index.php/Participe/Choix_vaisseauP/"+id_bataille);
                             $("#date_combat").load("http://localhost/Ci_FilRouge/index.php/Participe/Selection_date/"+id_bataille);
 
                     });
             </script>
                        
-
-
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-		 integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-		 crossorigin="anonymous"></script>
- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-		 integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-		 crossorigin="anonymous"></script>

@@ -90,14 +90,14 @@ class Participe extends CI_Controller
 
         public function ajoutP(){
 
-            $titre = " ajout d'un rapport de bataille";
+            /*$titre = " ajout d'un rapport de bataille";
             $aView["titre"] = $titre;
 
             $aView["Salutation"]="<i>Salve, esto paratus sit vivere fabulosa valebat. </i><br> Bonjour, Soyez pret a vivre une aventure fabuleuse.";
 
             $this->load->library('proverbe');
             $citation=$this->proverbe->lesproverbes();
-            $aView["citation"]=$citation;
+            $aView["citation"]=$citation;*/
 
             if($this->session->user /*&& $this->session->user->id_autorisation == "1"*/)
             {
@@ -132,9 +132,9 @@ class Participe extends CI_Controller
                         else
                         {
                             $this->form_validation->set_message('required','Erreur');
-                            $this->load->view('inclusion/navbar',$aView);
+                            //$this->load->view('inclusion/navbar',$aView);
                             $this->load->view("participe/ajoutP",$aView);
-                            $this->load->view('inclusion/footer',$aView); 
+                            //$this->load->view('inclusion/footer',$aView); 
                         }
             }
             else 
@@ -144,19 +144,17 @@ class Participe extends CI_Controller
         }
 
 
-        public function Choix_vaisseau($id_bataille)
+        public function Choix_vaisseauP($id_bataille)
             {
             $this->load->model("Participe_model");
             $choix = $this->Participe_model->Choix_vaisseau($id_bataille);
-            //$this->load->model("Vaisseau_model");
-            //$vaisseau = $this->Vaisseau_model->liste();
 
             if ($choix  != null) {
                 $this->load->model("Vaisseau_model");
                 $vaisseau= $this->Vaisseau_model->Choix_vaisseau();}
             else {
-                            $this->load->model("Vaisseau_model");
-            $vaisseau = $this->Vaisseau_model->liste();
+                    $this->load->model("Vaisseau_model");
+                    $vaisseau = $this->Vaisseau_model->liste();
                 }
             $aView["choix"]=$choix;
             $aView["vaisseau"]= $vaisseau;

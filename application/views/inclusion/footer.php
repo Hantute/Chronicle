@@ -24,7 +24,8 @@
 </footer>
 
 <link src="<?php echo base_url("assets/js/onglet.js");?>">
-
+<!--<link src='<?php// echo base_url("assets/css/GestionModal.css");?>'>-->
+<link rel="stylesheet" href="<?php echo base_url("assets/css/GestionModal.css");?>">
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
 integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"

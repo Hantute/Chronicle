@@ -21,6 +21,13 @@ class Groupe_model extends CI_Model
       $groupe = $requete->result();
       return $groupe;
   }
+  
+  public function ChoixVaisseau($id)
+  {
+      $requete = $this->db->query("SELECT * FROM groupe_de_combat WHERE id_groupe=?", array($id));
+      $choixVaisseau = $requete->row();
+      return $choixVaisseau;
+  }        
 }
 
 
