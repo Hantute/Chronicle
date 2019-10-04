@@ -19,7 +19,7 @@ class Bataille extends CI_Controller
      *      \date       12/09/2019    
      */ 
     
-    public function Liste()
+    public function ListeB()
     {
         $titre="Liste détaillée des batailles livrées";
         $aView["titre"]= $titre;
@@ -31,15 +31,36 @@ class Bataille extends CI_Controller
         $aView["citation"]=$citation;
         
         $this->load->model('Bataille_model');
-        $archive= $this->Bataille_model->archive();
+        $archive= $this->Bataille_model->archiveB();
         
         $aView["archives"]=$archive;
         
         $this->load->view('inclusion/navbar',$aView);
-        $this->load->view("bataille/liste",$aView);
+        $this->load->view("bataille/listeB",$aView);
         $this->load->view('inclusion/footer',$aView);
         
     }
     
+    
+    public function RecitB()
+    {
+        $titre="Compte rendu officiel des batailles livrées entre les colonies et l'Empire des l'empire des Vespides";
+        $aView["titre"]=$titre;
+        $aView["Salutation"]= "<i>Testis est nobilior eratque eorum princeps nostri ad proeliandum contra adversarios nostros.</i> <br/>Soyez le temoin des exploits de nos combattants contre nos adversaires.";
+    
+        $this->load->library('proverbe');
+        $citation=$this->proverbe->lesproverbes();
+        $aView["citation"]=$citation;
+        
+        $this->load->model('Bataille_model');
+        $liste=$this->Bataille_model->listeB();
+        $aView["RecitB"]=$liste;
+        
+        $this->load->view('inclusion/navbar',$aView);
+        $this->load->view("bataille/recitB",$aView);
+        $this->load->view('inclusion/footer',$aView);
+        
+        
+    }
     
 }

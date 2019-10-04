@@ -22,7 +22,7 @@ class Vaisseau extends CI_Controller
      *   \date    11/06/2019
      */
 
-    public function liste()
+    public function listeV()
     {
         //Déclaration du tableau associatif à transmettre à la vue
         $aView = array();
@@ -54,7 +54,7 @@ class Vaisseau extends CI_Controller
             $aView["Vliste"] = $Vliste;
 
             $this->load->view('inclusion/navbar',$aView);
-            $this->load->view('vaisseau/liste', $aView);
+            $this->load->view('vaisseau/listeV', $aView);
             $this->load->view('inclusion/footer',$aView);
             $this->form_validation->set_message('rule','Error Message');
 
@@ -64,7 +64,7 @@ class Vaisseau extends CI_Controller
              }
     }
 
-    public function detail($id_vaisseau)
+    public function detailV($id_vaisseau)
     {
         //Déclaration du tableau associatif à transmettre à la vue
         $aView = array();
@@ -107,7 +107,7 @@ class Vaisseau extends CI_Controller
             $aView["Flotte"]=$flotte;
 
             $this->load->view('inclusion/navbar',$aView);
-            $this->load->view('vaisseau/detail', $aView);
+            $this->load->view('vaisseau/detailV', $aView);
             $this->load->view('inclusion/footer',$aView);
         }
         else {
@@ -125,7 +125,7 @@ class Vaisseau extends CI_Controller
          *   \date    11/06/2019
          */
 
-        public function ajout()
+        public function ajoutV()
         {
             
             $titre= "Ajouter un vaisseau à la flotte de défense coloniale";
@@ -159,7 +159,7 @@ class Vaisseau extends CI_Controller
                     {
                       $this->load->model('Vaisseau_model');
                       $this->Vaisseau_model->ajout($data);
-                      redirect(site_url("vaisseau/liste"));
+                      redirect(site_url("vaisseau/listeV"));
                     }
                     else 
                     {    
@@ -176,7 +176,7 @@ class Vaisseau extends CI_Controller
                         $aView["chantier"]=$planete;
 
                         $this->load->view('inclusion/navbar',$aView);
-                        $this->load->view("vaisseau/ajout",$aView);
+                        $this->load->view("vaisseau/ajoutV",$aView);
                         $this->load->view("inclusion/footer",$aView);
                     }
             }
@@ -185,7 +185,7 @@ class Vaisseau extends CI_Controller
             }
         }
 
-        public function modification($id_vaisseau)
+        public function modificationV($id_vaisseau)
         {
             if($this->session->user && $this->session->user->id_autorisation == "1")
             {
@@ -220,7 +220,7 @@ class Vaisseau extends CI_Controller
                     $this->load->model('Vaisseau_model');
                     $modif = $this->Vaisseau_model->modification($id_vaisseau);
                     $aView['modification']=$modif;
-                    redirect(site_url("Vaisseau/liste"));
+                    redirect(site_url("Vaisseau/listeV"));
                   }
                   else {
 
@@ -235,7 +235,7 @@ class Vaisseau extends CI_Controller
                     $aView["modif"] = $adetail;
 
                     $this->load->view('inclusion/navbar',$aView);
-                    $this->load->view("vaisseau/modification",$aView);
+                    $this->load->view("vaisseau/modificationV",$aView);
                     $this->load->view("inclusion/footer",$aView);
                   }
             }

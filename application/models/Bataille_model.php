@@ -22,7 +22,7 @@ defined('BASEPATH') OR exit ('No direct script access allowed');
       *  \date      17/06/2019
       */
 
-      public function liste()
+      public function listeB()
       {
       $requete = $this->db->query ("SELECT * FROM bataille");
       $abataille = $requete->result();
@@ -36,7 +36,7 @@ defined('BASEPATH') OR exit ('No direct script access allowed');
           return $selection;
       }
       
-      public function archive()
+      public function archiveB()
       {
             $requete= $this->db->query("SELECT * FROM bataille 
                     JOIN participe On participe.id_bataille = bataille.id_bataille

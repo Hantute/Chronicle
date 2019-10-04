@@ -41,4 +41,10 @@ class Participe_model extends CI_Model
         return $participe;
     }
     
+    public function RapportP($id)
+    {        
+        $requete = $this->db->query("SELECT * FROM participe WHERE id_participation=?", array($id));
+        $RapportP= $requete->row();
+        return $RapportP;
+    }        
 }

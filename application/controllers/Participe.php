@@ -90,15 +90,6 @@ class Participe extends CI_Controller
 
         public function ajoutP(){
 
-            /*$titre = " ajout d'un rapport de bataille";
-            $aView["titre"] = $titre;
-
-            $aView["Salutation"]="<i>Salve, esto paratus sit vivere fabulosa valebat. </i><br> Bonjour, Soyez pret a vivre une aventure fabuleuse.";
-
-            $this->load->library('proverbe');
-            $citation=$this->proverbe->lesproverbes();
-            $aView["citation"]=$citation;*/
-
             if($this->session->user /*&& $this->session->user->id_autorisation == "1"*/)
             {
                 $this->load->model('Participe_model');
@@ -106,7 +97,7 @@ class Participe extends CI_Controller
                 $aView["participe"] = $participe;
 
                 $this->load->model('Bataille_model');
-                $bataille = $this->Bataille_model->liste();
+                $bataille = $this->Bataille_model->listeB();
                 $aView['bataille']=$bataille;
 
                 $this->load->model('Vaisseau_model');
@@ -132,9 +123,7 @@ class Participe extends CI_Controller
                         else
                         {
                             $this->form_validation->set_message('required','Erreur');
-                            //$this->load->view('inclusion/navbar',$aView);
                             $this->load->view("participe/ajoutP",$aView);
-                            //$this->load->view('inclusion/footer',$aView); 
                         }
             }
             else 
@@ -171,22 +160,19 @@ class Participe extends CI_Controller
 
         }
 
-        /*public function controle_debut($choix_bataille)
+        public function RapportP($id)
         {
-            echo "Bonjour CD";
-            var_dump($choix_bataille);
-            $this->load->model("Bataille_model");
-            $selection = $this->Bataille_model->Selection_date($choix_bataille);
-            var_dump($selection);
+            $this->load->model("Participe_model");
+            $RapportP = $this->Participe_model->RapportP($id);
+            $idV=$RapportP->id_vaisseau;
+            $this->load->model("Vaisseau_model");
+            $DetailV=$this->Vaisseau_model->detail($idV);
+            
+            
+            $aView["RapportP"]=$RapportP;
+            $aView["VaisseauV"]=$DetailV;
+            $this->load->view("autre/Rapport",$aView);
 
-            $data= $this->input->post();
-            var_dump($data);
-            foreach($selection as $row)
-            {
-            var_dump($row->date_debut_bataille);
-            //if ( )
-            {
-            }
-        }*/
+        }
 
 }

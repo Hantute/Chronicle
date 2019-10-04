@@ -7,7 +7,7 @@
             </p>
     </div>
 </div><br />                        
-    <a href="<?php echo site_url('Vaisseau/ajout');?>">Ajouter un nouveau vaisseau à la flotte </a><br/>
+    <a href="<?php echo site_url('Vaisseau/ajoutV');?>">Ajouter un nouveau vaisseau à la flotte </a><br/>
     <?php $compteur=0; ?> 
             
         <?php foreach($Fliste as $rowf)
@@ -24,8 +24,8 @@
                         {                   
                             if($rowf->id_flotte == $rowg->flotte_id_flotte)
                             { ?>
-                            <div class='GROUPE row'  value='<?php echo $rowf->id_flotte;?>'> 
-                                <div class='Groupe col-3' id='groupe<?php echo $rowg->id_groupe ;?>' value="<?php echo $rowg->id_groupe ;?>" >    
+                            <div class='GROUPE row'  id='GB<?php echo $rowg->id_groupe ;?>' value='<?php echo $rowg->id_groupe;?>'> 
+                                <div class='Groupe col-3'  value="<?php echo $rowg->id_groupe ;?>" >    
                                 <?php   echo $rowg->nom_groupe."<br />\n";
                                        echo $rowg->mission."<br />\n";
                                        echo $rowg->base_groupe."<br />\n"; 
@@ -52,13 +52,18 @@
                 console.log($(this));
                 $("#Groupe"+$id).load("http://localhost/CI_FilRouge/index.php/Groupe_de_combat/GroupeVaisseau/"+$id);    
             });
+            $("#GB"+$id).mouseleave(function(){
+                $("#GB"+$id).empty("#Groupe"+$id);
+            })
             
             $('.tableauV').hover(function()
             {
-                
-                console.log($id);
+                //console.log($id);
                 if($id !==0){
-                console.log("AU REVOIR");
+                    //console.log("AU REVOIR");
+                    $(".tableauV").mouseleave(function(){
+                        $("#Groupe"+$id).empty("#Groupe"+$id);
+                    });
                 }
                 
             });

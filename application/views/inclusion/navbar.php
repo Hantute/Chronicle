@@ -49,23 +49,23 @@ if (!defined ('BASEPATH')) exit ('No direct script access allowed');
           <a href="#">Bibliothéques</a>
             <ul id="SMenu">
               <li class="nav-item">
-                <a class="nav-link" href="<?php echo site_url("") ?>" > Récits romancés de Bataille </a>
+                <a class="nav-link" href="<?php echo site_url("Bataille/RecitB") ?>" > Récits romancés de Bataille </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="<?php echo site_url("Bataille/Liste") ?>" > Archives des Rapports de combats </a>
+                <a class="nav-link" href="<?php echo site_url("Bataille/ListeB") ?>" > Archives des Rapports de combats </a>
               </li>
             </ul>
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" href="<?php echo site_url("Vaisseau/liste") ?>" >Effectifs </a>
+          <a class="nav-link" href="<?php echo site_url("Vaisseau/listeV") ?>" >Effectifs </a>
             <ul >
-              <li class="nav-item"><a class="nav-link" href="<?php echo site_url('Vaisseau/liste#flotte1')?>" >flotte1</a></li>
-              <li class="nav-item"><a class="nav-link" href="<?php echo site_url('Vaisseau/liste#flotte2')?>" >flotte2</a></li>
-              <li class="nav-item"><a class="nav-link" href="<?php echo site_url('Vaisseau/liste#flotte3')?>" >flotte3</a></li>
-              <li class="nav-item"><a class="nav-link" href="<?php echo site_url('Vaisseau/liste#flotte4')?>" >flotte4</a></li>
-              <li class="nav-item"><a class="nav-link" href="<?php echo site_url('Vaisseau/liste#flotte5')?>" >flotte5</a></li>
-              <li class="nav-item"><a class="nav-link" href="<?php echo site_url('Vaisseau/liste#flotte6')?>" >flotte6</a></li>
+              <li class="nav-item"><a class="nav-link" href="<?php echo site_url('Vaisseau/listeV#flotte1')?>" >flotte1</a></li>
+              <li class="nav-item"><a class="nav-link" href="<?php echo site_url('Vaisseau/listeV#flotte2')?>" >flotte2</a></li>
+              <li class="nav-item"><a class="nav-link" href="<?php echo site_url('Vaisseau/listeV#flotte3')?>" >flotte3</a></li>
+              <li class="nav-item"><a class="nav-link" href="<?php echo site_url('Vaisseau/listeV#flotte4')?>" >flotte4</a></li>
+              <li class="nav-item"><a class="nav-link" href="<?php echo site_url('Vaisseau/listeV#flotte5')?>" >flotte5</a></li>
+              <li class="nav-item"><a class="nav-link" href="<?php echo site_url('Vaisseau/listeV#flotte6')?>" >flotte6</a></li>
             </ul>
         </li>
 

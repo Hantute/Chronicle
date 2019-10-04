@@ -22,10 +22,10 @@ and open the template in the editor.
                                         <td width='75' text-align='center'><?php echo $rowv->id_vaisseau ;?></td>
                                         <td width='150' text-align='center'><?php echo $rowv->nom_type ;?></td>
                                         <td width='100' text-align='center'><?php echo $rowv->classe_vaisseau;?></td>
-                                        <td width='100' text-align='center'><?php echo "<a href=".site_url("Vaisseau/detail/").$rowv->id_vaisseau.">".$rowv->nom_vaisseau."</td>\n";?></td>
+                                        <td width='100' text-align='center'><?php echo "<a href=".site_url("Vaisseau/detailV/").$rowv->id_vaisseau.">".$rowv->nom_vaisseau."</td>\n";?></td>
                                         <td width='100' text-align='center'><?php echo $rowv->chantier_de_construction ; ?></td>
                                         <td width='100' text-align='center'><?php echo $rowv->date_activation; ?></td>
-                                        <td width='150' text-align='center'><?php echo "<a href=".site_url("Vaisseau/modification/").$rowv->id_vaisseau.">Se mettre à quai à ".$rowv->chantier_de_construction ;?></td>
+                                        <td width='150' text-align='center'><?php echo "<a href=".site_url("Vaisseau/modificationV/").$rowv->id_vaisseau.">Se mettre à quai à ".$rowv->chantier_de_construction ;?></td>
                                     </tr>
                          <?php  
                         } ?>
