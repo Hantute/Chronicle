@@ -22,28 +22,28 @@
     							</div>
     						</div>
     						<div class="form-group row">
-    							<label for="nom" class="col-sm-2 col-form-labl"><a class="text-danger">*</a>Pseudo :</label>
+    							<label for="prenom" class="col-sm-2 col-form-labl"><a class="text-danger">*</a>Pseudo :</label>
     							<div class="col-sm-10">
     								<input type="text" class="form-control border-success" name="pseudo_client" id="pseudo_client" required>
     								<span id="paspseudo"></span>
     							</div>
     						</div>
     						<div class="form-group row">
-    							<label for="nom" class="col-sm-2 col-form-labl">Date de naissance :</label>
+    							<label for="date_naissance" class="col-sm-2 col-form-labl">Date de naissance :</label>
     							<div class="col-sm-10">
     								<input type="text" class="form-control border-success" name="date_naissance_client" id="date_naissance" value="AAAA-MM-JJ">
     								<span id="pasdate"></span>
     							</div>
     						</div>
     						<div class="form-group row">
-    							<label for="nom" class="col-sm-2 col-form-labl"><a class="text-danger">*</a>Mot de Passe :</label>
+    							<label for="motdepasse" class="col-sm-2 col-form-labl"><a class="text-danger">*</a>Mot de Passe :</label>
     							<div class="col-sm-10">
     								<input type="text" class="form-control border-success" name="mot_de_passe" id="motdepasse" value="Il faut mettre un signe spécifique -(_^*+\/\#à dans votre mot de passe" required>
     								<span id="pascode"></span>
     							</div>
     						</div>
     						<div class="form-group row">
-    							<label for="nom" class="col-sm-2 col-form-labl"><a class="text-danger">*</a>e_mail :</label>
+    							<label for="email" class="col-sm-2 col-form-labl"><a class="text-danger">*</a>e_mail :</label>
     							<div class="col-sm-10">
     								<input type="text" class="form-control border-success" name="e_mail_client" id="email" required>
     								<span id="pasemail"></span>
