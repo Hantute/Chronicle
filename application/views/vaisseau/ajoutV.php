@@ -71,15 +71,15 @@
                                                         </div>    
 
 						 	<div class="form-group row">
-						 		<label for="chantier_de_construction" class="col-sm-2 col-form-labl"><a class="text-danger">*</a>chantier de construction:</label>
+						 		<label for="id_systeme_label" class="col-sm-2 col-form-labl"><a class="text-danger">*</a>chantier de construction:</label>
 						 		<div class="col-sm-4">
-						 			<select name="chantier_de_construction" id="chantier_de_construction" class="form-control" required>
+						 			<select name="id_systeme" id="id_systeme" class="form-control" required>
                                                                             <option selected disabled> Sélectionnez le nom de la planète ou se trouve le chantier</option>
                                                                             <?php foreach ($chantier as $rowCh): ?>
-                                                                            <option value="<?= $rowCh->nom_planete ?>"><?php echo $rowCh->nom_planete ?></option>
+                                                                            <option value="<?= $rowCh->id_systeme ?>"><?php echo $rowCh->nom_planete_capitale ?></option>
                                                                             <?php endforeach; ?>
                                                                         </select>    
-						 			<span id="paschantier"></span>
+						 			<span id="passysteme"></span>
 						 		</div>
 						 	</div>
 						 	<div class="form-group row">

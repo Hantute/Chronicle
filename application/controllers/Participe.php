@@ -13,8 +13,6 @@ class Participe extends CI_Controller
      *   \date    02/07/2019
      */
 
-
-
      public function Liste()
      {
 
@@ -55,6 +53,8 @@ class Participe extends CI_Controller
        $this->load->view('inclusion/footer',$aView);
      }
 
+//******************************************************************************     
+     
      public function Detail()
      {
         $titre = " Détail de la bataille";
@@ -83,11 +83,13 @@ class Participe extends CI_Controller
         $aView['listeF']=$flotte;
 
 
-         $this->load->view('inclusion/navbar',$aView);
-         $this->load->view("produit/liste",$aView);
-         $this->load->view('inclusion/footer',$aView);
-     }
+        $this->load->view('inclusion/navbar',$aView);
+        $this->load->view("produit/liste",$aView);
+        $this->load->view('inclusion/footer',$aView);
+    }
 
+//******************************************************************************     
+     
         public function ajoutP(){
 
             if($this->session->user /*&& $this->session->user->id_autorisation == "1"*/)
@@ -132,7 +134,8 @@ class Participe extends CI_Controller
                 }
         }
 
-
+//******************************************************************************
+        
         public function Choix_vaisseauP($id_bataille)
             {
             $this->load->model("Participe_model");
@@ -150,6 +153,8 @@ class Participe extends CI_Controller
             $this->load->view("autre/vaisseau", $aView);
             }
 
+//******************************************************************************            
+            
         public function Selection_date($id_bataille)
         {
             //$choix_bataille=$id_bataille;
@@ -160,6 +165,8 @@ class Participe extends CI_Controller
 
         }
 
+//******************************************************************************        
+        
         public function RapportP($id)
         {
             $this->load->model("Participe_model");
@@ -167,8 +174,7 @@ class Participe extends CI_Controller
             $idV=$RapportP->id_vaisseau;
             $this->load->model("Vaisseau_model");
             $DetailV=$this->Vaisseau_model->detail($idV);
-            
-            
+          
             $aView["RapportP"]=$RapportP;
             $aView["VaisseauV"]=$DetailV;
             $this->load->view("autre/Rapport",$aView);

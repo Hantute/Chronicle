@@ -1,6 +1,6 @@
 
 		<?php if($this->session->user && $this->session->user->id_autorisation == "1"){?>
-		<a href="<?php echo site_url("Produit/ajout")?>">ajouter un produit</a><br />
+		<a href="<?php echo site_url("Produit/ajoutP")?>">ajouter un produit</a><br />
                 <?php } ?>
 
 
@@ -37,7 +37,7 @@
                                 <td><input disabled width='75' class='col-8' text-align='center' id='id<?php echo $id ; ?>' value='<?php echo $id ; ?>' ></td>
                                 <td width='100' text-align='center'><?php echo"<a href=".site_url("produit/detail/").$id.">".$row->nom_produit ;?></a></td>
                                 <td><input disabled width='100' class='col-10' text-align='center' id='prix<?php echo $id ; ?>' value='<?php echo $row->prix_produit ;?>'> €</td>
-				<td width='100' text-align='center'><?php echo $row->categorie_produit ;?></td>
+				<td width='100' text-align='center'><?php echo $Categorie->nom_categorie ;?></td>
                                 <td width='100' text-align='center'><?php echo $limite ;?></td>
                                 <td width='100' text-align='center'><select id="quantite<?php echo $id ; ?>" class='commande'>
                                         <?php for($cpt=0; $cpt<=$limite;$cpt++){ ?>

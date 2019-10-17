@@ -6,7 +6,7 @@ class Classe_model extends CI_Model
 {
     public function Classe($id)
     {
-        $requete = $this->db->query("SELECT * FROM Classe /*JOIN type ON classe.id_type = type.id_type*/ WHERE id_type=?", array($id));
+        $requete = $this->db->query("SELECT * FROM classe WHERE id_type=?", array($id));
         $classe = $requete->result();
         return $classe;
     }

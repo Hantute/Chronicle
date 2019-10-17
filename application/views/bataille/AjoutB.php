@@ -1,17 +1,4 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title><?php echo $titre ;?></title>
-    </head>
-    <body>
-        <?php echo $Salutation;
-        echo $citation; ?>
+
         <h5>.. Mise à jour des Archives de la bibliothéque centrale</h5>
         <h5>.. Création d'une nouvelle entrée</h5>
         <h3>.. Ajout d'une nouvelle bataille </h3>
@@ -37,6 +24,19 @@ and open the template in the editor.
                 </div>    
             </div>
             <div class='form-group_row'>
+                <label for='lieu_bataille_label' class='col-sm-2 col-form-label'><p class="text-danger">*</p> Système stellaire </label>
+                <div class="col-sm-8">
+                    <select class="col-sm-6 col-form-control" name='id_systeme' id='id_systeme'>
+                        <option selected disabled>Selectionner un système stellaire</option>
+                            <?php   foreach ($Systeme as $rowS)
+                            {?> 
+                                <option value='<?php echo $rowS->id_systeme ?>'><?php echo $rowS->nom_systeme ?></option>
+                            <?php } ?>
+                    </select>
+                    <span id='passysteme_bataille'></span>
+                </div>    
+            </div>
+            <div class='form-group_row'>
                 <label for='lieu_bataille_label' class='col-sm-2 col-form-label'><p class="text-danger">*</p> lieu de la bataille </label>
                 <div class="col-sm-8">
                     <input type="text" class="form-control border-success" name='lieu_bataille' id='lieu_bataille' required>
@@ -46,7 +46,7 @@ and open the template in the editor.
             <div class='form-group_row'>
                 <label for='recit_bataille_label' class='col-sm-2 col-form-label'><p class="text-danger">*</p> Récit de la bataille </label>
                 <div class="col-sm-8">
-                    <input type="text-area" class="form-control border-success" name='recit_bataille' id='recit_bataille' required>
+                    <textarea  type='input' class="form-control border-success" name='recit_bataille' id='recit_bataille' required></textarea>
                     <span id='pasrecit_bataille'></span>
                 </div>    
             </div>

@@ -11,21 +11,20 @@
 					<legend> Caractéristique du produit à ajouter au catalogue</legend>
 						<p class="text-danger"><b>* Ces zones sont obligatoires pour valider le formulaire d'intégration du produit dans le catalogue</b></p>
 						<div class="form-group row">
-							<label for="categorie_produit" class="col-sm-2 col-form-label">*catégorie du produit :</label>
+							<label for="id_categorie_label" class="col-sm-2 col-form-label">*catégorie du produit :</label>
 								<div class="col-sm-8">
-									<select class="col-sm-4 col-form-control" name="categorie_produit" id="categorie_produit" required>
-											<option value="maquette">Maquette</option>
-											<option value="dessin">Dessin</option>
-											<option value="figurine">Figurine</option>
-											<option value="livre">Livre</option>
-											<option value="autres">Autres</option>
+									<select class="col-sm-4 col-form-control" name="id_categorie" id="id_categorie" required>
+                                                                            <option selected disabled> Selectionner une catégorie de produit</option>
+											<?php foreach ($listeCat as $rowC): ?>
+                                                                                        <option value="<?php echo $rowC->id_categorie ?>"><?= $rowC->nom_categorie ?></option>
+                                                                                        <?php endforeach; ?>
 									</select>
 								</div>
 						</div>
 						<div class="form-group row">
-							<label for="type_produit" class="col-sm-2 col-form-label">* Type de vaisseau</label>
+							<label for="id_type" class="col-sm-2 col-form-label">* Type de vaisseau</label>
 							<div class="col-sm-8">
-								<select class="col-sm-4 col-form-control" name="type_produit" id="type_produit">
+								<select class="col-sm-4 col-form-control" name="id_type" id="id_type">
 									<option>
 										Selectionner un type de vaisseau
 									</option>
@@ -38,11 +37,11 @@
 							</div>
 						</div>
 							<div class="form-group row">
-								<label for="classe_produit" class="col-sm-2 col-form-label" id="classe_label">* Classe du vaisseau</label>
+								<label for="id_classe_label" class="col-sm-2 col-form-label" id="id_classe_label">* Classe du vaisseau</label>
 								<div class="col-sm-8">
-									<select class="col-sm-4 col-form-control" name="classe_produit" id="classe_produit">
+									<select class="col-sm-4 col-form-control" name="id_classe" id="id_classe">
 										<?php foreach ($classe as $C):?>
-												<option value="<? = $C->id_classe ?>"><? = $C->classe_vaisseau ?>
+												<option value="<?= $C->id_classe ?>"><? = $C->nom_classe ?>
 												</option>
 										<?php endforeach; ?>
 									</select>
@@ -50,42 +49,42 @@
 								</div>
 							</div>
 							<div class="form-group row">
-								<label for="id_vaisseau" class="col-sm-2 col-form-label" id="id_vaisseau_label">* Nom du vaisseau</label>
+								<label for="id_vaisseau_label" class="col-sm-2 col-form-label" id="id_vaisseau_label">* Nom du vaisseau</label>
 								<div class="col-sm-8">
 									<select class="col-sm-4 col-form-control" name="id_vaisseau" id="id_vaisseau">
 										<?php foreach ($vaisseau as $V):?>
-												<option value="<? = $V->id_vaisseau ?>"><? = $V->nom_vaisseau ?>
+												<option value="<?= $V->id_vaisseau ?>"><? = $V->nom_vaisseau ?>
 												</option>
 										<?php endforeach; ?>
 									</select>
-								<span id="pasclasse"></span>
+								<span id="pasvaisseau"></span>
 								</div>
 							</div>
 							<div class="form-group row">
-								<label for="nom_produit" class="col-sm-2 col-form-label"><a class="text-danger">*</a> Nom du produit:</label>
-								<div class="col-sm-8">
+								<label for="nom_produit_label" class="col-sm-2 col-form-label"><a class="text-danger">*</a> Nom du produit:</label>
+								<div class="col-sm-6">
 									<input type="text" class="form-control border-success" name="nom_produit" id="nom_produit" required>
 									<span id="pasnom"></span>
 								</div>
 							</div>
 							<div class="form-group row">
 								<label for="stock_produit" class="col-sm-2 col-form-label"><a class="text-danger">*</a> Quantité en stock du produit:</label>
-								<div class="col-sm-8">
+								<div class="col-sm-6">
 									<input type="text" class="form-control border-success" name="stock_produit" id="stock_produit" required>
 									<span id="passtock"></span>
 								</div>
 							</div>
 							<div class="form-group row">
-								<label for="prix_produit" class="col-sm-2 col-form-label"><a class="text-danger">*</a> Prix du produit:</label>
-								<div class="col-sm-8">
-									<input type="text" class="form-control border-success" name="prix_produit" id="prix_produit" required>
+								<label for="prix_produit" class="col-sm-2 col-form-label"><a class="text-danger" >*</a> Prix du produit:</label>
+								<div class="col-sm-6">
+									<input type="text" class="form-control border-success" name="prix_produit" id="prix_produit" value='XXX,XX' required>€
 									<span id="pasprix"></span>
 								</div>
 							</div>
 							<div class="form-group row">
 								<label for="Description" class="col-sm-2 col-form-label"></a> Description du produit:</label>
 								<div class="col-sm-8">
-									<input type="text" class="form-control border-success" name="Description" id="Description" >
+									<input type="text-area" class="form-control border-success" name="Description" id="Description" >
 									<span id="pasnom"></span>
 								</div>
 							</div>
@@ -95,26 +94,26 @@
 
 		</div>
 		<script>
-				$("#classe_label").hide();
-				$("#classe_produit").hide();
+				$("#id_classe_label").hide();
+				$("#id_classe").hide();
 				$("#id_vaisseau_label").hide();
 				$("#id_vaisseau").hide();
 
-				$("#type_produit").change(function ()
+				$("#id_type").change(function ()
 					{
-								$("#classe_label").show();
-								$("#classe_produit").show();
-								let id_type = $("#type_produit").val();
+								$("#id_classe_label").show();
+								$("#id_classe").show();
+								let id_type = $("#id_type").val();
 								//console.log(id_type);
 								//console.log($T->id_type);
-								$("#classe_produit").load("http://localhost/Ci_FilRouge/index.php/Produit/classe_produit/" + id_type);
+								$("#id_classe").load("http://localhost/Ci_FilRouge/index.php/Produit/classe_produit/" + id_type);
 					});
 
-					$("#classe_produit").change(function ()
+					$("#id_classe").change(function ()
 						{
 									$("#id_vaisseau_label").show();
 									$("#id_vaisseau").show();
-									let id_classe = $("#classe_produit").val();
+									let id_classe = $("#id_classe").val();
 									//console.log(classe_vaisseau);
 									//console.log($C->id_classe);
 									$("#id_vaisseau").load("http://localhost/Ci_FilRouge/index.php/Produit/vaisseau_produit/" + id_classe);

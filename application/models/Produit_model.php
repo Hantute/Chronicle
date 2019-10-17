@@ -41,6 +41,8 @@ class Produit_model extends CI_Model
             //$name=$_FILES["photo_produit"]["name"];
             //$extension = pathinfo($name,PATHINFO_EXTENSION);
             unset($data["envoyer"]);
+            unset($data['id_type']);
+            unset($data['id_classe']);
             $data["date_ajout"]=$Date;
             //$data["photo_produit"]=$extension;
             $this->db->insert('produit',$data);
@@ -60,9 +62,8 @@ class Produit_model extends CI_Model
         public function Categorie($categorie_produit)
         {
           $requete = $this->db->query("SELECT * FROM produit
-          JOIN vaisseau
-          ON produit.id_vaisseau = vaisseau.id_vaisseau
-          WHERE categorie_produit=?", array($categorie_produit));
+          JOIN vaisseau ON produit.id_vaisseau = vaisseau.id_vaisseau
+          WHERE id_categorie=?", array($categorie_produit));
           $categorie = $requete->result();
           return $categorie;
         }

@@ -29,24 +29,15 @@ if (!defined('BASEPATH')) exit ('No direct script access allowed');
                         </div>
                       </div>
                       <div class="form-group row">
-                        <label for="chantier_de_construction" class="col-sm-2 col-form-label">Chantier de construction du vaisseau </label>
+                        <label for="id_systeme" class="col-sm-2 col-form-label">Chantier de construction du vaisseau </label>
                         <div class="col-sm-6">
-                          <input type="input" class="form-control border-success" name="chantier_de_construction" id="chantier de construction" value="<?= $modif->chantier_de_construction; ?>" required>
-                          <span id="paschantier"></span>
+                          <input type="input" class="form-control border-success" name="id_systeme" id="id_systeme" value="<?= $modif->id_systeme; ?>" required>
+                          <span id="passysteme"></span>
                         </div>
                       </div>
                       <legend> Date donné en suivant le calendrier spatial universel actuellement en cours</legend>
                       <div>
-                        <p> Date de construction de la coque du vaisseau : <?php echo $modif->date_construction_modele; ?></p>
-                      </div>
-                      <div>
-                        <p> Date de lancement du vaisseau : <?php echo $modif->date_lancement; ?></p>
-                      </div>
-                      <div>
                         <p> Date d'activation du vaisseau, intégration dans un groupe de combat: <?php echo $modif->date_activation; ?></p>
-                      </div>
-                      <div>
-                        <p> Date de modernisation/remodelage vaisseau: <?php echo $modif->mise_a_jour; ?></p>
                       </div>
                       <div class="form-group row">
                         <label for="armement" class="col-sm-2 col-form-label">Armement du vaisseau </label>
@@ -69,13 +60,6 @@ if (!defined('BASEPATH')) exit ('No direct script access allowed');
                           <span id="pasenergie"></span>
                         </div>
                       </div>
-                      <!--<div class="form-group row">
-                        <label for="id_statut" class="col-sm-2 col-form-label">Statut actuelle du vaisseau et de son équipage</label>
-                        <div class="col-sm-6">
-                          <input type="input" class="form-control border-success" name="id_statut" id="id_statut" value="<?//= $statut->nom_statut; ?>" required>
-                          <span id="pasvaisid"></span>
-                        </div>
-                      </div>-->
               </fieldset>
                   <h2> Le vaisseau va être remodelé et remis à niveau</h2>
 

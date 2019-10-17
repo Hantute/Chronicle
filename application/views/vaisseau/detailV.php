@@ -13,20 +13,20 @@
                     </table>
                     </div>
                     <div class="col-8  text-center" >CENTRE
-                                <h3><a href='<?php echo site_url("/vaisseau/liste#flotte").$Flotte->id_flotte ;?>'><?php echo $Flotte->nom_flotte ;?></h3>
-                                <h3><a href='<?php echo site_url("/vaisseau/liste#groupe").$detail->id_groupe ;?>'><?php echo $Groupe->nom_groupe ;?></a> </h3>
+                                <h3><a href='<?php echo site_url("/vaisseau/listeV#flotte").$Flotte->id_flotte ;?>'><?php echo $Flotte->nom_flotte ;?></h3>
+                                <h3><a href='<?php echo site_url("/vaisseau/listeV#groupe").$detail->id_groupe ;?>'><?php echo $Groupe->nom_groupe ;?></a> </h3>
 
                         <div class="row">
                             <div class="col-4">DROITE 1
                                 <h3><?php echo $detail->nom_type ?></h3>
-                                classe :<h3><?php echo $detail->classe_vaisseau ?></h3>
+                                classe :<h3><?php echo $detail->nom_classe ?></h3>
                             </div>
                             <div class="col-4">CENTRE 1
-                                <h3>Chantier Spatial de <?php echo $detail->chantier_de_construction ?></h3>
+                                <h3>Chantier Spatial de <?php echo $Systeme->nom_systeme ?></h3>
                             </div>
                             <div class="col-4">GAUCHE 1
                                 <h5>Date de lancement :<?php echo $detail->date_activation ?></h5>
-                                <h5>Dernière modernisation :<?php echo $detail->mise_a_jour ?></h5>
+                                <h5>Dernière modernisation :<?php //echo $detail->mise_a_jour ?></h5>
                             </div>
                         </div>
                         <div class="row">
@@ -56,7 +56,7 @@
                                         <th>repli</th>
                                     </tr>
                                     <tr>
-                                        <td width='50' text-align='center'><?php //echo $rowr->Rapport ; ?></td>
+                                        <td width='50' text-align='center'><?php echo $rowr->Rapport ; ?></td>
                                         <td width='50' text-align='center'><?php echo $rowr->date_participation ; ?></td>
                                         <td width='50' text-align='center'><?php echo $rowr->date_repli ; ?></td>
                                     </tr>

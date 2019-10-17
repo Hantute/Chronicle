@@ -53,13 +53,13 @@ $bataille=0; ?>
                             {
                                 if($row->id_bataille == $bataille)
                                     { ?>
-                                        <tr border='10' bgcolor='#a4c2f4' width='1500' class='Choixvaisseau' value='<?php echo $row->id_participation ;?>'>
+                                        <tr border='10' bgcolor='#a4c2f4' width='1500' class='Choixvaisseau' value='<?php echo $row->id_participe ;?>'>
                                             <td width='250' text-align='center' id='<?php echo $row->id_vaisseau ?>'><?php echo $row->nom_vaisseau ;?></td>
                                             <td width='350' text-align='center'><?php echo $row->date_participation ;?></td>
                                             <td width='350' text-align='center'><?php echo $row->date_repli ; ?></td>
                                             <td width='200' text-align='center'>
                                                 <!-- Trigger the modal with a button -->
-                                                <button type='button' class='btn btn-info btn-lg' id='myBtn<?php echo $row->id_participation ?>' data-toggle='modal' data-target='#myModal'>
+                                                <button type='button' class='btn btn-info btn-lg' id='myBtn<?php echo $row->id_participe ?>' data-toggle='modal' data-target='#myModal'>
                                                     RAPPORT DE COMBAT</button></td>
                                                     <!-- Modal -->
                                         
@@ -131,7 +131,7 @@ $bataille=0; ?>
                 $('#GROUPE'+$id).show(); 
                 $('.Choixvaisseau').hover(function(){
                     $IDV=parseInt($(this).attr('value'));
-                    console.log('id_participation');
+                    console.log('id_participe');
                     console.log($IDV);
                     $('#myBtn'+$IDV);
                 });

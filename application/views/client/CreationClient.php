@@ -29,13 +29,6 @@
     							</div>
     						</div>
     						<div class="form-group row">
-    							<label for="date_naissance" class="col-sm-2 col-form-labl">Date de naissance :</label>
-    							<div class="col-sm-10">
-    								<input type="text" class="form-control border-success" name="date_naissance_client" id="date_naissance" value="AAAA-MM-JJ">
-    								<span id="pasdate"></span>
-    							</div>
-    						</div>
-    						<div class="form-group row">
     							<label for="motdepasse" class="col-sm-2 col-form-labl"><a class="text-danger">*</a>Mot de Passe :</label>
     							<div class="col-sm-10">
     								<input type="text" class="form-control border-success" name="mot_de_passe" id="motdepasse" value="Il faut mettre un signe spécifique -(_^*+\/\#à dans votre mot de passe" required>

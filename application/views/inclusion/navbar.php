@@ -76,10 +76,10 @@ if (!defined ('BASEPATH')) exit ('No direct script access allowed');
                   <a class="nav-link" href="<?php echo site_url("Produit/liste") ?>" >Catalogue de produits</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="<?php echo site_url("Produit/categorie/Maquette")?>">les maquettes</a>
+                  <a class="nav-link" href="<?php echo site_url("Produit/categorie/1")?>">les maquettes</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="<?php echo site_url("Produit/categorie/Dessin")?>">les dessins</a>
+                  <a class="nav-link" href="<?php echo site_url("Produit/categorie/2")?>">les dessins</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="">les figurines</a>

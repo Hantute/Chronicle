@@ -34,8 +34,7 @@ class Vaisseau extends CI_Controller
         {
             // On charge la fonction citation crée dans la library proverbe.
             $this->load->library('proverbe');
-            $citation=$this->proverbe->lesproverbes();
-            $aView["citation"]=$citation;
+            $aView["citation"]=$this->proverbe->lesproverbes();
             $aView["Salutation"]= "<i>Salve, esto paratus sit vivere fabulosa valebat. </i><br> Bonjour, Soyez pret a vivre une aventure fabuleuse.<br>";
 
             $this->load->model('Flotte_model');
@@ -45,25 +44,30 @@ class Vaisseau extends CI_Controller
             $this->load->model('Groupe_model');
             $Gliste = $this->Groupe_model->liste();
             $aView["Gliste"] = $Gliste;
-
+            
+            /*$this->load->model('Systeme_model');
+            $Systeme= $this->Systeme_model->listeS();
+            $aView['systeme']=$Systeme;*/
+            
             // On charge le modèle 'vaisseau_model'
             $this->load->model('Vaisseau_model');
-
+            
             // On appelle la méthode liste() du modèle, qui retourne le tableau résultat ici affecté à la variable $aListe (un tableau)
             $Vliste = $this->Vaisseau_model->liste();
             $aView["Vliste"] = $Vliste;
+
 
             $this->load->view('inclusion/navbar',$aView);
             $this->load->view('vaisseau/listeV', $aView);
             $this->load->view('inclusion/footer',$aView);
             $this->form_validation->set_message('rule','Error Message');
-
             }
         else {
             redirect(site_url("Client/Accueil"));
              }
     }
-
+    
+//******************************************************************************    
     public function detailV($id_vaisseau)
     {
         //Déclaration du tableau associatif à transmettre à la vue
@@ -100,12 +104,17 @@ class Vaisseau extends CI_Controller
             $groupe= $this->Groupe_model->ChoixVaisseau($idgroupe);
             $aView["Groupe"]=$groupe;
             
-            $idflotte= $groupe->flotte_id_flotte;
+            $idflotte= $groupe->id_flotte;
             
             $this->load->model('Flotte_model');
             $flotte= $this->Flotte_model->Choixflotte($idflotte);
             $aView["Flotte"]=$flotte;
 
+            $idsysteme=$adetail->id_systeme;
+            $this->load->model('Systeme_model');
+            $systeme=$this->Systeme_model->DetailS($idsysteme);
+            $aView["Systeme"]=$systeme;
+            
             $this->load->view('inclusion/navbar',$aView);
             $this->load->view('vaisseau/detailV', $aView);
             $this->load->view('inclusion/footer',$aView);
@@ -115,6 +124,7 @@ class Vaisseau extends CI_Controller
         }
     }
 
+//******************************************************************************    
         /** \brief     Fonction Arme qui permet d'afficher la page ajout
          *  \details   Elle permet d'afficher la page d'ajout de vaisseau, de naviguer a travers le site grâce a sa barre de navigation.
          *  \param     prenom     Affiche le prenom de l'utilisateur.
@@ -144,7 +154,7 @@ class Vaisseau extends CI_Controller
                     array ('required'=> 'Erreur dans le champs %s'));
                 $this->form_validation->set_rules('nom_vaisseau', 'nom', 'required',
                     array ('required'=> 'Erreur dans le champs %s'));
-                $this->form_validation->set_rules('chantier_de_construction','chantier', 'required',
+                $this->form_validation->set_rules('id_systeme','systeme', 'required',
                     array('required'=> 'Erreur dans le champs %s'));
                 $this->form_validation->set_rules('armement', 'armement', 'required',
                     array ('required' => 'Erreur dans le champs %s'));
@@ -171,8 +181,8 @@ class Vaisseau extends CI_Controller
                         $this->load->model('Type_model');
                         $liste = $this->Type_model->liste();
                         $aView["ajout"] = $liste;
-                        $this->load->model('Planete_model');
-                        $planete = $this->Planete_model->liste();
+                        $this->load->model('systeme_model');
+                        $planete = $this->systeme_model->listeS();
                         $aView["chantier"]=$planete;
 
                         $this->load->view('inclusion/navbar',$aView);
@@ -185,9 +195,10 @@ class Vaisseau extends CI_Controller
             }
         }
 
+//******************************************************************************        
         public function modificationV($id_vaisseau)
         {
-            if($this->session->user && $this->session->user->id_autorisation == "1")
+            if($this->session->user /*&& $this->session->user->id_autorisation == "1"*/)
             {
 
               $this->form_validation->set_rules('nom_vaisseau', 'nom', 'required',
@@ -213,21 +224,11 @@ class Vaisseau extends CI_Controller
                     $data = $this->input->post();
 
                     $this->load->model('Vaisseau_model');
-                    $statut = $this->Vaisseau_model->statut($id_vaisseau);
-                    $aView['statut']=$statut;
-
-
-                    $this->load->model('Vaisseau_model');
                     $modif = $this->Vaisseau_model->modification($id_vaisseau);
                     $aView['modification']=$modif;
                     redirect(site_url("Vaisseau/listeV"));
                   }
                   else {
-
-                    $this->load->model('Vaisseau_model');
-                    $statut = $this->Vaisseau_model->statut($id_vaisseau);
-                    $aView['statut']=$statut;
-
                     $this->load->model('Vaisseau_model');
 
                     // On appelle la méthode liste() du modèle, qui retourne le tableau résultat ici affecté à la variable $aListe (un tableau)
@@ -244,6 +245,7 @@ class Vaisseau extends CI_Controller
             }
         }
 
+//******************************************************************************
         public function suppression()
         {
             if($this->session->user && $this->session->user->id_autorisation == "1")
@@ -257,6 +259,7 @@ class Vaisseau extends CI_Controller
             }
         }
 
+//******************************************************************************        
         public function type_vaisseau()
         {
           echo "bonjour";
@@ -267,6 +270,7 @@ class Vaisseau extends CI_Controller
 
         }
 
+//******************************************************************************
         public function classe_vaisseau($id)
         {
         $this->load->model('Classe_model');

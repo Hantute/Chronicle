@@ -42,12 +42,12 @@ defined('BASEPATH') OR exit ('No direct script access allowed');
                 JOIN participe On participe.id_bataille = bataille.id_bataille
                 JOIN vaisseau ON vaisseau.id_vaisseau = participe.id_vaisseau
                 JOIN groupe_de_combat ON groupe_de_combat.id_groupe = vaisseau.id_groupe
-                JOIN flotte ON flotte.id_flotte = groupe_de_combat.flotte_id_flotte");
+                JOIN flotte ON flotte.id_flotte = groupe_de_combat.id_flotte");
             $archive= $requete->result();
             return $archive;
         }
       
-        public function ajoutB()
+        public function AjoutB($data)
         {
             $this->db->insert('Bataille',$data);
         }

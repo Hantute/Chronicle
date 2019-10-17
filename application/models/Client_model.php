@@ -10,13 +10,12 @@ class Client_model extends CI_Model
         return $aClient;
     }
 
-
+//******************************************************************************
+    
     public function Inscription()
     {
-        //$statut = "2";
         $Date = date("Y-m-d");
         $data = $this->input->post();
-        //var_dump($data);
         unset($data["envoyer"]);
         
         $data["mot_de_passe"] = password_hash($data["mot_de_passe"], PASSWORD_DEFAULT);
@@ -25,7 +24,8 @@ class Client_model extends CI_Model
         $this->db->insert("client", $data);
     }
 
-
+//******************************************************************************
+    
     public function Connexion()
     {
         $Date = date ("Y-m-d H:i:s");
@@ -61,13 +61,15 @@ class Client_model extends CI_Model
                 }
             }
         }
-            else
-            {
-                $this->session->user = null;
-                redirect(site_url("Client/Connexion"));
-            }
+        else
+        {
+            $this->session->user = null;
+            redirect(site_url("Client/Connexion"));
+        }
     }
 
+//******************************************************************************    
+    
     public function Modif($id_client)
     {
         $Date=date("Y-m-d H:i:s");
@@ -77,11 +79,8 @@ class Client_model extends CI_Model
         unset ($data["modifier"]);
 
         $data["date_modification"] = $Date;
-        //$data["date_modification_client"]=$Date;
         $data["mot_de_passe"] = password_hash($data["mot_de_passe"], PASSWORD_DEFAULT);
-        var_dump($data);
-        var_dump($id_client);
-        //exit;
+        
         $this->db->WHERE ('id_client', $id_client);
         $this->db->UPDATE("client", $data);
     }

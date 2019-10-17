@@ -11,6 +11,7 @@
                         <div class='col-6'><center><h2><?php echo $rowB->nom_bataille ;?></h2><br/><h5><?php echo $rowB->lieu_bataille ;?></h5><br/></center></div>
                         <div class='col-3'></div>
                     </div>
+                
                     <div class='row'>
                         <div class='col-2'></div>
                         <div class='col-8'><center><?php echo $rowB->date_debut_bataille;?> AU <?php echo $rowB->date_fin_bataille; ?></center></div>
@@ -18,7 +19,7 @@
                     </div>
                     <div class='row'>
                         <div class='col-2'></div>
-                        <div class='col-8 text-light' ><center><?php echo $rowB->recit_bataille."<br/>"; ?></center></div>
+                        <div class='col-8 text-light' ><center><text class='justify-content-around'><?php echo $rowB->recit_bataille."<br/>"; ?></text></center></div>
                         <div class='col-2'></div>
                     </div>    
                 <?php } ?>                      

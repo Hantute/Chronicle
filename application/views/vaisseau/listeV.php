@@ -18,16 +18,14 @@
                     <div class='FLOTTE col-10' id='flotte<?php echo $compteur;?>'  value='<?php echo $rowf->id_flotte;?>'>
                         <center> 
                         
-                        Nom de la flotte : <?php echo $rowf->nom_flotte ; ?><br/>
-                        Role dans la Marine coloniale : <?php echo $rowf->role_flotte; ?><br /></center>      
+                        Nom de la flotte : <?php echo $rowf->nom_flotte ; ?><br/>     
                         <?php foreach($Gliste as $rowg)
                         {                   
-                            if($rowf->id_flotte == $rowg->flotte_id_flotte)
+                            if($rowf->id_flotte == $rowg->id_flotte)
                             { ?>
                             <div class='GROUPE row'  id='GB<?php echo $rowg->id_groupe ;?>' value='<?php echo $rowg->id_groupe;?>'> 
                                 <div class='Groupe col-3'  value="<?php echo $rowg->id_groupe ;?>" >    
                                 <?php   echo $rowg->nom_groupe."<br />\n";
-                                       echo $rowg->mission."<br />\n";
                                        echo $rowg->base_groupe."<br />\n"; 
                                 ?>
                                 </div >

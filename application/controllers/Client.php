@@ -34,15 +34,15 @@ class Client extends CI_Controller
                 $this->load->model('Client_model');
                 $client = $this->Client_model->liste();
                 $aView["client"]=$client;
-                //$this->load->view('inclusion/navbar',$aView);
-                $this->load->view("Accueil",$aView);
+                $this->load->view("client/Accueil",$aView);
             }
             else {
-                //$this->load->view('inclusion/navbar',$aView);
-                $this->load->view('Accueil',$aView);
+                $this->load->view('client/Accueil',$aView);
             }
         }
 
+//******************************************************************************        
+        
         public function Inscription()
         {
 
@@ -65,8 +65,6 @@ class Client extends CI_Controller
                 array('required'=>'Erreur dans le champ %s'));
             $this->form_validation->set_rules('pseudo_client','pseudo', 'required|regex_match[/^[0-9A-Za-z\sèéêàùâîôûöïä_-]{0,}$/]',
                 array('required'=>'Erreur dans le champ %s'));
-            $this->form_validation->set_rules('date_naissance_client','date_naissance','required|regex_match[/^[0-9]{4,4}[-]{1,1}[0-1][0-9][-][0-3][0-9]{1,1}?$/]',
-                array('required'=>'Erreur dans le champs %s'));
             $this->form_validation->set_rules('mot_de_passe','motdepasse', 'required|regex_match[/^[0-9A-Za-zéèà@ç]{0,}[-(_^*+\/\"#à]{1,}[0-9A-Za-z]{0,}$/] ',
                 array('required'=>'Erreur dans le champ %s'));
             $this->form_validation->set_rules('e_mail_client','email', "required|regex_match[/^[A-Za-z0-9!#$%&'*+=?^_`{|}~-]+(?:\.[A-Za-z0-9!#$%&'*+=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9][a-z0-9-]*[a-z0-9]?$/]",
@@ -85,11 +83,12 @@ class Client extends CI_Controller
             else {
                   $this->form_validation->set_message('required','Erreur');
                   $this->load->view('inclusion/navbar',$aView);
-                  $this->load->view("CreationClient",$aView);
+                  $this->load->view("client/CreationClient",$aView);
             }
         }
 
-
+//******************************************************************************
+        
         public function Connexion()
         {
             // On affiche une ligne de salutation puis le nom, et le prénom de l'Utilisateur, si il a déjà un compte et qu'il s'est connecté.
@@ -121,10 +120,12 @@ class Client extends CI_Controller
             }
             else{
                 $this->load->view('inclusion/navbar',$aView);
-                $this->load->view("ConnexionClient",$aView);
+                $this->load->view("client/ConnexionClient",$aView);
                 }
         }
 
+//******************************************************************************        
+        
         public function Modification()
         {
             $aView["Salutation"]= "<i>Salve, esto paratus sit vivere fabulosa valebat. </i><br> Bonjour, Soyez pret a vivre une aventure fabuleuse.";
@@ -141,8 +142,6 @@ class Client extends CI_Controller
                 array('required'=>'Erreur dans le champ %s'));
             $this->form_validation->set_rules('pseudo_client','pseudo', 'required|regex_match[/^[0-9A-Za-z\sèéêàùâîôûöïä_-]{0,}$/]',
                 array('required'=>'Erreur dans le champ %s'));
-            $this->form_validation->set_rules('date_naissance_client','date_naissance','required|regex_match[/^[0-9]{4,4}[-]{1,1}[0-1][0-9][-][0-3][0-9]{1,1}?$/]',
-                array('required'=>'Erreur dans le champs %s'));
             $this->form_validation->set_rules('mot_de_passe','motdepasse', 'required|regex_match[/^[0-9A-Za-zéèà@ç]{0,}[-(_^*+\/\#à]{1,}[0-9A-Za-z]{0,}$/] ',
                 array('required'=>'Erreur dans le champ %s'));
             $this->form_validation->set_rules('e_mail_client','email', "required|regex_match[/^[A-Za-z0-9!#$%&'*+=?^_`{|}~-]+(?:\.[A-Za-z0-9!#$%&'*+=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9][a-z0-9-]*[a-z0-9]?$/]",
@@ -169,19 +168,21 @@ class Client extends CI_Controller
                     echo"<p> le compte n'éxiste pas dans la base de données.</p>";
                     exit;
                 }
-                $this->load->view('CompteClient', $Modification);
+                $this->load->view('client/CompteClient', $Modification);
                 $this->form_validation->set_message('rule','Error Message');
            }
         }
 
-
+//******************************************************************************
+        
         public function Deconnexion()
         {
             $this->session->user = null;
             redirect(site_url("Client/Accueil"));
         }
 
-
+//******************************************************************************
+        
         public function Test()
         {
           $aView["Salutation"]= "<i>Salve, esto paratus sit vivere fabulosa valebat. </i><br> Bonjour, Soyez pret a vivre une aventure fabuleuse.";
@@ -193,7 +194,6 @@ class Client extends CI_Controller
           $titre="test";
           $aView["titre"]=$titre;
           $aView["citation"]=$citation;
-
 
           $this->load->view('Header',$aView);
         }

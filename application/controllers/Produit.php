@@ -36,8 +36,18 @@ class Produit extends CI_Controller
 
             $this->load->model("Produit_model");
             $aliste=$this->Produit_model->liste();
+            
+            foreach($aliste as $row)
+            {
+            $idCat=$row->id_categorie;    
+            }
+            
+            $this->load->model('Categorie_model');
+            $categorie=$this->Categorie_model->DetailCat($idCat);
+            
+            $aView['Categorie']=$categorie;
             $aView['liste']=$aliste;
-
+            
             $this->load->view('inclusion/navbar',$aView);
             $this->load->view("produit/liste",$aView);
             $this->load->view('inclusion/footer',$aView);
@@ -48,6 +58,7 @@ class Produit extends CI_Controller
         }
     }
 
+//******************************************************************************
     /** \brief     Fonction detail qui permet d'afficher la page detail
      *  \details   Elle permet d'afficher la page detaillé d'un produit, de naviguer a travers le site grâce a sa barre de navigation, de modifier ou supprimer le produit.
      *  \param     prenom     Affiche le prenom de l'utilisateur.
@@ -84,7 +95,7 @@ class Produit extends CI_Controller
         }
     }
 
-
+//******************************************************************************
     /** \brief      Fonction ajout qui permet d'afficher la page ajout pour ajouter un produit
      *   \details   Elle permet d'afficher la page de formulaire d'ajout de produit, de naviguer a travers le site grâce a sa barre de navigation.
      *              Elle contient une boucle pour vérifier que les données rentrés sont bien conforme à ce que l'on demande et fait une vérification pour empêcher le piratage du site.
@@ -95,7 +106,7 @@ class Produit extends CI_Controller
      *   \date      17/06/2019
      */
 
-    public function ajout()
+    public function ajoutP()
     {
         $titre= "Ajouter un produit";
         $aView["titre"]=$titre;
@@ -110,13 +121,19 @@ class Produit extends CI_Controller
             $this->load->model('Type_model');
             $liste = $this->Type_model->liste();
             $aView["ajout"] = $liste;
+            
+            $this->load->model('Categorie_model');
+            $categorie=$this->Categorie_model->listeCM();
+            $aView["listeCat"]=$categorie;
+            
+            $data = $this->input->post();
+            var_dump($data);
 
-            $this->form_validation->set_rules('type_produit','type_produit','required');
-            $this->form_validation->set_rules('classe_produit','classe_produit','required');
+            $this->form_validation->set_rules('id_categorie','id_categorie','required');
             $this->form_validation->set_rules('id_vaisseau','id_vaisseau','required');
             $this->form_validation->set_rules('nom_produit','nom_produit','required|regex_match[/^[0-9A-Za-zéèêëàâôöîïùûüç\s\/\\%-_]{0,}$/]',
                 array('required'=>'Erreur dans le champ %s'));
-            $this->form_validation->set_rules('prix_produit','prix_produit','required|regex_match[/^[1-9]{1,1}[0-9]{0,2}[\s]{0,1}[0-9]{0,3}[.,]{0,1}[0-9]{2,2}$/]',
+            $this->form_validation->set_rules('prix_produit',"prix_produit",'required|regex_match[/^[1-9]{1,1}[0-9]{0,2}[\s]{0,1}[0-9]{0,3}[.,]{0,1}[0-9]{2,2}$/]',
                 array('required'=>'Erreur dans le champ %s'));
             $this->form_validation->set_rules('stock_produit', 'stock_produit','required|regex_match[/^[0-9]{0,}$/]',
                 array('required'=>'Erreur dans le champs %s'));
@@ -142,7 +159,7 @@ class Produit extends CI_Controller
         }
     }
 
-
+//******************************************************************************
     /** \brief      Fonction modification qui permet d'afficher la page modification pour modifier ou supprimer un produit
      *   \details   Elle permet d'afficher la page de formulaire de modification du produit, de naviguer a travers le site grâce a sa barre de navigation.
      *              Elle contient une boucle pour vérifier que les données rentrés sont bien conforme a se que l'on demande et fait une vérification pour empêcher le piratage du site.
@@ -200,6 +217,7 @@ class Produit extends CI_Controller
         }
     }
 
+//******************************************************************************    
     /**  \brief      fonction supprime qui permet de supprimer un produit de la base de donnée produits
      *   \details    Elle permet d'afficher la page de suppression du produit
      *   \param      supprime       qui récupère les données du model et supprime les données du produits que l'on désire supprimer.
@@ -231,6 +249,8 @@ class Produit extends CI_Controller
         //$this->load->view('produit/supprime', $supprime);
     }
 
+//******************************************************************************    
+    
     public function type_produit()
     {
       echo "bonjour";
@@ -243,6 +263,8 @@ class Produit extends CI_Controller
 
     }
 
+//******************************************************************************
+    
     public function classe_produit($id)
     {
     $this->load->model('Classe_model');
@@ -253,6 +275,8 @@ class Produit extends CI_Controller
     $this->load->view("autre/classe", $aView);
   }
 
+//******************************************************************************  
+  
     public function vaisseau_produit($id)
     {
       $this->load->model('Vaisseau_model');
@@ -261,6 +285,8 @@ class Produit extends CI_Controller
       $this->load->view("autre/vaisseau",$aView);
     }
 
+//******************************************************************************    
+    
     public function categorie($categorie_produit)
     {
 
