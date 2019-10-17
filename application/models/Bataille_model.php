@@ -29,6 +29,8 @@ defined('BASEPATH') OR exit ('No direct script access allowed');
             return $abataille;
             }
 
+//******************************************************************************            
+            
         public function Selection_date($id)
             {
             $requete = $this->db->query ("SELECT * FROM bataille WHERE id_bataille =?",array($id));
@@ -36,6 +38,8 @@ defined('BASEPATH') OR exit ('No direct script access allowed');
             return $selection;
             }
 
+//******************************************************************************            
+            
         public function archiveB()
         {
             $requete= $this->db->query("SELECT * FROM bataille 
@@ -47,18 +51,25 @@ defined('BASEPATH') OR exit ('No direct script access allowed');
             return $archive;
         }
       
+//******************************************************************************           
+        
         public function AjoutB($data)
         {
             $this->db->insert('Bataille',$data);
         }
-      
+
+//******************************************************************************           
+        
         public function modificationB()
         {
             
         }
+
+//******************************************************************************   
         
         public function suppressionB()
         {
+ 
             
         }
 }
