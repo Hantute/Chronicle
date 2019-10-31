@@ -24,9 +24,9 @@
                 </div>    
             </div>
             <div class='form-group_row'>
-                <label for='lieu_bataille_label' class='col-sm-2 col-form-label'><p class="text-danger">*</p> Système stellaire </label>
+                <label for='id_systeme_bataille_label' class='col-sm-2 col-form-label'><p class="text-danger">*</p> Système stellaire </label>
                 <div class="col-sm-8">
-                    <select class="col-sm-6 col-form-control" name='id_systeme' id='id_systeme'>
+                    <select class="col-sm-6 col-form-control" name='id_systeme_bataille' id='id_systeme_bataille'>
                         <option selected disabled>Selectionner un système stellaire</option>
                             <?php   foreach ($Systeme as $rowS)
                             {?> 

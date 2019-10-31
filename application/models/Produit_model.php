@@ -4,6 +4,13 @@ if (!defined('BASEPATH')) exit ('No direct script access allowed');
 class Produit_model extends CI_Model
 {
 
+        public function produit($id)
+        {
+            $requete=$this->db->query('SELECT * FROM produit WHERE id_produit=?',array($id));
+            $produit=$requete->result();
+            return $produit;
+        }
+        
 
         public function liste()
         {

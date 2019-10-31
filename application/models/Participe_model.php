@@ -4,6 +4,13 @@ defined ("BASEPATH") OR exit ("No direct script access allowed");
 class Participe_model extends CI_Model
 {
 
+    public function listeP()
+    {
+        $requete = $this->db->query ("SELECT * FROM participe");
+        $participe = $requete->result();
+        return $participe;
+    }
+     
     public function liste()
     {
       $requete = $this->db->query ("SELECT * FROM participe JOIN vaisseau ON vaisseau.id_vaisseau = participe.id_vaisseau");
@@ -22,6 +29,7 @@ class Participe_model extends CI_Model
     {
         $data = $this->input->post();
         unset ($data["envoyer"]);
+        unset ($data["nom_bataille"]);
         var_dump($data);
         $this->db->insert ('participe', $data);
     }
@@ -43,7 +51,7 @@ class Participe_model extends CI_Model
     
     public function RapportP($id)
     {        
-        $requete = $this->db->query("SELECT * FROM participe WHERE id_participation=?", array($id));
+        $requete = $this->db->query("SELECT * FROM participe WHERE id_participe=?", array($id));
         $RapportP= $requete->row();
         return $RapportP;
     }        

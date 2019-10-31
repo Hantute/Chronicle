@@ -112,6 +112,8 @@ class Client extends CI_Controller
 
             if($this->form_validation->run() == TRUE)
             {
+                //créer le panier dés la connexion de l'utilisateur
+                //$this->get_instance(Panier::createPanier());           //Panier->createPanier();
                 $this->load->view('inclusion/navbar',$aView);
                 $this->load->model("Client_model");
                 $personne = $this->Client_model->Connexion();
@@ -195,7 +197,7 @@ class Client extends CI_Controller
           $aView["titre"]=$titre;
           $aView["citation"]=$citation;
 
-          $this->load->view('Header',$aView);
+          $this->load->view('inclusion/Panier',$aView);
         }
 }
 ?>

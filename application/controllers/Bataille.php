@@ -32,13 +32,18 @@ class Bataille extends CI_Controller
         
         $this->load->model('Bataille_model');
         $archive= $this->Bataille_model->archiveB();
+        $this->load->model('Systeme_model');
+        $systeme=$this->Systeme_model->listeS();
+        $this->load->model('Vaisseau_model');
+        $vaisseau=$this->Vaisseau_model->choix_vaisseau();
         
+        $aView["Vaisseau"]=$vaisseau;
         $aView["archives"]=$archive;
+        $aView["systeme"]=$systeme;
         
         $this->load->view('inclusion/navbar',$aView);
         $this->load->view("bataille/listeB",$aView);
-        $this->load->view('inclusion/footer',$aView);
-        
+        $this->load->view('inclusion/footer',$aView);   
     }
     
 //******************************************************************************    
@@ -102,6 +107,13 @@ class Bataille extends CI_Controller
         }
     }
     
-    
-    
+//******************************************************************************    
+  
+    public function nom_batailleB($id)
+    {
+        $this->load->model('Bataille_model');
+        $nom= $this->Bataille_model->Selection_date($id);
+        $aView['Nom']=$nom;
+        $this->load->view('bataille/NomB',$aView);
+    }
 }

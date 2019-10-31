@@ -120,7 +120,7 @@ class Participe extends CI_Controller
 
                             $this->load->model('Participe_model');
                             $ajout= $this->Participe_model->ajout();
-                            redirect(site_url("Bataille/Liste"));
+                            redirect(site_url("Bataille/ListeB"));
                         }
                         else
                         {

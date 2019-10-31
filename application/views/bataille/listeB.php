@@ -14,16 +14,23 @@ $bataille=0; ?>
 <div class='row'>
     <?php    
     foreach ($archives as $rowa ) {
+        //var_dump($archives);
         if($bataille!=$rowa->id_bataille){
             $bataille=$rowa->id_bataille;
     ?>
             <div class='col-12 text-danger'>
-                <center><h3><a>Lieu de la bataille : <?php echo $rowa->lieu_bataille ;?></a></h3></center>
+                <center><h3><a><?php echo $rowa->nom_bataille ;?></a></h3></center>
+                <center><h4><a>Lieu de la bataille : <?php echo $rowa->lieu_bataille ;?></a></h4></center>
+                <?php foreach ($systeme as $rowS){
+                    if ($rowa->id_systeme_bataille == $rowS->id_systeme){?>
+                        <center><h3><a><?php echo $rowS->nom_systeme ;?></a></h3></center>    
+                    <?php }
+                }?>
+                
                 <div class='row'>
                     <div class='col-6'><center><h4><a>date de début d'engagement : <?php echo $rowa->date_debut_bataille ?></a></h4></center></div>
                     <div class='col-6'><center><h4><a>date fin d'engagement : <?php echo $rowa->date_fin_bataille ;?></a></h4></center></div>
                 </div>  
-                    <h4><a>statut de la bataille : <?php echo $rowa->statut_bataille ;?></a></h4>
             </div>    
     <div class='col-1'></div>
     <div class='col-10'>

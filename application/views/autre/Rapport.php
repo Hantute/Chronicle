@@ -7,7 +7,7 @@ and open the template in the editor.
 <h4 class='modal-title'>Rapport de combat du <?php echo $VaisseauV->nom_vaisseau ;?></h4>
                 <p> <?php
                     {
-                    echo $RapportP->Rapport;
+                    echo $RapportP->rapport;
                     }
                 ?></p>
 <link rel="stylesheet" href="<?php echo base_url("assets/css/GestionModal.css");?>">
