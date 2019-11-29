@@ -164,17 +164,46 @@ class Vaisseau extends CI_Controller
                     array ('required' => 'Erreur dans le champs %s'));
                 
                 $data = $this->input->post();
+                    
 
                     if ($this->form_validation->run() == TRUE)
                     {
-                      $this->load->model('Vaisseau_model');
-                      $this->Vaisseau_model->ajout($data);
-                      redirect(site_url("vaisseau/listeV"));
+                        $this->load->model('Vaisseau_model');
+                        $id=$this->Vaisseau_model->ajout($data);
+                        
+                        
+                        $name=$_FILES['photo_vaisseau']['name'];                // Récupération du nom du fichier
+                        $extension= pathinfo($name, PATHINFO_EXTENSION);         // Récupération de l'extension du fichier uploadé                        
+                        //Chargement des paramètres du wrapper d'upload
+                        $config=[];
+                        $config['upload_path']= FCPATH."assets/img/";
+                        $config['allowed_types']='gif|jpg|png';
+                        $config['file_name']= $id.'.'.$extension;
+                        $config['overwrite'] = TRUE;
+                        $config['max_size'] = '1024';
+                        $config['max_width'] = '3000';
+                        $config['max_height'] = '2000';
+                        $this->load->library('upload',$config);
+                        
+                        $this->load->initialize($config);
+                        var_dump($config);
+
+                        $photo['photo_vaisseau']=$config['file_name'];
+                        $this->load->model('Vaisseau_model');
+                        $this->Vaisseau_model->photo($id,$photo);
+                        //move_uploaded_file($config["fichier"]["tmp_name"],"img.jpg");
+                        
+                        if(!$this->upload->do_upload('photo_vaisseau'))
+                        {
+                            $this->load->view('Vaisseau/ajoutV');
+                            $this->response = $this->upload->display_errors();
+                        }
+                        //redirect(site_url("vaisseau/listeV"));
                     }
                     else 
                     {    
                         $this->form_validation->set_message('required','Erreur');
-
+                        $data=$this->upload->data();
                         $this->load->model('Flotte_model');
                         $flotte= $this->Flotte_model->Liste();
                         $aView["flotte"]=$flotte;

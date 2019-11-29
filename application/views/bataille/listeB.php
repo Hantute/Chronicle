@@ -8,17 +8,17 @@
 $bataille=0; ?>
 <div class='row'>
     <div class='col-12'>
-        <button type='button' class='btn2 btn-info btn-lg' id='myBtnA' data-toggle='modal' data-target='#myModal2'>Archiver un rapport de combat</button>                                                 
+        <button type='button' class='btn2 btn-info btn-lg' id='myBtnA' data-toggle='modal' data-target='#myModal2'>Archiver un rapport de combat</button> 
     </div>
 </div>
-<div class='row'>
+<div class='row justify-content-around'>
     <?php    
     foreach ($archives as $rowa ) {
         //var_dump($archives);
         if($bataille!=$rowa->id_bataille){
             $bataille=$rowa->id_bataille;
     ?>
-            <div class='col-12 text-danger'>
+            <div class='col-12 text-danger justify-content-around'>
                 <center><h3><a><?php echo $rowa->nom_bataille ;?></a></h3></center>
                 <center><h4><a>Lieu de la bataille : <?php echo $rowa->lieu_bataille ;?></a></h4></center>
                 <?php foreach ($systeme as $rowS){
@@ -27,18 +27,18 @@ $bataille=0; ?>
                     <?php }
                 }?>
                 
-                <div class='row'>
+                <div class='row justify-content-around'>
                     <div class='col-6'><center><h4><a>date de début d'engagement : <?php echo $rowa->date_debut_bataille ?></a></h4></center></div>
                     <div class='col-6'><center><h4><a>date fin d'engagement : <?php echo $rowa->date_fin_bataille ;?></a></h4></center></div>
                 </div>  
             </div>    
     <div class='col-1'></div>
     <div class='col-10'>
-        <div class="row">
+        <div class="row justify-content-around">
             <div class="col-12">
                 <div class="row">
                     <div class="col-4"></div>
-                    <div class='col-4 text-primary'><a id='flotte<?php echo $rowa->id_flotte;?>'><?php echo $rowa->nom_flotte; ?></a><br /></div>
+                    <div class='col-4 text-primary justify-content-around'><center><a id='flotte<?php echo $rowa->id_flotte;?>'><?php echo $rowa->nom_flotte; ?></a></center><br /></div>
                     <div class='col-4'></div>
                 </div>
             </div>
@@ -85,7 +85,7 @@ $bataille=0; ?>
     } ?>
 </div>
 <!-- Modal gérant les rapport de batailles spécifique à chaque bataille et vaisseau -->
-<div  class='modal fade' id='myModal' role='dialog'>
+<div  class='modal' id='myModal' data-keyboard='false' data-backdrop='false'>
     <div class='modal-dialog modal-lg' role="document">
             <!-- Modal content -->
         <div class='modal-content'  >
@@ -102,12 +102,12 @@ $bataille=0; ?>
     </div>    
 </div>
 <!-- Modal gérant les ajout de nouveaux vaisseau -->
-<div id='myModal2' class='modal fade' role='dialog'>
+<div id='myModal2' class='modal' data-keyboard='false' data-backdrop='false' role='dialog'>
     <div class='modal-dialog modal-lg' role="document">
             <!-- Modal content -->
         <div class='modal-content'>
             <div class='modal-header'>
-                <h4 class='modal-title'>Ajout d'un vaisseau</h4>
+                <h4 class='modal-title'>Ajout d'un rapport de bataille</h4>
                 <button type='button' class='close' data-dismiss='modal'>&Ll;</button>
             </div>
             <div class='modal-body' id='modal_ajout'>

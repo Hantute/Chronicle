@@ -28,7 +28,7 @@ class Produit extends CI_Controller
         $aView["titre"]=$titre;
         if($this->session->user)
         {
-            $aView["Salutation"]= "<i>Salve, quis tabernam mirabile , quis offer naves te heroes .</i><br> Bienvenus, dans se magasin étonnant qui offre des navires héroiques.";
+            $aView["Salutation"]= "<i>Salve, quis tabernam mirabile , quis offer naves te heroes. </i><br> Bienvenus, dans ce magasin étonnant qui offre des navires héroiques.";
 
             $this->load->library('proverbe');
             $citation=$this->proverbe->lesproverbes();
@@ -49,7 +49,7 @@ class Produit extends CI_Controller
             $aView['liste']=$aliste;
             
             $this->load->view('inclusion/navbar',$aView);
-            $this->load->view("produit/liste",$aView);
+            $this->load->view("produit/listeProduit",$aView);
             $this->load->view('inclusion/footer',$aView);
 
         }
@@ -297,6 +297,10 @@ class Produit extends CI_Controller
       $this->load->library("proverbe");
       $citation= $this->proverbe->lesproverbes();
       $aView['citation'] = $citation;
+      
+      $this->load->model('Categorie_model');
+      $subcat = $this->Categorie_model->DetailCat($categorie_produit);
+      $aView['Subcat']= $subcat;
 
       $this->load->model('Produit_model');
       $categorie = $this->Produit_model->Categorie($categorie_produit);

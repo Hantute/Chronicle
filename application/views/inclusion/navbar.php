@@ -1,11 +1,11 @@
 <?php
+//var_dump($_SESSION);
 if (!defined ('BASEPATH')) exit ('No direct script access allowed');
 
-var_dump($_SESSION);
 ?>
 <!-- Page de view spécifique au Header, appeller pour faire l'entête de la page appeler -->
 
-<!DOCTYPE html>
+<DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="utf-8">
@@ -13,10 +13,7 @@ var_dump($_SESSION);
 <title><?php echo  $titre; ?></title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
  integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
- <script
-			  src="https://code.jquery.com/jquery-3.4.1.min.js"
-			  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-			  crossorigin="anonymous"></script>
+ <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 
 <!-- lien vers une page css pour faire la mise en forme de la page de présentation -->
  <link rel="stylesheet" href="<?php echo base_url("assets/css/Accueilbootstrap.css");?>">
@@ -29,98 +26,108 @@ var_dump($_SESSION);
         </div>
     </header>
     <div class="row">
-        <nav id="navbar" class="navbar navbar-expand-sm bg-info navbar-info" role="navigation">
-          <!-- Barre de navigation qui devient un bouton quand la taille de l'écran change Toggler/collapsibe Button -->
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-            <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="collapsibleNavbar">
-                <ul class="navbar-nav" id="MENU">
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?php echo site_url('Client/Accueil')?>" >Accueil</a>
-                        <ul>
-                            <li class="nav-item"><a class="nav-link" href="<?php echo site_url('Client/Accueil#Lieu')?>" >Lieu</a></li>
-                            <li class="nav-item"><a class="nav-link" href="<?php echo site_url('Client/Accueil#Quadrants')?>" >Quadrants</a></li>
-                            <li class="nav-item"><a class="nav-link" href="<?php echo site_url('Client/Accueil#Zayin')?>" >Zayin-Mëm</a></li>
-                            <li class="nav-item"><a class="nav-link" href="<?php echo site_url('Client/Accueil#Secteur')?>" >Le Secteur Mercuriadum</a></li>
+        <div class="col-sm-6"> 
+            <nav id="navbar" class="navbar navbar-default navbar-fixed-top navbar-expand-sm bg-info navbar-info" role="navigation">
+              <!-- Barre de navigation qui devient un bouton quand la taille de l'écran change Toggler/collapsibe Button -->
+                <button class="navbar-toggler pull-left" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                    <ul class="navbar-nav" id="MENU">
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?php echo site_url('Client/Accueil')?>" >Accueil</a>
+                            <ul>
+                                <li class="nav-item"><a class="nav-link" href="<?php echo site_url('Client/Accueil#Lieu')?>" >Lieu</a></li>
+                                <li class="nav-item"><a class="nav-link" href="<?php echo site_url('Client/Accueil#Quadrants')?>" >Quadrants</a></li>
+                                <li class="nav-item"><a class="nav-link" href="<?php echo site_url('Client/Accueil#Zayin')?>" >Zayin-Mëm</a></li>
+                                <li class="nav-item"><a class="nav-link" href="<?php echo site_url('Client/Accueil#Secteur')?>" >Le Secteur Mercuriadum</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#">Bibliothéques</a>
+                            <ul id="SMenu">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="<?php echo site_url("Bataille/RecitB") ?>" > Récits romancés de Bataille </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="<?php echo site_url("Bataille/ListeB") ?>" > Archives des Rapports de combats </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?php echo site_url("Vaisseau/listeV") ?>" >Effectifs </a>
+                            <ul >
+                                <li class="nav-item"><a class="nav-link" href="<?php echo site_url('Vaisseau/listeV#flotte1')?>" >Dragon</a></li>
+                                <li class="nav-item"><a class="nav-link" href="<?php echo site_url('Vaisseau/listeV#flotte2')?>" >Mythe</a></li>
+                                <li class="nav-item"><a class="nav-link" href="<?php echo site_url('Vaisseau/listeV#flotte3')?>" >Antique</a></li>
+                                <li class="nav-item"><a class="nav-link" href="<?php echo site_url('Vaisseau/listeV#flotte4')?>" >Angélique</a></li>
+                                <li class="nav-item"><a class="nav-link" href="<?php echo site_url('Vaisseau/listeV#flotte5')?>" >Infernale</a></li>
+                                <li class="nav-item"><a class="nav-link" href="<?php echo site_url('Vaisseau/listeV#flotte6')?>" >héroique</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?php echo site_url("Produit/liste") ?>">Les produits</a>
+                            <ul >
+                                <li class="nav-item">
+                                    <a class="nav-link" href="<?php echo site_url("Produit/liste") ?>" >Catalogue</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="<?php echo site_url("Produit/categorie/1")?>">les Maquettes</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="<?php echo site_url("Produit/categorie/2")?>">les Dessins</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="<?php echo site_url("Produit/categorie/3")?>">les Figurines</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="<?php echo site_url("Produit/categorie/4")?>">les Livres</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="<?php echo site_url("Produit/categorie/5")?>">Autres</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <?php  if ($this->session->user):?>
+                                <a class="nav-link" href="<?php echo site_url("Client/Modification/"). $this->session->user->id_client?>">Mon Compte</a>
+                            <?php else:?>
+                                <a class="nav-link" href="<?php  echo site_url("Client/Inscription")?>">Inscription</a>
+                            <?php endif;?>
+                        </li>
+                        <li class="nav-item">
+                            <?php if($this->session->user):?>
+                                <a class="nav-link" href="<?php echo site_url("Client/Deconnexion")?>" tabindex="-1" aria-disabled="true"><?= $this->session->user->pseudo_client ?></a>
+                            <?php else: ?>
+                                <a class="nav-link" href="<?php echo site_url("Client/Connexion")?>" tabindex="-1" aria-disabled="true">Connexion</a>
+                            <?php endif;?>
+                        </li>
+                    </ul>       
+                </div>
+            </nav>
+        </div>
+        <?php if($this->session->user):?>
+        <div class="col-sm-6" id='navbarPanier'>
+            <nav id="navPanier" class="navbar navbar-default" role="navigation">
+                <div class="container-fluid">
+                    <div class="navbar-header navbar-right" id="PANIER">
+                        <button type="button" class="navbar-toggle collapsed" id='buttonPanier' data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">PANIER
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class='nav navbar-nav'>
+                            <li class='active' id='AFFICHE'><span class='sr-only'>
+                                (current)</span></li>
                         </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#">Bibliothéques</a>
-                        <ul id="SMenu">
-                            <li class="nav-item">
-                                <a class="nav-link" href="<?php echo site_url("Bataille/RecitB") ?>" > Récits romancés de Bataille </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="<?php echo site_url("Bataille/ListeB") ?>" > Archives des Rapports de combats </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?php echo site_url("Vaisseau/listeV") ?>" >Effectifs </a>
-                        <ul >
-                            <li class="nav-item"><a class="nav-link" href="<?php echo site_url('Vaisseau/listeV#flotte1')?>" >flotte1</a></li>
-                            <li class="nav-item"><a class="nav-link" href="<?php echo site_url('Vaisseau/listeV#flotte2')?>" >flotte2</a></li>
-                            <li class="nav-item"><a class="nav-link" href="<?php echo site_url('Vaisseau/listeV#flotte3')?>" >flotte3</a></li>
-                            <li class="nav-item"><a class="nav-link" href="<?php echo site_url('Vaisseau/listeV#flotte4')?>" >flotte4</a></li>
-                            <li class="nav-item"><a class="nav-link" href="<?php echo site_url('Vaisseau/listeV#flotte5')?>" >flotte5</a></li>
-                            <li class="nav-item"><a class="nav-link" href="<?php echo site_url('Vaisseau/listeV#flotte6')?>" >flotte6</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#">Les produits</a>
-                        <ul >
-                            <li class="nav-item">
-                                <a class="nav-link" href="<?php echo site_url("Produit/liste") ?>" >Catalogue de produits</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="<?php echo site_url("Produit/categorie/1")?>">les maquettes</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="<?php echo site_url("Produit/categorie/2")?>">les dessins</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="">les figurines</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="">les livres</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <?php //var_dump($this->session->user); die();?>
-                        <?php  if ($this->session->user):?>
-                            <a class="nav-link" href="<?php echo site_url("Client/Modification/"). $this->session->user->id_client?>">Mon Compte</a>
-                        <?php else:?>
-                            <a class="nav-link" href="<?php  echo site_url("Client/Inscription")?>">Inscription</a>
-                        <?php endif;?>
-                    </li>
-                    <li class="nav-item">
-                        <?php if($this->session->user):?>
-                            <a class="nav-link" href="<?php echo site_url("Client/Deconnexion")?>" tabindex="-1" aria-disabled="true"><?= $this->session->user->pseudo_client ?></a>
-                        <?php else: ?>
-                            <a class="nav-link" href="<?php echo site_url("Client/Connexion")?>" tabindex="-1" aria-disabled="true">Connexion</a>
-                        <?php endif;?>
-                    </li>
-                </ul>       
-            </div>
-        </nav>
-        <nav id="navPanier" class="navbar navbar-expand-sm bg-info navbar-info" role="navigation">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-            <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="collapsibleNavbarPANIER">
-                <ul class="navbar-nav" id='PANIER'>
-                    <li class="nav-item" >
-                        <a class="nav-link" >PANIER</a>
-                        <ul>
-                            <li class="nav-item" id='AFFICHE'>Contenu</li>
-                            <?php  ?>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </nav>
+                    </div>
+                </div>    
+            </nav>
+        </div>
+        <?php endif ?>
     </div>    
 <div class="container-fluid">
     <?php if($this->session->user):?>
@@ -147,20 +154,30 @@ var_dump($_SESSION);
                 </a>
         </div>
     </div>
+<!-- Modal gérant les ajout de nouveaux vaisseau -->
+<div id='ModaPanier' class='modal fade bd-example-modal-lg' tabindex='-1' role='dialog' aria-labelledby='myLargeModalLabel' aria-hidden='true' data-backdrop="false">
+    <div class='modal-dialog modal-lg' role="document" >
+        <!-- Modal content -->
+        <div class='modal-content' id='PanierModif'>
+            
+        </div>        
+    </div>
+</div>
 
-<link src="<?php echo base_url("assets/js/onglet.js");?>">
+<link src="<?php echo base_url('assets/js/onglet.js')?>">
+<link src="<?php echo base_url('assets/css/GestionModal.css')?>">
 
 <script>
-    $("#PANIER").mouseenter(function()
+    $("#buttonPanier").click(function()
     {
         console.log("BONJOUR");
         $('#AFFICHE').load("http://localhost/CI_FilRouge/index.php/Panier/listePanier");
-    })
-    $("#PANIER").mouseleave(function()
+    });
+    /*$("#PANIER").mouseleave(function()
     {
         console.log('BONSOIR');
         $('#AFFICHE').empty();
-    })
+    });*/
     
     
 </script>    

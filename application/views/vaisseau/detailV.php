@@ -1,7 +1,6 @@
-            TEST PRESENTATION VAISSEAU
             
             <div class="row">
-                <div id='nom_vaisseau' class='col-12 text-center text-primary'><center><h5>CSM 00<?php echo $detail->id_vaisseau ?></h5><h1><i><?php echo $detail->nom_vaisseau; ?></i></h1></center></div>
+                <div id='nom_vaisseau' class='col-12 text-center text-primary'><center><h5>CSM <?php echo $detail->id_vaisseau ?></h5><h1><i><?php echo $detail->nom_vaisseau; ?></i></h1></center></div>
                 <div class='row'>
                     <div class="col-2 text-center">Produits Dérivés
                     <table border='5' bgcolor=#d0ff00 text-align='center'>
@@ -31,7 +30,7 @@
                         </div>
                         <div class="row">
                             <div class="col-12">TOTAL</div>
-                            <a><img src="<?php echo base_url('/assets/img/vaisseauspatial.jpg') ?>" id="imagevaisseau" name="image représentant le vaisseau selectionner"> </a>
+                            <a><img src="<?php echo base_url('/assets/img/'.$detail->photo_vaisseau) ?>" id="imagevaisseau" name="image représentant le vaisseau selectionner"> </a>
                         </div>
                         <div class="row"> 
                             <div class="col-4">DROITE 2

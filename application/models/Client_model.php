@@ -39,7 +39,6 @@ class Client_model extends CI_Model
 
         if ($secu == $secu2)
         {
-
             // On récupère les données enregistrer dans la base de données client
 
             $personne = $this->db->query("SELECT * FROM client WHERE pseudo_client=?", $pseudo)->row();
@@ -73,7 +72,6 @@ class Client_model extends CI_Model
     public function Modif($id_client)
     {
         $Date=date("Y-m-d H:i:s");
-        $client = $this->session->user->id_client;
         $data = $this->input->post();
         unset ($data["id_client"]);
         unset ($data["modifier"]);
@@ -84,5 +82,15 @@ class Client_model extends CI_Model
         $this->db->WHERE ('id_client', $id_client);
         $this->db->UPDATE("client", $data);
     }
+
+    
+    public function SauvegardePanier($id, $Panier)
+    {
+        $data['panier_client']=$Panier;
+
+        $this->db->WHERE ('id_client', $id);
+        $this->db->UPDATE("client", $data);
+    }
+    
 }
 ?>

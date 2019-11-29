@@ -16,6 +16,7 @@ class Client extends CI_Controller
 
         public function Accueil()
         {
+
           // On affiche une ligne de salutation puis le nom, et le prénom de l'Utilisateur, si il a déjà un compte et qu'il s'est connecté.
           $aView["Salutation"]= "<i>Salve, esto paratus sit vivere fabulosa valebat. </i><br> Bonjour, Soyez pret a vivre une aventure fabuleuse.";
 
@@ -39,6 +40,7 @@ class Client extends CI_Controller
             else {
                 $this->load->view('client/Accueil',$aView);
             }
+            $this->load->view("inclusion/footer",$aView);
         }
 
 //******************************************************************************        
@@ -84,6 +86,7 @@ class Client extends CI_Controller
                   $this->form_validation->set_message('required','Erreur');
                   $this->load->view('inclusion/navbar',$aView);
                   $this->load->view("client/CreationClient",$aView);
+                  $this->load->view("inclusion/footer",$aView);
             }
         }
 
@@ -102,27 +105,32 @@ class Client extends CI_Controller
 
             $this->form_validation->set_rules('pseudo_client','pseudo', 'required|regex_match[/^[0-9A-Za-z\sèéêàùâîôûöïä_-]{0,}$/]',
                 array('required'=>'Erreur dans le champ %s'));
-                $this->form_validation->set_rules('mot_de_passe','motdepasse', 'required|regex_match[/^[0-9A-Za-zéèà@ç]{0,}[-(_^*+\/\"#à]{1,}[0-9A-Za-z]{0,}$/] ',
-                    array('required'=>'Erreur dans le champ %s'));
-                    $this->form_validation->set_rules('password','password', 'required|regex_match[/^[0-9A-Za-zéèà@ç]{0,}[-(_^*+\/\"#à]{1,}[0-9A-Za-z]{0,}$/] ',
-                        array('required'=>'Erreur dans le champ %s'));
+            $this->form_validation->set_rules('mot_de_passe','motdepasse', 'required|regex_match[/^[0-9A-Za-zéèà@ç]{0,}[-(_^*+\/\"#à]{1,}[0-9A-Za-z]{0,}$/] ',
+                array('required'=>'Erreur dans le champ %s'));
+            $this->form_validation->set_rules('password','password', 'required|regex_match[/^[0-9A-Za-zéèà@ç]{0,}[-(_^*+\/\"#à]{1,}[0-9A-Za-z]{0,}$/] ',
+                array('required'=>'Erreur dans le champ %s'));
 
             $data= $this->input->post();
 
 
             if($this->form_validation->run() == TRUE)
-            {
+            { 
                 //créer le panier dés la connexion de l'utilisateur
-                //$this->get_instance(Panier::createPanier());           //Panier->createPanier();
                 $this->load->view('inclusion/navbar',$aView);
                 $this->load->model("Client_model");
                 $personne = $this->Client_model->Connexion();
-                return $personne;
+                //$id=$personne->id_client;
+                //$this->load->Panier->createPanier($id);
+                /*if($personne->table_client != NULL)
+                {
+                   $this->load->Panier->chargement_panier($personne->table_client); 
+                }*/
                 redirect(site_url("Client/Accueil"));
             }
             else{
                 $this->load->view('inclusion/navbar',$aView);
                 $this->load->view("client/ConnexionClient",$aView);
+                $this->load->view("inclusion/footer",$aView);
                 }
         }
 
@@ -179,6 +187,7 @@ class Client extends CI_Controller
         
         public function Deconnexion()
         {
+            unset($_SESSION['panier']);
             $this->session->user = null;
             redirect(site_url("Client/Accueil"));
         }

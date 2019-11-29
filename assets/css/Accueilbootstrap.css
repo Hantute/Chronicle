@@ -1,46 +1,74 @@
-html{
+@import url(https://fonts.googleapis.com/css?family=open+Sans);
+@import url(https://fonts.googleapis.com/css?family=Federo);
 
-	font-size:100%;
-
+html
+{
+    font-size:100%;
+    margin:0;
+    min-height: 100%;
 }
 
-@keyframes deplacementlogo{
-	0%{
-		transform: translateX(0%);
-		}
-	50%{
-		transform: translateX(75%);
-		}
-	100%{
-		transform: translateX(200%);
-	}
+@keyframes deplacementlogo
+{
+    0%
+    {
+        transform: translateX(0%);
+    }
+    50%
+    {
+        transform: translateX(75%);
+    }
+    100%
+    {
+	transform: translateX(200%);
+    }
 }
 
-nav{
-	margin-top:1%;
-	margin-bottom:1%;
-	clear:both;
-	background-color:white;
-	padding-top:0.5%;
-	padding-bottom:0.5%;
+nav
+{
+    margin-top:1%;
+    margin-bottom:1%;
+    clear:both;
+    background-color:transparent;
+    padding-top:0.5%;
+    padding-bottom:0.5%;
 }
 
-body {
-	width:100%;
-	height:100%;
-        color: white;
-	/* text-decoration-color: transparent; */
-	background-size: cover;
-	background-position: center center;
-	-webkit-transform: translateZ(0);
-				  transform: translateZ(0);
-	will-change:transform;
-	background-image: url('../../assets/img/orion_nebula-Universe.jpg');
-	background-repeat: no-repeat;
+body
+{
+    position: relative;
+    margin:0;
+    min-height: 100%;
+    padding: 30px;
+    padding-top: 70px;
+    width:100%;
+    height:100%;
+    color: white !important;
+    font-family: 'Opens Sans', sans-serif;
+    /* text-decoration-color: transparent; */
+    background-size: cover;
+    background-position: center center;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    will-change:transform;
+    background-image: url('../../assets/img/orion_nebula-Universe.jpg');
+    background-repeat: no-repeat;
+    /*background: linear-gradient(#38c15a, white);*/
+    /*background-color:white;*/
+    background-attachment:fixed;
+}
 
-	/*background: linear-gradient(#38c15a, white);*/
-	/*background-color:white;*/
-	background-attachment:fixed;
+.tableau
+{
+    text-justify: auto;
+    text-align: center !important;
+}
+
+#Univers
+{
+    text-align: center;
+    text-decoration: blue;
+    text-justify: auto;
 }
 
 #corps{
@@ -62,4 +90,12 @@ body {
 
 #generateur {
 	overflow: scroll;
+}
+
+.ButtonPanier
+{
+    display: inherit;
+    color:white;
+    justify-content:flex-end !important; 
+    float: left;
 }

@@ -106,7 +106,7 @@
 						 	<div class="form-group row">
 						 		<label for="photo_vaisseau" class="col-sm-2 col-form-labl">image du Vaisseau:</label>
 						 		<div class="col-sm-4">
-						 			<input type="file" name="photo_vaisseau" id="photo_vaisseau">
+						 			<input type="file" class='input-file btn btn-dark photo_vaisseau' name="photo_vaisseau" id="photo_vaisseau">
 						 			<span id="pasnom"></span>
 						 		</div>
 						 	</div>

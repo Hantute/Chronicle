@@ -1,15 +1,15 @@
 
-
+<!--
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
  integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
  <script
 			  src="https://code.jquery.com/jquery-3.4.1.min.js"
 			  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 			  crossorigin="anonymous"></script>
-
+-->
 <!--lien vers une page css pour faire la mise en forme de la page de présentation -->
-<link rel="stylesheet" href="<?php echo base_url("assets/css/Accueilbootstrap.css");?>">
- <link rel="stylesheet" href="<?php echo base_url("assets/css/Menu.css"); ?>"> 
+<link rel="stylesheet" href="<?php //echo base_url("assets/css/Accueilbootstrap.css");?>">
+ <link rel="stylesheet" href="<?php //echo base_url("assets/css/Menu.css"); ?>"> 
 
 
         <?php echo form_open_multipart();

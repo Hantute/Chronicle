@@ -1,33 +1,58 @@
+
 <div class="row" id="corps">
-  <div class="col-sm-6 col-lg-8" id="tableau">
+  <div class="col-md-6 offset-md-3 justify-content-around" id="tableau">
     <p>
-      <h2>Liste des maquettes de vaisseaux </h2>
+      <h2>Liste des <?= $Subcat->nom_categorie ;?> </h2>
     </p>
   </div>
 </div><br />
-
-<div class="col-sm-12">
-
-</div>
-  <table border='5' bgcolor='#d0ff00' text-align='center'>
-    <TR border='10' bgcolor='#a4c2f4' width='1500'>
-      <TH width="100">code du produit</TH>
-      <TH width="200">Nom du produit</TH>
-      <TH width="1000">Description du produit</TH>
-      <TH width="100">Produit encore en stock</TH>
-      <TH width="100">Prix du produit</TH>
-    </TR>
-    <br />
+<div class='row' id='tableau'>
+    <div class='col-md-8 offset-md-2 justify-content-around card-group'>
     <?php
     foreach ($categorie as $row)
-    {
-      echo "<TR border='10' bgcolor='#a4c2f4' width='1500'>\n";
-      echo "<TD width='100' text-align='center'>".$row->id_produit."</TD>\n";
-      echo "<TD width='200' text-align='center'>".$row->nom_produit."</TD>\n";
-      echo "<TD width='1000' text-align='center' id='texte' classe='texte'>".$row->Description."</TD>\n";
-      echo "<TD width='100' text-align='center'>".$row->stock_produit."</TD>\n";
-      echo "<TD width='100' text-align='center'>".$row->prix_produit."</TD>\n";
-      echo "</TR>";
+    { ?>
+        <div class="card mb-3" style="max-width: 540px;">
+            <div class="row no-gutters">
+                <div class="col-md-4">
+                     <img src="<?php echo base_url('assets/img/vaisseauspatial.jpg');?>" class='card-img-top' alt='....'>
+                </div>
+                <div class="col-md-8" >
+                    <div class="card-body click3" id='<?= $row->id_produit ?>'>
+                        <h5 class="card-title DetailProduit"><?= $row->nom_produit ;?></h5>
+                        <p class="card-text"><?= $Subcat->nom_categorie ;?></p>
+                        <p class="card-text"><?= $row->Description ;?></p>
+                        <div class='row'>
+                            <div class='col-5'><p class="card-text">stock : <?= $row->stock_produit ;?></p></div>
+                            <div class='col-7'>quantité :
+                                <select id="quantite<?php echo $row->id_produit ; ?>" class='commande'>
+                                    <?php 
+                                    for($cpt=0; $cpt<=$row->stock_produit;$cpt++)
+                                    { ?>
+                                        <option value='<?php echo $cpt ;?>'> <?php echo $cpt ;?></option>
+                                    <?php
+                                    } ?>
+                                </select>
+                            </div>
+                        </div>
+                        <p class="card-text" id="Prix<?= $row->id_produit;?>" value='<?= $row->prix_produit;?>'><?= $row->prix_produit ;?>€</p>
+                        <button>Commander</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <?php
     } ?>
-  </table>
+    </div>
 </div>
+<script>
+    $(".click3").click(function()
+    {
+        $idProd=$(this).attr('id');
+        let $qte = $("#quantite"+$idProd).val();
+        
+        console.log($idProd);       
+        console.log($qte);
+
+        $('#AFFICHE').load("http://localhost/CI_FilRouge/index.php/Panier/ajout/"+$idProd +"/"+$qte);
+    });
+</script>

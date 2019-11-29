@@ -17,8 +17,8 @@ class Vaisseau_model extends CI_Model
         public function detail($id_vaisseau)
         {
             $requete = $this->db->query("SELECT * FROM vaisseau
-                       JOIN classe ON vaisseau.id_classe=classe.id_classe
-                       JOIN type ON classe.id_type=type.id_type WHERE id_vaisseau=?", array($id_vaisseau));
+                JOIN classe ON vaisseau.id_classe=classe.id_classe
+                JOIN type ON classe.id_type=type.id_type WHERE id_vaisseau=?", array($id_vaisseau));
             $detail = $requete->row();
             return $detail;
         }
@@ -26,26 +26,26 @@ class Vaisseau_model extends CI_Model
 //******************************************************************************
         public function statut($id_vaisseau)
         {
-          $requete = $this->db->query("SELECT * FROM vaisseau
-          JOIN statut ON statut.id_statut = vaisseau.id_statut WHERE vaisseau.id_vaisseau=?", array($id_vaisseau));
-          $Vstatut = $requete->row();
-          return $Vstatut;
+            $requete = $this->db->query("SELECT * FROM vaisseau
+            JOIN statut ON statut.id_statut = vaisseau.id_statut WHERE vaisseau.id_vaisseau=?", array($id_vaisseau));
+            $Vstatut = $requete->row();
+            return $Vstatut;
         }
 
 //******************************************************************************        
         public function Vaisseau($id)
         {
-          $requete = $this->db->query("SELECT * FROM vaisseau WHERE id_classe=?", array($id));
-          $vaisseau = $requete->result();
-          return $vaisseau;
+            $requete = $this->db->query("SELECT * FROM vaisseau WHERE id_classe=?", array($id));
+            $vaisseau = $requete->result();
+            return $vaisseau;
         }
 
 //******************************************************************************        
         public function VaisseauNom($id)
         {
-          $requete = $this->db->query("SELECT * FROM vaisseau WHERE id_classe=?", array($id));
-          $vaisseau = $requete->result();
-          return $vaisseau;
+            $requete = $this->db->query("SELECT * FROM vaisseau WHERE id_classe=?", array($id));
+            $vaisseau = $requete->result();
+            return $vaisseau;
         }
 
 //******************************************************************************        
@@ -61,22 +61,22 @@ class Vaisseau_model extends CI_Model
             
             //$data["photo_vaisseau"] = $photo;
             $this->db->insert('vaisseau',$data);
-            //return $photo;
+            return $this->db->insert_id();
         }
 
 //******************************************************************************        
         public function modification($id_vaisseau)
         {
-          $data = $this->input->post();
-          var_dump($id_vaisseau);
+            $data = $this->input->post();
+            var_dump($id_vaisseau);
 
-          $Date=date("Y-m-d H:i:s");
-          unset($data["id_vaisseau"]);
-          unset($data["modifier"]);
-          $data["mise_a_jour"] = $Date;
+            $Date=date("Y-m-d H:i:s");
+            unset($data["id_vaisseau"]);
+            unset($data["modifier"]);
+            $data["mise_a_jour"] = $Date;
 
-          $this->db->WHERE('id_vaisseau', $id_vaisseau);
-          $this->db->UPDATE('vaisseau',$data);
+            $this->db->WHERE('id_vaisseau', $id_vaisseau);
+            $this->db->UPDATE('vaisseau',$data);
         }
 
 //******************************************************************************        
@@ -97,6 +97,15 @@ class Vaisseau_model extends CI_Model
             $GroupeV= $requete->result();
             return $GroupeV;
         }
+
+//******************************************************************************        
+        public function photo($id, $photo)
+        {
+
+            $this->db->WHERE('id_vaisseau', $id);
+            $this->db->UPDATE('vaisseau',$photo);
+        }        
+        
         
 }
 

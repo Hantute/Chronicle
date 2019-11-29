@@ -46,7 +46,18 @@ class Bataille extends CI_Controller
         $this->load->view('inclusion/footer',$aView);   
     }
     
-//******************************************************************************    
+//******************************************************************************
+
+    /**     \Brief      Fonction RecitB qui permet d'afficher les récits des différentes batailles 
+     *      \details    Elle permet d'afficher la liste des récits des différentes batailles entre les colonies et leur ennemis
+     *      \param      titre       Affiche le titre de la page
+     *      \param      citation    Affiche le résultat de la library citation
+     *      \param      liste       Affiche le résultat de la requete SQL.
+     *      \param      aView       Permet de transférer les données récupérer sur la page View
+     *      \@author    Aurélien Hantute
+     *      \date       26/11/2019    
+    */ 
+    
     public function RecitB()
     {
         $titre="Compte rendu officiel des batailles livrées entre les colonies et l'Empire des l'empire des Vespides";
@@ -66,7 +77,19 @@ class Bataille extends CI_Controller
         $this->load->view('inclusion/footer',$aView);     
     }
 
-//******************************************************************************    
+//****************************************************************************** 
+    
+    /**     \Brief      Fonction AjoutB 
+     *      \details    Elle permet de créer puis vérifier et transférer les données du formulaire ajout vers le modele Bataille_ajout
+     *      \param      titre       Affiche le titre de la page
+     *      \param      citation    Affiche le résultat de la library citation
+     *      \param      data        Tableau de donnée récupérer les données envoyer par le formulaire
+     *      \param      SystemeB    Donnée récupérer de la table système  
+     *      \param      aView       Permet de transférer les données récupérer sur la page View
+     *      \@author    Aurélien Hantute
+     *      \date       26/11/2019    
+    */ 
+    
     public function AjoutB()
     {
         $aView["titre"]="Ajout d'un récit";
@@ -90,7 +113,7 @@ class Bataille extends CI_Controller
         {
             $this->load->model('Bataille_model');
             $AjoutB=$this->Bataille_model->AjoutB($data);
-            $AjoutB["AjoutBataille"]=$AjoutB;
+            //$AjoutB["AjoutBataille"]=$AjoutB;
             redirect(site_url("Bataille/RecitB"));
             
             
@@ -109,6 +132,15 @@ class Bataille extends CI_Controller
     
 //******************************************************************************    
   
+    /**     \Brief      Fonction nom_bataille 
+     *      \details    Elle permet d'afficher les données d'une bataille de la table bataille
+     *      \param      id          Transmet l'identifiant de la bataille pour en obtenir les détails 
+     *      \param      nom         Affiche le résultat de la requete SQL.
+     *      \param      aView       Permet de transférer les données récupérer sur la page View
+     *      \@author    Aurélien Hantute
+     *      \date       26/11/2019    
+    */ 
+    
     public function nom_batailleB($id)
     {
         $this->load->model('Bataille_model');

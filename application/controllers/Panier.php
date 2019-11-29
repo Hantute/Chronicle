@@ -1,45 +1,5 @@
 
 <?php 
-
-/*$_SESSION['panier']=array();
-$_SESSION['panier']['idProd']=array();
-$_SESSION['panier']['qte']=array();
-$_SESSION['panier']['prixUnit']=array();
-$_SESSION['panier']['prixTot']=array();
-
-$select = array();
-$select['idProd'] = "phlevis501";
-$select['qte'] = 1;
-$select['prixUnit'] = "56";
-$select['prixTot'] = 84.95;
-//ajout($select);
-
-if(!isset($_SESSION['panier']))
-    {
-        $_SESSION['panier']=array();
-        $_SESSION['panier']['idProd']=array();
-        $_SESSION['panier']['qte']=array();
-        $_SESSION['panier']['prixUnit']=array();
-        $_SESSION['panier']['prixTot']=array();
-    }
-    var_dump($_SESSION['panier']);*/
-/*$select2 = array();    
-$select2['idProd'] = "vm654321";
-$select2['qte'] = 1;
-$select2['prixUnit'] = "34";
-$select2['prixTot'] = 434.95; 
-//ajout($select2);
-
-//$idProd="phlevis501"
-
-$select['idProd'] = "vm654321";
-$select['qte'] = 2;
-$select['prixUnit'] = "34";
-$select['prixTot'] = 434.95; 
-//verif_panier($select['idProd']);
-var_dump($_SESSION['panier']);*/
-
-
 class Panier extends CI_Controller
 {
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
@@ -48,7 +8,6 @@ class Panier extends CI_Controller
 
     public function createPanier()
     {
-        //$this->vider_panier();
         if(!isset($_SESSION['panier']))
         {
             $_SESSION['panier']=array();
@@ -56,8 +15,12 @@ class Panier extends CI_Controller
             $_SESSION['panier']['qte']=array();
             $_SESSION['panier']['prixUnit']=array();
             $_SESSION['panier']['prixTot']=array();
-            //var_dump($_SESSION['panier']);
-        }  
+        } 
+        if($_SESSION['user']->panier_client !=NULL)
+        {
+            $CartLoad=$_SESSION['user']->panier_client;
+            $this->chargement_panier($CartLoad);
+        }
     return $_SESSION['panier'];
     }
 
@@ -65,11 +28,43 @@ class Panier extends CI_Controller
     
     public function listePanier()
     {
-        $_SESSION['panier']=$this->createPanier();
+        if(!isset($_SESSION['panier']))
+        {
+            $_SESSION['panier']=$this->createPanier();
+        }
+        $this->load->model("Produit_model");
+        $aliste=$this->Produit_model->liste();
         
         $aView['Achat'] = $_SESSION['panier'];
+        $aView['QTE']=$aliste;
       
-        $this->load->view('panier/ListeP',$aView);
+        $this->load->view('panier/ListePanier',$aView);
+    }
+    
+    /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+    
+    public function DetailPanier($id)
+    {
+        $nb_article=count($_SESSION['panier']['idProd']);
+        /* On parcoure le tableau de session pour modifier l'article précis */
+        for($i=0;$i<$nb_article;$i++)
+        {
+            if($id == $_SESSION['panier']['idProd'][$i])
+            {
+                $aView['idProd'] = $id;
+                
+                $this->load->model("Produit_model");
+                $prodliste=$this->Produit_model->detail($id);
+                $idcat=$prodliste->id_categorie;
+                
+                $this->load->model('Categorie_model');
+                $cat =$this->Categorie_model->DetailCat($idcat);
+                
+                $aView['Categorie']=$cat;
+                $aView['Produit']=$prodliste;
+                $this->load->view('panier/DetailPanier',$aView);
+            }
+        }    
     }
     
     /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
@@ -87,11 +82,8 @@ class Panier extends CI_Controller
     {
         // Récupérer le $_POST de l'id et de la qte puis faire une requete model pour récupérer les donnés du produits 
         $ajout=FALSE;
-        $_SESSION['panier']=$this->createPanier();
-        //var_dump($_SESSION['panier']['idProd']);
+        //$_SESSION['panier']=$this->createPanier();
         $select=$this->transfert($id, $qte);
-        //var_dump($select);
-        //var_dump($select['idProd']);
                 
         if(!isset($_SESSION['panier']['verouille']) || $_SESSION['panier']['verouille']==FALSE)
         {
@@ -101,21 +93,17 @@ class Panier extends CI_Controller
                 array_push($_SESSION['panier']['qte'],$select['qte']);
                 array_push($_SESSION['panier']['prixUnit'],$select['prixUnit']);
                 array_push($_SESSION['panier']['prixTot'],$select['prixTot']);
+                $idClient=intval($_SESSION->id_client);
+                $this->sauvegarde_panier($idClient);
                 $ajout = TRUE;
                 $ajoute='Produit ajoutée';
                 return $ajoute;
             }
            else
             {
-                //var_dump("BONJOUR");
-                //var_dump($select);
                 $ajoute = $this->modif_qte($select['idProd'],$select['qte']);
                 return $ajoute;
             }
-            //var_dump($ajoute);
-            $aView['Achat'] = $_SESSION['panier'];
-            $aView['ajoute']= $ajoute;
-            $this->load->view('panier/ListeP',$aView);
         }    
     } 
 
@@ -135,21 +123,28 @@ class Panier extends CI_Controller
     {
         /* On initialise la variable de retour */
         $idProd=(int)$idProd;
+        $qte=(int)$qte;
         $modifie = FALSE;
+        
         if(!isset($_SESSION['panier']['verouille']) || $_SESSION['panier']['verouille'] == FALSE)
         {
-            if($this->nombre_articles($idProd)!= FALSE && $qte != $this->nombre_articles($idProd))
+            if(/*$this->nombre_articles($idProd)!= FALSE &&*/ $qte != $this->nombre_articles($idProd))
             {
                 /* On compte le nombre d'article différents dans le panier */
                 $nb_article=count($_SESSION['panier']['idProd']);
-                //var_dump($nb_article);
                 /* On parcoure le tableau de session pour modifier l'article précis */
                 for($i=0;$i<$nb_article;$i++)
                 {
                     if($idProd == $_SESSION['panier']['idProd'][$i])
                     {
                         $_SESSION['panier']['qte'][$i]=$qte;
-                        $modifie = TRUE;
+                        $prix=$_SESSION['panier']['prixUnit'][$i];
+                        $total=($qte*$prix);
+                        $_SESSION['panier']['prixTot'][$i]=$total;
+                        $idClient=intval($_SESSION['user']->id_client);
+                        $this->sauvegarde_panier($idClient);
+                        $modifie = TRUE; 
+                        
                     }
                 }    
             }
@@ -168,11 +163,11 @@ class Panier extends CI_Controller
                 if($qte != $this->nombre_articles($idProd))
                 {
                     $ajoute="qte_ok";
-                }
-            //var_dump($ajoute);    
+                }    
             return $ajoute;     
             }  
         }
+        $this->listePanier();
     }
 
     /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
@@ -214,13 +209,16 @@ class Panier extends CI_Controller
                 /* Option : on peut maintenant supprimer notre panier temporaire */
                 unset($panier_tmp);
                 $suppression = TRUE;
+                $idClient=$_SESSION->id_client;
+                $this->sauvegarde_panier($idClient);
             }
             else
             {
                 $suppression="absent";
             }
-            return $suppression;    
-        } 
+            //return $suppression;    
+        }
+        $this->listePanier();
     }
 
     /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
@@ -297,7 +295,8 @@ class Panier extends CI_Controller
                 $vide="inexistant";
             }  
         }
-        return $vide;  
+        redirect(site_url("Client/Accueil"));
+        //return $vide;  
     }
 
 
@@ -318,16 +317,12 @@ class Panier extends CI_Controller
         $select = array();
         $select['idProd'] = (int)$id;
         $select['qte'] = (int)$qte;
-        //var_dump($select);
         $this->load->model('Produit_model');
         $produit = $this->Produit_model->produit($select['idProd']);
-        //var_dump($produit);
         
         $select['prixUnit'] =(int)$produit[0]->prix_produit;
         $select['prixTot'] = $select['qte']*$select['prixUnit'];
-        //var_dump('transfer');
-        //var_dump($select);
-        //var_dump(count($select));
+        
         return($select);
             
     }
@@ -356,7 +351,6 @@ class Panier extends CI_Controller
                 $nombre = $_SESSION['panier']['qte'][$i];
             }
         }
-        //var_dump($nombre);
         return $nombre;
     }
 
@@ -392,8 +386,6 @@ class Panier extends CI_Controller
      */
     public function verif_panier($ref_article)
     {
-        //var_dump($ref_article);
-        //var_dump($_SESSION['panier']['idProd']);
         /* On initialise la variable de retour */
         $present = FALSE;
         /* On vérifie les numéros de références des articles et on compare avec l'article à vérifier */
@@ -404,6 +396,37 @@ class Panier extends CI_Controller
         return $present;
     }   
 
+    /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+    
+    /**
+     * Sauvegarde automatique du panier dans la table client 
+     * 
+     * @param Int           $id     référence du client du panier
+     * @param string        $CartSafe    Panier du client convertie en String
+     */
+    
+    function sauvegarde_panier($id)
+    {
+        $CartSafe= serialize($_SESSION['panier']);
+        $this->load->model('Client_model');
+        $this->Client_model->SauvegardePanier($id,$CartSafe);
+    }
+    
+    /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+    
+    /**
+     * Chargement dans le panier du dernier panier effectué par le client 
+     * 
+     * @param string        $CartLoad Sauvegarde du panier du client en String
+     * @param Array         $_SESSION['panier'] Renvoie un tableau contenant les données reçu sur          
+     *                      l'ancien panier
+     */
+    
+    function chargement_panier($CartLoad)
+    {
+        $_SESSION['panier']= unserialize($CartLoad);
+    }
+    
     /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
     /**
@@ -431,49 +454,6 @@ class Panier extends CI_Controller
         /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
         unset($_SESSION['panier']);
     }
-    
+
 }
-
-/*
-$_SESSION['panier']=array();
-$_SESSION['panier']['idProd']=array();
-$_SESSION['panier']['qte']=array();
-$_SESSION['panier']['prixUnit']=array();
-$_SESSION['panier']['prixTot']=array();
-
-$select = array();
-$select['idProd'] = "phlevis501";
-$select['qte'] = 1;
-$select['prixUnit'] = "56";
-$select['prixTot'] = 84.95;
-*/
-//ajout($select);
-
-/*if(!isset($_SESSION['panier']))
-    {
-        $_SESSION['panier']=array();
-        $_SESSION['panier']['idProd']=array();
-        $_SESSION['panier']['qte']=array();
-        $_SESSION['panier']['prixUnit']=array();
-        $_SESSION['panier']['prixTot']=array();
-    }
-    
-$select2 = array();    
-$select2['idProd'] = "vm654321";
-$select2['qte'] = 1;
-$select2['prixUnit'] = "34";
-$select2['prixTot'] = 434.95; 
-ajout($select2);
-
-//$idProd="phlevis501"
-
-$select['idProd'] = "vm654321";
-$select['qte'] = 2;
-$select['prixUnit'] = "34";
-$select['prixTot'] = 434.95; 
-//verif_panier($select['idProd']);
-var_dump($_SESSION['panier']);
-*/
-
-
 ?>

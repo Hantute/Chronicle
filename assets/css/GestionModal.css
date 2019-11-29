@@ -8,9 +8,31 @@ and open the template in the editor.
     Author     : Aurélien Hantute
 */
 
-.modal{
-    position: absolute;
-    /*background-color: #CFFF6A;*/
-    text-justify: AUTO;
+.modal
+{
+    width: 750px;
+    height: 300px;
+    top: 25%;
+    left: 35%;
+    margin-top: -200px;
+    margin-left: -550px;
+    border-radius: 5px;
+    text-align: center;
+    overflow: auto;
+    position: fixed;
+    text-justify: auto;
+    color: #002AFF;
+    z-index: 110;
+}
+
+
+.card
+{
+    overflow: auto;
+    text-justify: auto;
+    justify-content:flex-end !important;
     color: #002AFF;
 }
+
+
+
