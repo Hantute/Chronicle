@@ -6,22 +6,19 @@ class Panier extends CI_Controller
 /*                 Fonctions de base de gestion du panier                     */
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
-    public function createPanier()
-    {
-        if(!isset($_SESSION['panier']))
-        {
-            $_SESSION['panier']=array();
-            $_SESSION['panier']['idProd']=array();
-            $_SESSION['panier']['qte']=array();
-            $_SESSION['panier']['prixUnit']=array();
-            $_SESSION['panier']['prixTot']=array();
-        } 
-        if($_SESSION['user']->panier_client !=NULL)
-        {
-            $CartLoad=$_SESSION['user']->panier_client;
+    public function createPanier() {
+        if (!isset($_SESSION['panier'])) {
+            $_SESSION['panier'] = array();
+            $_SESSION['panier']['idProd'] = array();
+            $_SESSION['panier']['qte'] = array();
+            $_SESSION['panier']['prixUnit'] = array();
+            $_SESSION['panier']['prixTot'] = array();
+        }
+        if ($_SESSION['user']->panier_client != NULL) {
+            $CartLoad = $_SESSION['user']->panier_client;
             $this->chargement_panier($CartLoad);
         }
-    return $_SESSION['panier'];
+        return $_SESSION['panier'];
     }
 
     /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
@@ -125,10 +122,9 @@ class Panier extends CI_Controller
         $idProd=(int)$idProd;
         $qte=(int)$qte;
         $modifie = FALSE;
-        
         if(!isset($_SESSION['panier']['verouille']) || $_SESSION['panier']['verouille'] == FALSE)
         {
-            if(/*$this->nombre_articles($idProd)!= FALSE &&*/ $qte != $this->nombre_articles($idProd))
+            if($qte != $this->nombre_articles($idProd))
             {
                 /* On compte le nombre d'article différents dans le panier */
                 $nb_article=count($_SESSION['panier']['idProd']);
@@ -144,7 +140,6 @@ class Panier extends CI_Controller
                         $idClient=intval($_SESSION['user']->id_client);
                         $this->sauvegarde_panier($idClient);
                         $modifie = TRUE; 
-                        
                     }
                 }    
             }

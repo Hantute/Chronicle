@@ -40,7 +40,6 @@ and open the template in the editor.
     backface-visibility: hidden;
 }
 
-
 .flip-box-front
 {
     background-color: transparent;
@@ -59,4 +58,9 @@ and open the template in the editor.
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+}
+
+.CardProduit
+{
+    margin:5px;
 }

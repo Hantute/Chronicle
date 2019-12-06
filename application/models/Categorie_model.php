@@ -11,6 +11,12 @@ defined ('BASEPATH') OR exit('No direct script access allowed');
 
 class Categorie_model extends CI_Model
 {
+    public function listeCat()
+    {
+        $requete=$this->db->query("SELECT * FROM categorie ");
+        $listecCat=$requete->result();
+        return $listecCat; 
+    }
     
     public function listeCM()
     {

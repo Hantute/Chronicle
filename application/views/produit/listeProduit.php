@@ -1,3 +1,4 @@
+    <br>
     <?php
     if($this->session->user && $this->session->user->id_autorisation == "1")
     { ?>
@@ -22,7 +23,14 @@
                     <div class='card' style='width: 18rem'>
                         <img src="<?php echo base_url('assets/img/vaisseauspatial.jpg');?>" class='card-img-top' alt='....'>
                         <h5 class='card-title' id='<?= $row->id_produit;?>'><?= $row->nom_produit ;?></h5>
-                        <h6 class='card-text'><?= $Categorie->nom_categorie ;?></h6>    
+                        <?php foreach ($Categorie as $rowCat)
+                        {
+                            if($row->id_categorie == $rowCat->id_categorie)
+                            {?>
+                                <h6 class='card-text'><?= $rowCat->nom_categorie ;?></h6>  
+                            <?php 
+                            }
+                        }?>          
                     </div>
                 </div>
                 <div class="flip-box-back">

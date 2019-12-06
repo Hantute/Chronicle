@@ -109,16 +109,14 @@ class Bataille extends CI_Controller
         $this->form_validation->set_rules('recit_bataille','recit_bataille',"required|regex_match[/^[0-9A-Za-z\sèéêàùâîôûöïäç',._-]{0,}$/]",
                 array('required'=>'Erreur dans le champ %s'));
         
+        // Si la e formulaire est bien rempli la validation sera vrai et les données seront enregistrer dans la base de donnée
         if($this->form_validation->run()==TRUE)
         {
             $this->load->model('Bataille_model');
             $AjoutB=$this->Bataille_model->AjoutB($data);
-            //$AjoutB["AjoutBataille"]=$AjoutB;
-            redirect(site_url("Bataille/RecitB"));
-            
-            
+            redirect(site_url("Bataille/RecitB"));   
         }
-        else
+        else        // Si le formulaire n'est pas bon, ou pas encore rempli, la page se chargera ou se rechargera 
         {          
             $this->load->model('Systeme_model');
             $SystemeB=$this->Systeme_model->listeS();
@@ -141,7 +139,7 @@ class Bataille extends CI_Controller
      *      \date       26/11/2019    
     */ 
     
-    public function nom_batailleB($id)
+    public function nom_batailleB($id)      // Permet de récupérer le nom de la bataille  
     {
         $this->load->model('Bataille_model');
         $nom= $this->Bataille_model->Selection_date($id);

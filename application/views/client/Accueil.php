@@ -34,6 +34,14 @@
             <article>
             <h4 id="Secteur">Le Secteur Mercuriadum</h4>
             </article>
+            <p>Le Secteur Mercuriadum est particulier</p>
+            <p>il s'agit d'une nébuleuse extrèmement dense, composé d'un gaz inconnu mais dont les effets sont, pour l'instant, considèrés comme non nocif pour les êtres vivants.</p>
+            <p>De plus, il est entouré d'un gigantesque champs d'astéroide possédant la curieuse caractéristique d'empêcher toute propulsion supraluminique. </p>
+            <p> IL est très riche en minéraux, minéraux rares, gaz, voir élèments encore inconnus </p> 
+            <p>Pendant longtemps, il fut impossible d'y entrer, mais la découverte d'un passage étroit et dangereux à permis l'exploration puis la colonisation par ceux qu'on définit maintenant par les coloniaux</p>
+            <p> Malheureusement, les Vespides ont pus aussi profiter d'un passage plus stable et ont déjà coloniser plusieurs systèmes du secteur</p>
+            <p>Les combats sur les autres front entre le Royaume, patrie d'origine des coloniaux, et les Vespides ne donnant aucun résultats</p>
+            <p>Le Secteur Mercuriadum est devenu une zone stratégique pour les deux empires</p>
         </section>
     </div>    
 </div>

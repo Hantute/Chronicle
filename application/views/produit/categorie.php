@@ -11,7 +11,7 @@
     <?php
     foreach ($categorie as $row)
     { ?>
-        <div class="card mb-3" style="max-width: 540px;">
+        <div class="card mb-3 CardProduit" style="max-width: 540px;">
             <div class="row no-gutters">
                 <div class="col-md-4">
                      <img src="<?php echo base_url('assets/img/vaisseauspatial.jpg');?>" class='card-img-top' alt='....'>

@@ -1,6 +1,8 @@
 
 <h1 class="text-center text-light"> Récits romancés des différentes batailles entre les Colonies et l'empire des Vespides</h1>
+<?php if($this->session->user && $this->session->user->id_autorisation == "1"){ ?>
 <a href="<?php echo site_url("Bataille/AjoutB");?>">Archiver une nouvelle bataille</a>
+<?php } ?>
     <div class="row">
         <div class="col-1"></div>
             <div class="recit col-10" id="Bataille<?php //echo $rowB->id_bataille ?>">

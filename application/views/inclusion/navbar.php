@@ -1,5 +1,4 @@
 <?php
-//var_dump($_SESSION);
 if (!defined ('BASEPATH')) exit ('No direct script access allowed');
 
 ?>
@@ -26,7 +25,7 @@ if (!defined ('BASEPATH')) exit ('No direct script access allowed');
         </div>
     </header>
     <div class="row">
-        <div class="col-sm-6"> 
+        <div class="col-sm-6" id='couleur_navbar'> 
             <nav id="navbar" class="navbar navbar-default navbar-fixed-top navbar-expand-sm bg-info navbar-info" role="navigation">
               <!-- Barre de navigation qui devient un bouton quand la taille de l'écran change Toggler/collapsibe Button -->
                 <button class="navbar-toggler pull-left" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
@@ -44,7 +43,7 @@ if (!defined ('BASEPATH')) exit ('No direct script access allowed');
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a href="#">Bibliothéques</a>
+                            <a href="#">Bibliothèques</a>
                             <ul id="SMenu">
                                 <li class="nav-item">
                                     <a class="nav-link" href="<?php echo site_url("Bataille/RecitB") ?>" > Récits romancés de Bataille </a>
@@ -55,7 +54,7 @@ if (!defined ('BASEPATH')) exit ('No direct script access allowed');
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?php echo site_url("Vaisseau/listeV") ?>" >Effectifs </a>
+                            <a class="nav-link" href="<?php echo site_url("Vaisseau/listeV") ?>" >Ordre de Bataille </a>
                             <ul >
                                 <li class="nav-item"><a class="nav-link" href="<?php echo site_url('Vaisseau/listeV#flotte1')?>" >Dragon</a></li>
                                 <li class="nav-item"><a class="nav-link" href="<?php echo site_url('Vaisseau/listeV#flotte2')?>" >Mythe</a></li>
@@ -80,12 +79,12 @@ if (!defined ('BASEPATH')) exit ('No direct script access allowed');
                                 <li class="nav-item">
                                     <a class="nav-link" href="<?php echo site_url("Produit/categorie/3")?>">les Figurines</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="<?php echo site_url("Produit/categorie/4")?>">les Livres</a>
+                                <!--<li class="nav-item">
+                                    <a class="nav-link" href="<?php //echo site_url("")?>">les Livres</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="<?php echo site_url("Produit/categorie/5")?>">Autres</a>
-                                </li>
+                                    <a class="nav-link" href="<?php //echo site_url("Produit/categorie/5")?>">Autres</a>
+                                </li>-->
                             </ul>
                         </li>
                         <li class="nav-item">
@@ -137,24 +136,8 @@ if (!defined ('BASEPATH')) exit ('No direct script access allowed');
         <p> <?php echo $Salutation;?></p>
     <?php endif;?> 
     <?php echo $citation; ?>                      
-<!-- Carroussel d'image controlée -->
-    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img class="d-block w-100" src="" id="img2"
-                alt="First slide" title=" responsive" >
-            </div>
-                <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </a>
-        </div>
-    </div>
-<!-- Modal gérant les ajout de nouveaux vaisseau -->
+
+<!-- Modal gérant l'affichage du panier -->
 <div id='ModaPanier' class='modal fade bd-example-modal-lg' tabindex='-1' role='dialog' aria-labelledby='myLargeModalLabel' aria-hidden='true' data-backdrop="false">
     <div class='modal-dialog modal-lg' role="document" >
         <!-- Modal content -->
@@ -172,12 +155,6 @@ if (!defined ('BASEPATH')) exit ('No direct script access allowed');
     {
         console.log("BONJOUR");
         $('#AFFICHE').load("http://localhost/CI_FilRouge/index.php/Panier/listePanier");
-    });
-    /*$("#PANIER").mouseleave(function()
-    {
-        console.log('BONSOIR');
-        $('#AFFICHE').empty();
-    });*/
-    
+    });    
     
 </script>    

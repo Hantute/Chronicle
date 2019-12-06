@@ -26,36 +26,25 @@ class Produit extends CI_Controller
     {
         $titre= "Liste des produits";
         $aView["titre"]=$titre;
-        if($this->session->user)
-        {
-            $aView["Salutation"]= "<i>Salve, quis tabernam mirabile , quis offer naves te heroes. </i><br> Bienvenus, dans ce magasin étonnant qui offre des navires héroiques.";
+        $aView["Salutation"]= "<i>Salve, quis tabernam mirabile , quis offer naves te heroes. </i><br> Bienvenus, dans ce magasin étonnant qui offre des navires héroiques.";
 
-            $this->load->library('proverbe');
-            $citation=$this->proverbe->lesproverbes();
-            $aView["citation"]=$citation;
+        $this->load->library('proverbe');
+        $citation=$this->proverbe->lesproverbes();
+        $aView["citation"]=$citation;
 
-            $this->load->model("Produit_model");
-            $aliste=$this->Produit_model->liste();
+        $this->load->model("Produit_model");
+        $aliste=$this->Produit_model->liste();
             
-            foreach($aliste as $row)
-            {
-            $idCat=$row->id_categorie;    
-            }
+        $this->load->model('Categorie_model');
+        $categorie=$this->Categorie_model->listeCat();
             
-            $this->load->model('Categorie_model');
-            $categorie=$this->Categorie_model->DetailCat($idCat);
+        $aView['Categorie']=$categorie;
+        $aView['liste']=$aliste;
             
-            $aView['Categorie']=$categorie;
-            $aView['liste']=$aliste;
-            
-            $this->load->view('inclusion/navbar',$aView);
-            $this->load->view("produit/listeProduit",$aView);
-            $this->load->view('inclusion/footer',$aView);
+        $this->load->view('inclusion/navbar',$aView);
+        $this->load->view("produit/listeProduit",$aView);
+        $this->load->view('inclusion/footer',$aView);
 
-        }
-        else{
-            redirect(site_url("Client/Accueil"));
-        }
     }
 
 //******************************************************************************
@@ -112,12 +101,12 @@ class Produit extends CI_Controller
         $aView["titre"]=$titre;
         $aView["Salutation"]= "<i>Salve, quis tabernam mirabile , quis offer naves te heroes .</i><br> Bienvenus, dans se magasin étonnant qui offre des navires héroiques.";
 
-        if($this->session->user)
+        if($this->session->user && $this->session->user->id_autorisation == "1")
         {
             $this->load->library('proverbe');
             $citation=$this->proverbe->lesproverbes();
             $aView["citation"] = $citation;
-
+            
             $this->load->model('Type_model');
             $liste = $this->Type_model->liste();
             $aView["ajout"] = $liste;
@@ -127,7 +116,6 @@ class Produit extends CI_Controller
             $aView["listeCat"]=$categorie;
             
             $data = $this->input->post();
-            var_dump($data);
 
             $this->form_validation->set_rules('id_categorie','id_categorie','required');
             $this->form_validation->set_rules('id_vaisseau','id_vaisseau','required');
@@ -175,7 +163,7 @@ class Produit extends CI_Controller
         $titre= "Modifier un produit";
         $aView["titre"]=$titre;
 
-        if($this->session->user)
+        if($this->session->user && $this->session->user->id_autorisation == "1")
         {
             $this->load->library('proverbe');
             $citation=$this->proverbe->lesproverbes();
@@ -229,24 +217,26 @@ class Produit extends CI_Controller
     {
         $titre= "Supprimer un produit";
         $aView["titre"]=$titre;
-
-        if ($this->input->get())
+        if ($this->session->user && $this->session->user->id_autorisation == "1")
         {
+            if ($this->input->get())
+            {
 
-            // On charge les données obtenus dans la function produits_model
+                // On charge les données obtenus dans la function produits_model
+                $this->load->model('produit_model');
+                $supprime = $this->produit_model->supprime();
+                $supprime['supprime']=$supprime;
+
+                redirect('Produit/liste');
+            }
+
+            $this->load->view('inclusion/navbar',$aView);
+            // On fait un lien entre les deux table pour afficher le nom de la catégorie du produits et non son code numérique.
             $this->load->model('produit_model');
-            $supprime = $this->produit_model->supprime();
-            $supprime['supprime']=$supprime;
-
-            redirect('Produit/liste');
-        }
-
-        $this->load->view('inclusion/navbar',$aView);
-        // On fait un lien entre les deux table pour afficher le nom de la catégorie du produits et non son code numérique.
-        $this->load->model('produit_model');
-        $detail = $this->produit_model->DetailProduits($id_produit);
-        $supprime['produit'] = $detail;
-        //$this->load->view('produit/supprime', $supprime);
+            $detail = $this->produit_model->DetailProduits($id_produit);
+            $supprime['produit'] = $detail;
+            //$this->load->view('produit/supprime', $supprime);
+        }    
     }
 
 //******************************************************************************    

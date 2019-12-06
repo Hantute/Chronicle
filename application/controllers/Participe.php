@@ -40,8 +40,6 @@ class Participe extends CI_Controller
        $this->load->model('Vaisseau_model');
        $vaisseau = $this->Vaisseau_model->liste();
        
-
-
        $aView["bataille"] = $bataille;
        $aView["participe"] = $participe;
        $aView["groupe"] = $groupe;
@@ -55,8 +53,16 @@ class Participe extends CI_Controller
 
 //******************************************************************************     
      
-     public function Detail()
-     {
+    /** \brief   Fonction detail qui permet d'afficher le detail d'une bataille
+     *   \details Elle permet d'afficher le detail de la bataille selectionné.  
+     *   \param   Citation   Affiche le résultat de la function proverbe.
+     *   \param   aView      Affiche toute les données qu'on veux faire apparaitre sur la page detail de la bataille.
+     *   \@author   AHantute
+     *   \date    02/12/2019
+    */
+    
+    public function Detail()
+    {
         $titre = " Détail de la bataille";
         $aView["titre"] = $titre;
 
@@ -82,82 +88,99 @@ class Participe extends CI_Controller
         $flotte = $this->Flotte_model->liste();
         $aView['listeF']=$flotte;
 
-
         $this->load->view('inclusion/navbar',$aView);
         $this->load->view("produit/liste",$aView);
         $this->load->view('inclusion/footer',$aView);
     }
 
 //******************************************************************************     
-     
-        public function ajoutP(){
+    
+    /** \brief      Fonction ajoutP qui permet d'afficher le formulaire d'ajout d'une bataille
+     *   \param     $data Récupère les données envoyer par le formulaire
+     *   \param     Citation   Affiche le résultat de la function proverbe.
+     *   \param     aView      Affiche toute les données qu'on veux faire apparaitre sur la page detail de la bataille.
+     *   \@author   AHantute
+     *   \date      02/12/2019
+    */
+    
+    public function ajoutP()
+    {
+        if($this->session->user && $this->session->user->id_autorisation == "1")
+        {
+            $this->load->model('Participe_model');
+            $participe = $this->Participe_model->liste();
+            
+            $this->load->model('Bataille_model');
+            $bataille = $this->Bataille_model->listeB();
 
-            if($this->session->user /*&& $this->session->user->id_autorisation == "1"*/)
+            $this->load->model('Vaisseau_model');
+            $vaisseau = $this->Vaisseau_model->liste();
+            
+            $aView["participe"] = $participe;
+            $aView['bataille']=$bataille;
+            $aView["vaisseau"] = $vaisseau;
+                    // On fait un contrôle de chaque champs pour vérifier qu'il y a bien une donnée rentrée 
+            $this->form_validation->set_rules('id_bataille', 'bataille', 'required',        
+                array ('required'=>'Erreur dans le champs %s'));
+            $this->form_validation->set_rules('id_vaisseau','vaisseau', 'required',
+                array('required'=>'Erreur dans le champs %s'));
+            $this->form_validation->set_rules('Rapport', 'rapport', 'required',
+                array('required'=>'Erreur dans le champs %s'));
+
+            if($this->form_validation->run() == TRUE)       // On vérifie que le formulaire est correct, si oui, on envoi les données dans le modèle
             {
+                $data= $this->input->post();
                 $this->load->model('Participe_model');
-                $participe = $this->Participe_model->liste();
-                $aView["participe"] = $participe;
-
-                $this->load->model('Bataille_model');
-                $bataille = $this->Bataille_model->listeB();
-                $aView['bataille']=$bataille;
-
-                $this->load->model('Vaisseau_model');
-                $vaisseau = $this->Vaisseau_model->liste();
-                $aView["vaisseau"] = $vaisseau;
-
-                $this->form_validation->set_rules('id_bataille', 'bataille', 'required',
-                        array ('required'=>'Erreur dans le champs %s'));
-                $this->form_validation->set_rules('id_vaisseau','vaisseau', 'required',
-                        array('required'=>'Erreur dans le champs %s'));
-                $this->form_validation->set_rules('Rapport', 'rapport', 'required',
-                        array('required'=>'Erreur dans le champs %s'));
-
-                        if($this->form_validation->run() == TRUE)
-                        {
-                            $data= $this->input->post();
-                            var_dump($data);
-
-                            $this->load->model('Participe_model');
-                            $ajout= $this->Participe_model->ajout();
-                            redirect(site_url("Bataille/ListeB"));
-                        }
-                        else
-                        {
-                            $this->form_validation->set_message('required','Erreur');
-                            $this->load->view("participe/ajoutP",$aView);
-                        }
+                $ajout= $this->Participe_model->ajout();
+                redirect(site_url("Bataille/ListeB"));
             }
-            else 
-               {
-                redirect(site_url("Client/Accueil"));
-                }
+            else                                            // Sinon, on recharge la page du formulaire en indiquant les erreurs, les données manquantes
+            {
+                $this->form_validation->set_message('required','Erreur');
+                $this->load->view("participe/ajoutP",$aView);
+            }
         }
+    }
 
 //******************************************************************************
-        
-        public function Choix_vaisseauP($id_bataille)
-            {
-            $this->load->model("Participe_model");
-            $choix = $this->Participe_model->Choix_vaisseau($id_bataille);
+    
+    /** \brief   Fonction Choix_vaisseauP qui permet d'afficher une page pour selectionner un vaisseau dans le formulaire ajout Participe 
+     *   \param   $id_bataille   variable qui permet d'obtenir l'id de la bataille choisit.
+     *   \param   aView      Affiche toute les données qu'on veux faire apparaitre sur la page autre/vaisseau de la bataille.
+     *   \@author   AHantute
+     *   \date    02/12/2019
+    */
+    
+    public function Choix_vaisseauP($id_bataille)
+    {
+        $this->load->model("Participe_model");
+        $choix = $this->Participe_model->Choix_vaisseau($id_bataille);
 
-            if ($choix  != null) {
-                $this->load->model("Vaisseau_model");
-                $vaisseau= $this->Vaisseau_model->Choix_vaisseau();}
-            else {
-                    $this->load->model("Vaisseau_model");
-                    $vaisseau = $this->Vaisseau_model->liste();
-                }
-            $aView["choix"]=$choix;
-            $aView["vaisseau"]= $vaisseau;
-            $this->load->view("autre/vaisseau", $aView);
-            }
+        if ($choix  != null)
+        {
+            $this->load->model("Vaisseau_model");
+            $vaisseau= $this->Vaisseau_model->Choix_vaisseau();}
+        else
+        {
+            $this->load->model("Vaisseau_model");
+            $vaisseau = $this->Vaisseau_model->liste();
+        }
+        $aView["choix"]=$choix;
+        $aView["vaisseau"]= $vaisseau;
+        $this->load->view("autre/vaisseau", $aView);
+    }
 
 //******************************************************************************            
+    
+    /** \brief   Fonction Selection_date qui permet d'afficher les dates d'une bataille 
+     *   \param   $id_bataille   variable qui permet d'obtenir l'id de la bataille choisit.
+     *   \param   aView      Affiche toute les données qu'on veux faire apparaitre sur la page detail de la bataille.
+     *   \@author   AHantute
+     *   \date    02/12/2019
+    */        
             
         public function Selection_date($id_bataille)
         {
-            //$choix_bataille=$id_bataille;
             $this->load->model("Bataille_model");
             $selection = $this->Bataille_model->Selection_date($id_bataille);
             $aView["selection_date"]=$selection;
@@ -166,6 +189,14 @@ class Participe extends CI_Controller
         }
 
 //******************************************************************************        
+    
+    /** \brief      Fonction    RapportP qui permet d'afficher le rapport de participation d'un vaisseau dans une bataille
+     *   \param     $id         Variable qui indique l'identifiant de la bataille choisit 
+     *   \param     Citation    Affiche le résultat de la function proverbe.
+     *   \param     aView       Affiche toute les données qu'on veux faire apparaitre sur la page detail de la bataille.
+     *   \@author   AHantute
+     *   \date      02/12/2019
+    */    
         
         public function RapportP($id)
         {

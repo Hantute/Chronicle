@@ -48,6 +48,5 @@
 				<p><i>gratias ago tibi, MILES </i>: Merci, SOLDAT</p>
 		</form>
 	</div>
-<!-- <link rel="stylesheet" href="http://localhost/ci/assets/css/??.css">	-->
 </body>
 </html>

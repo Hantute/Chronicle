@@ -1,14 +1,12 @@
 <?php
 
 //echo "<a><img src=".base_url('/assets/img/Archives.png')." id='imageArchive' name='image des archives' class='archives' ></img></a>"; 
-
-
-        //echo "<center>TEST <br/></center>";
-        //echo "<a href=".site_url('/Participe/ajoutP').">Archiver un rapport de combat </a><br/>";
 $bataille=0; ?>
 <div class='row'>
     <div class='col-12'>
+        <?php if($this->session->user && $this->session->user->id_autorisation == "1"){ ?>
         <button type='button' class='btn2 btn-info btn-lg' id='myBtnA' data-toggle='modal' data-target='#myModal2'>Archiver un rapport de combat</button> 
+        <?php } ?>
     </div>
 </div>
 <div class='row justify-content-around'>
@@ -69,8 +67,6 @@ $bataille=0; ?>
                                                 <button type='button' class='btn btn-info btn-lg' id='myBtn<?php echo $row->id_participe ?>' data-toggle='modal' data-target='#myModal'>
                                                     RAPPORT DE COMBAT</button></td>
                                                     <!-- Modal -->
-                                        
-
                                         </tr>
                               <?php }
                             } ?>        

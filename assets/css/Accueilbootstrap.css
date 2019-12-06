@@ -53,8 +53,6 @@ body
     will-change:transform;
     background-image: url('../../assets/img/orion_nebula-Universe.jpg');
     background-repeat: no-repeat;
-    /*background: linear-gradient(#38c15a, white);*/
-    /*background-color:white;*/
     background-attachment:fixed;
 }
 
@@ -64,6 +62,12 @@ body
     text-align: center !important;
 }
 
+.tableauGroupe
+{
+    
+    color: black !important;
+}
+
 #Univers
 {
     text-align: center;
@@ -71,26 +75,33 @@ body
     text-justify: auto;
 }
 
-#corps{
+#corps
+{
 	color: white;
-	opacity: 0.8;
+        opacity:0.8;
 }
 
-#texte{
+#texte
+{
 	overflow:scroll;
 }
 
-#armement{
+#armement
+{
 	overflow: scroll;
 }
 
-#protection {
+#protection 
+{
 	overflow: scroll;
 }
 
-#generateur {
+#generateur 
+{
 	overflow: scroll;
 }
+
+
 
 .ButtonPanier
 {

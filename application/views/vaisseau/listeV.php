@@ -43,8 +43,6 @@
             $(".Groupe").click(function()
             {
                 $id=parseInt($(this).attr('value'));
-                console.log($id);
-                console.log($(this));
                 $("#Groupe"+$id).load("http://localhost/CI_FilRouge/index.php/Groupe_de_combat/GroupeVaisseau/"+$id);    
             });
             $("#GB"+$id).mouseleave(function(){
@@ -53,9 +51,8 @@
             
             $('.tableauV').hover(function()
             {
-                //console.log($id);
+
                 if($id !==0){
-                    //console.log("AU REVOIR");
                     $(".tableauV").mouseleave(function(){
                         $("#Groupe"+$id).empty("#Groupe"+$id);
                     });
